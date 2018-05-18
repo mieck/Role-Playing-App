@@ -12,6 +12,34 @@ app.use(cors());
 
 app.post('/checkname', function(req, res){
 
+    if(req.body.name.toLowerCase() === 'homer'){
+
+        res.status(401).send({message: 'Sorry, no Homer\'s!'});
+
+    } else {
+
+        res.send({
+            passed: true,
+            message: 'Welcome, friend!'
+        });
+
+    }
+
 });
+
+app.get('/checkname/:name', function(req, res){
+
+    if(req.params.name.toLowerCase() === 'homer'){
+
+        res.status(401).send({message: 'Sorry, no Homer\'s!'});
+
+    } else {
+
+        res.json('Welcome!');
+
+    }
+});
+
+
 
 app.listen(process.env.PORT || 8080);
