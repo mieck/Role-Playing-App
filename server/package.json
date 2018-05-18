@@ -1,0 +1,27 @@
+{
+  "name": "rpa_server",
+  "version": "1.0.0",
+  "description": "serve our role-playing-app",
+  "main": "server,js",
+  "scripts": {
+    "test": "rpa_server_test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mieck/Role-Playing-App.git"
+  },
+  "author": "romeo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mieck/Role-Playing-App/issues"
+  },
+  "homepage": "https://github.com/mieck/Role-Playing-App#readme",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "cors": "^2.8.4",
+    "del": "^3.0.0",
+    "express": "^4.16.3",
+    "method-override": "^2.3.10",
+    "morgan": "^1.9.0"
+  }
+}
