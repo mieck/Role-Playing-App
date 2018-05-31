@@ -3,19 +3,25 @@ import {Http} from "@angular/http";
 import {map} from 'rxjs/operators'
 
 @Component({
-  selector: 'page-home',
-  templateUrl: 'home.html'
+  selector: 'page-register',
+  templateUrl: 'register.html'
 })
-export class HomePage {
+
+
+export class RegisterPage {
   name:string;
+  password:string;
+  mail:string;
 
   constructor(private http: Http) {
 
   }
-  checkName() {
+  checkRegister() {
 
     let data = {
-      name: this.name
+      "name": this.name,
+      "password": this.password,
+      "mail": this.mail,
     };
 
     this.http.post('http://localhost:8080/checkname', data).pipe(
@@ -29,7 +35,6 @@ export class HomePage {
     ).subscribe(response => {
       console.log('GET Response:', response);
     });
-
   }
 
 }
