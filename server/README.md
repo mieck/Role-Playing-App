@@ -12,5 +12,8 @@ Studentenprojekt
   server
         name: rpa_server  </br>
         ent_point: server.js  </br>
-        test_command: rpa_server_test
+        test_command: rpa_server_testy<br/>
+# router statt router
+    app git mit get und post 
+  
         

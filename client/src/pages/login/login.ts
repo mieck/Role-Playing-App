@@ -29,21 +29,21 @@ export class LoginPage {
   checkLogin() {
 
     let data = {
-        "name": this.name,
-        "password": this.password
+        "spielername": this.name,
+        "spielerpasswort": this.password
     };
 
-    this.http.post('http://localhost:8080/checkname', data).pipe(
+    this.http.post('http://localhost:8080/way/login', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
     });
 
-    this.http.get('http://localhost:8080/checkname/' + this.name).pipe(
+    /*this.http.get('http://localhost:8080/singup' + this.name).pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log('GET Response:', response);
-    });
+    });*/
 
     this.navCtrl.setRoot(ProfilePage);
     this.navCtrl.popToRoot();

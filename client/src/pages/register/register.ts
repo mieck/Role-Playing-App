@@ -17,24 +17,24 @@ export class RegisterPage {
 
   }
   checkRegister() {
-
+    console.log('klicked!');
     let data = {
-      "name": this.name,
-      "password": this.password,
-      "mail": this.mail,
+      "spielername": this.name,
+      "spielerpasswort": this.password,
+      "spieleremail": this.mail,
     };
 
-    this.http.post('http://localhost:8080/checkname', data).pipe(
+    this.http.post('http://localhost:8080/way/singup', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
     });
 
-    this.http.get('http://localhost:8080/checkname/' + this.name).pipe(
+   /* this.http.get('http://localhost:8080/checkname/' + this.name).pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log('GET Response:', response);
-    });
+    });*/
   }
 
 }
