@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {Http} from "@angular/http";
 import {map} from 'rxjs/operators'
+import {NavController} from "ionic-angular";
+import {CharacterPage} from "../character/character";
 
 @Component({
   selector: 'page-register',
@@ -13,10 +15,11 @@ export class RegisterPage {
   password:string;
   mail:string;
 
-  constructor(private http: Http) {
+  constructor(private http: Http, public navCtrl:NavController) {
 
   }
   checkRegister() {
+
     console.log('klicked!');
     let data = {
       "spielername": this.name,
@@ -29,6 +32,9 @@ export class RegisterPage {
     ).subscribe(response => {
       console.log('POST Response:', response);
     });
+
+    this.navCtrl.setRoot(CharacterPage);
+    this.navCtrl.popToRoot();
 
    /* this.http.get('http://localhost:8080/checkname/' + this.name).pipe(
       map(res => res.json())
