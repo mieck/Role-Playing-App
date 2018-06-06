@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Charakter
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <img id="avatar" src="https://img1.ak.crunchyroll.com/i/spire3/3614810e9ada5235038e8deb4adc264c1447729591_large.jpg">
+
+  <ion-list>
+    <ion-item>
+      <ion-grid>
+        <ion-row *ngFor="let item of attributes">
+          <ion-col>
+            <ion-item>
+              <ion-input [(ngModel)]="item.attr" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item>
+              <ion-input [(ngModel)]="item.value" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+    <button class="attrButton" color="danger" ion-button (click)="deleteAttribute()">-</button>
+    <button class="attrButton" ion-button (click)="addAttribute()">+</button>
+
+    <ion-item>
+      <ion-label class="my-label" stacked>Beschreibung</ion-label>
+      <ion-textarea rows="6"type="text" [(ngModel)]="description"></ion-textarea>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button (click)="saveAttributes()">Speichern</button>
+
+</ion-content>

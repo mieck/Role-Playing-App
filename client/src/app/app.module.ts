@@ -15,6 +15,7 @@ import { HttpModule } from '@angular/http';
 import {CharacterPage} from "../pages/character/character";
 import {RegisterPage} from "../pages/register/register";
 import {ProfilePage} from "../pages/profile/profile";
+import {CharacterEditPage} from "../pages/character-edit/character-edit";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import {ProfilePage} from "../pages/profile/profile";
     TabsPage,
     RegisterPage,
     CharacterPage,
-    ProfilePage
+    ProfilePage,
+    CharacterEditPage,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,8 @@ import {ProfilePage} from "../pages/profile/profile";
     TabsPage,
     RegisterPage,
     CharacterPage,
-    ProfilePage
+    ProfilePage,
+    CharacterEditPage,
   ],
   providers: [
     StatusBar,

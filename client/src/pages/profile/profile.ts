@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import {Http} from "@angular/http";
 import {map} from 'rxjs/operators';
 import { NavController} from 'ionic-angular';
-import {RegisterPage} from "../register/register";
 import {LoginPage} from "../login/login";
 
 @Component({
