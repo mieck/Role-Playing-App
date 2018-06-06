@@ -3,6 +3,7 @@ import {Http} from "@angular/http";
 import {map} from 'rxjs/operators'
 import {NavController} from "ionic-angular";
 import {CharacterPage} from "../character/character";
+import {CharacterEditPage} from "../character-edit/character-edit";
 
 @Component({
   selector: 'page-register',
@@ -33,7 +34,7 @@ export class RegisterPage {
       console.log('POST Response:', response);
     });
 
-    this.navCtrl.setRoot(CharacterPage);
+    this.navCtrl.setRoot(CharacterEditPage);
     this.navCtrl.popToRoot();
 
    /* this.http.get('http://localhost:8080/checkname/' + this.name).pipe(

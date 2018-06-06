@@ -10,6 +10,13 @@
         http://devdactic.com/restful-api-user-authentication-1 (Authentification)            
         https://www.joshmorony.com/building-a-hotel-booking-app-with-ionic-2-mongodb-node/   <br/>
      Deel with image 
-     https://gist.github.com/aheckmann/2408370 
+     https://gist.github.com/aheckmann/2408370
+
+
+    FileTransfer
+        npm install --save @ionic-native/file-transfer
+    File
+        npm install --save @ionic-native/file
+
    
     

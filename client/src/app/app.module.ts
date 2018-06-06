@@ -15,6 +15,10 @@ import { HttpModule } from '@angular/http';
 import {CharacterPage} from "../pages/character/character";
 import {RegisterPage} from "../pages/register/register";
 import {ProfilePage} from "../pages/profile/profile";
+
+import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
+import {File} from "@ionic-native/file";
+import { Camera, CameraOptions } from '@ionic-native/camera';
 import {CharacterEditPage} from "../pages/character-edit/character-edit";
 
 @NgModule({
@@ -27,7 +31,7 @@ import {CharacterEditPage} from "../pages/character-edit/character-edit";
     RegisterPage,
     CharacterPage,
     ProfilePage,
-    CharacterEditPage,
+    CharacterEditPage
   ],
   imports: [
     BrowserModule,
@@ -50,7 +54,10 @@ import {CharacterEditPage} from "../pages/character-edit/character-edit";
   providers: [
     StatusBar,
     SplashScreen,
-    {provide: ErrorHandler, useClass: IonicErrorHandler}
+    {provide: ErrorHandler, useClass: IonicErrorHandler},
+    File,
+    Camera,
+    FileTransfer
   ]
 })
 export class AppModule {}
