@@ -38,6 +38,8 @@ export class CharacterEditPage {
       dataObj[attrName] = attrValue;
     }
 
+    console.log(this.attributes);
+
     if(!dataObj.hasOwnProperty("Name"))
       this.presentAlert();
     else{
@@ -50,18 +52,21 @@ export class CharacterEditPage {
     let arrayLength = this.attributes.length;
 
     for (let i = 0; i < arrayLength; i++) {
-      if(this.attributes[i].attr == null || this.attributes[i].value == null)
+      console.log(this.attributes[i].attr)
+      if(this.attributes[i].attr == "" || this.attributes[i].value == "") {
+        console.log("delete")
         this.attributes.splice(i, 1);
-
+        arrayLength = this.attributes.length;
+        --i;
+      }
     }
-    //console.log(this.attributes);
   }
 
   addAttribute(){
 
       let insert = {
-        attr: null,
-        value: null
+        attr: "",
+        value: "",
       };
       this.attributes.push(insert);
   }
