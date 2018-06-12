@@ -20,6 +20,11 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import {File} from "@ionic-native/file";
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {CharacterEditPage} from "../pages/character-edit/character-edit";
+import {SettingsPage} from "../pages/settings/settings";
+import {CreateRPGPage} from "../pages/createRPG/createRPG";
+import {PostsPage} from "../pages/posts/posts";
+import {ChatPage} from "../pages/chat/chat";
+
 
 @NgModule({
   declarations: [
@@ -31,7 +36,12 @@ import {CharacterEditPage} from "../pages/character-edit/character-edit";
     RegisterPage,
     CharacterPage,
     ProfilePage,
-    CharacterEditPage
+    CharacterEditPage,
+    SettingsPage,
+    CreateRPGPage,
+    PostsPage,
+    ChatPage
+
   ],
   imports: [
     BrowserModule,
@@ -50,6 +60,11 @@ import {CharacterEditPage} from "../pages/character-edit/character-edit";
     CharacterPage,
     ProfilePage,
     CharacterEditPage,
+    SettingsPage,
+    CreateRPGPage,
+    PostsPage,
+    ChatPage
+
   ],
   providers: [
     StatusBar,

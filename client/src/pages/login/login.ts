@@ -3,9 +3,9 @@ import {Http} from "@angular/http";
 import {map} from 'rxjs/operators';
 import { NavController, LoadingController, ToastController} from 'ionic-angular';
 import {RegisterPage} from "../register/register";
-import {ProfilePage} from "../profile/profile";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import {PostsPage} from "../posts/posts";
 
 
 @Component({
@@ -57,7 +57,7 @@ export class LoginPage {
       console.log('GET Response:', response);
     });*/
 
-    this.navCtrl.setRoot(ProfilePage);
+    this.navCtrl.setRoot(PostsPage);
     this.navCtrl.popToRoot();
 
   }

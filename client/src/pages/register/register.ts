@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {Http} from "@angular/http";
 import {map} from 'rxjs/operators'
 import {NavController} from "ionic-angular";
-import {CharacterPage} from "../character/character";
+import {CreateRPGPage} from "../createRPG/createRPG";
 import {CharacterEditPage} from "../character-edit/character-edit";
 
 @Component({
@@ -15,6 +15,8 @@ export class RegisterPage {
   name:string;
   password:string;
   mail:string;
+
+  admin:boolean;
 
   constructor(private http: Http, public navCtrl:NavController) {
 
@@ -34,14 +36,21 @@ export class RegisterPage {
       console.log('POST Response:', response);
     });
 
-    this.navCtrl.setRoot(CharacterEditPage);
-    this.navCtrl.popToRoot();
+    this.admin = true;
+    if(this.admin){
+      this.navCtrl.setRoot(CreateRPGPage);
+      this.navCtrl.popToRoot();
+    }
+    else{
+      this.navCtrl.setRoot(CharacterEditPage);
+      this.navCtrl.popToRoot();
+    }
 
-   /* this.http.get('http://localhost:8080/checkname/' + this.name).pipe(
-      map(res => res.json())
-    ).subscribe(response => {
-      console.log('GET Response:', response);
-    });*/
+    /* this.http.get('http://localhost:8080/checkname/' + this.name).pipe(
+       map(res => res.json())
+     ).subscribe(response => {
+       console.log('GET Response:', response);
+     });*/
   }
 
 }

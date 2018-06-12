@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import {ProfilePage} from "../profile/profile";
+import {PostsPage} from "../posts/posts";
+import {TabsPage} from "../tabs/tabs";
 import {CharacterEditPage} from "../character-edit/character-edit";
 
 @Component({
@@ -11,6 +12,8 @@ export class CharacterPage {
 
   public attributes: Array<any>;
   public description: string;
+  public ownChar: boolean;
+
 
   constructor(public navCtrl: NavController) {
     this.attributes = [
@@ -20,10 +23,26 @@ export class CharacterPage {
     ];
 
     this.description = "Hier steht was";
+    this.ownChar = true;
+
   }
 
   editCharacter() {
     this.navCtrl.push(CharacterEditPage);
+  }
+
+  goToPosts(){
+    this.navCtrl.setRoot(TabsPage);
+    this.navCtrl.popToRoot();
+  }
+
+  ionViewDidLoad(){
+
+    if(this.ownChar) {
+      document.getElementById('editButton').style.visibility = 'visible';
+    } else {
+      document.getElementById('editButton').style.visibility = 'hidden';
+    }
   }
 
 }

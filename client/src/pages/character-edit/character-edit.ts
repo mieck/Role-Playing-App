@@ -14,6 +14,8 @@ export class CharacterEditPage {
   public description: string;
   public name: string;
   public profileImage: string;
+  public charExists: boolean;
+
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
     this.profileImage ="assets/imgs/ProfileImage.png"
@@ -25,6 +27,8 @@ export class CharacterEditPage {
     ];
 
     this.description = "Hier steht was";
+    this.charExists = false;
+
   }
 
   saveAttributes(){
@@ -109,6 +113,16 @@ export class CharacterEditPage {
     });
     alert.present();
   }
+
+  ionViewDidLoad(){
+
+    if(this.charExists) {
+      document.getElementById('notification').style.visibility = 'hidden';
+    } else {
+      document.getElementById('notification').style.visibility = 'visible';
+    }
+  }
+
 
 
 }
