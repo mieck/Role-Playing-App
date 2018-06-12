@@ -16,7 +16,7 @@ export class CharacterEditPage {
   public profileImage: string;
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
-    this.profileImage ="https://img1.ak.crunchyroll.com/i/spire3/3614810e9ada5235038e8deb4adc264c1447729591_large.jpg"
+    this.profileImage ="assets/imgs/ProfileImage.png"
 
     this.attributes = [
       {attr: "Name", value: "Klaus"},
