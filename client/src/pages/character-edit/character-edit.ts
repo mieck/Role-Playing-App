@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {CharacterPage} from "../character/character";
 import { AlertController } from 'ionic-angular';
+import {CameraOptions} from "@ionic-native/camera";
 
 @Component({
   selector: 'page-character',
@@ -12,8 +13,10 @@ export class CharacterEditPage {
   public attributes: Array<any>;
   public description: string;
   public name: string;
+  public profileImage: string;
 
   constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
+    this.profileImage ="https://img1.ak.crunchyroll.com/i/spire3/3614810e9ada5235038e8deb4adc264c1447729591_large.jpg"
 
     this.attributes = [
       {attr: "Name", value: "Klaus"},
@@ -44,6 +47,28 @@ export class CharacterEditPage {
       this.navCtrl.setRoot(CharacterPage);
       this.navCtrl.popToRoot();
     }
+  }
+
+  changeImage(){
+    this.profileImage = "assets/imgs/Natsume.png"
+
+      // get image from smartphone
+
+      // const options: CameraOptions = {
+      //   quality: 100,
+      //   destinationType: this.camera.DestinationType.DATA_URL,
+      //   encodingType: this.camera.EncodingType.JPEG,
+      //   mediaType: this.camera.MediaType.PICTURE
+      // }
+      //
+      // this.camera.getPicture(options).then((imageData) => {
+      //   // imageData is either a base64 encoded string or a file URI
+      //   // If it's base64:
+      //   var base64Image = 'data:image/jpeg;base64,' + imageData;
+      // }, (err) => {
+      //   // Handle error
+      // });
+
   }
 
   deleteRows(){

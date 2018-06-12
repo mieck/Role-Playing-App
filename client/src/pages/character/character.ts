@@ -13,7 +13,6 @@ export class CharacterPage {
   public description: string;
 
   constructor(public navCtrl: NavController) {
-
     this.attributes = [
       {attr: "Name", value: "Klaus"},
       {attr: "Alter", value: 12},
