@@ -6,6 +6,7 @@ import {RegisterPage} from "../register/register";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {PostsPage} from "../posts/posts";
+import {TabsPage} from "../tabs/tabs";
 
 
 @Component({
@@ -57,7 +58,7 @@ export class LoginPage {
       console.log('GET Response:', response);
     });*/
 
-    this.navCtrl.setRoot(PostsPage);
+    this.navCtrl.setRoot(TabsPage);
     this.navCtrl.popToRoot();
 
   }
