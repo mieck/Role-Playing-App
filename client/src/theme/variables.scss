@@ -33,12 +33,23 @@ $app-direction: ltr;
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
+
+$text-input-highlight-color-valid: #488aff;
+
+
+
 $colors: (
   primary:    #488aff,
   secondary:  #32db64,
   danger:     #f53d3d,
   light:      #f4f4f4,
-  dark:       #222
+  dark:       #000,
+  mycolor1:   #f7931e,
+  mycolor2:   #d97500,
+  mycolor3:   #62c0e2,
+  mycolor4:   #71c6e2,
+  mycolor5:   #86cee9,
+  mycolor6:   #cbe9fb,
 );
 
 

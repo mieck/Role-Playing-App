@@ -1,13 +1,46 @@
+
+
 page-login {
+  .toolbar-background {
+    background-color: white;
+  }
   #header {
     float: left;
     display: inline-block;
     font-size: 35px;
+    margin-left: 2%;
   }
   #logo {
     float: right;
     display: inline-block;
-    max-height: 40px;
-    max-width: 40px;
+    max-height: 45px;
+    max-width: 45px;
+    margin-right: 2%;
   }
+  #background {
+    background-color: #cbe9fb;
+  }
+  #name {
+    background-color: #cbe9fb;
+    position: center;
+    margin-top:10%;
+  }
+  #password {
+    background-color: #cbe9fb;
+  }
+  .label {
+    font-family: "AR JULIAN";
+    font-size: 20px;
+  }
+  .item.item-input {
+    left: 5%;
+    width: 85%;
+  }
+  #cool-button-div {
+    position: center;
+    width:85%;
+    margin-top:10%;
+  }
+  .input-cover {
+    position: static; }
 }
