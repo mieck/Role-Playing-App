@@ -6,39 +6,42 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content id="background" padding>
 
   <div id="notification">Erstelle einen neuen Charakter! Du kannst ihn auch später ändern.</div>
   <br>
 
   <img id="avatar"  [src]="profileImage" (click)="changeImage()" >
 
+
   <ion-list>
-    <ion-item>
       <ion-grid>
         <ion-row *ngFor="let item of attributes">
-          <ion-col>
-            <ion-item>
+
+          <ion-col col-5>
+            <ion-item class="table">
               <ion-input [(ngModel)]="item.attr" type="text"></ion-input>
             </ion-item>
           </ion-col>
-          <ion-col>
-            <ion-item>
+
+          <ion-col col-7>
+            <ion-item class="table">
               <ion-input [(ngModel)]="item.value" type="text"></ion-input>
             </ion-item>
           </ion-col>
+
         </ion-row>
       </ion-grid>
-    </ion-item>
-    <button class="attrButton" color="danger" ion-button (click)="deleteAttribute()">-</button>
+
+
+  <button class="attrButton" color="danger" ion-button (click)="deleteAttribute()">-</button>
     <button class="attrButton" ion-button (click)="addAttribute()">+</button>
 
-    <ion-item>
+    <ion-item class="table">
       <ion-label class="my-label" stacked>Beschreibung</ion-label>
       <ion-textarea rows="6"type="text" [(ngModel)]="description"></ion-textarea>
     </ion-item>
   </ion-list>
-
   <button ion-button (click)="saveAttributes()">Speichern</button>
 
 </ion-content>

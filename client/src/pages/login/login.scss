@@ -2,7 +2,7 @@
 
 page-login {
   .toolbar-background {
-    background-color: white;
+    background-color: #f4f4f4;
   }
   #header {
     float: left;
@@ -31,6 +31,7 @@ page-login {
   .label {
     font-family: "AR JULIAN";
     font-size: 20px;
+    color: midnightblue !important;
   }
   .item.item-input {
     left: 5%;
