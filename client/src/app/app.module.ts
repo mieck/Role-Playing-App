@@ -24,6 +24,8 @@ import {SettingsPage} from "../pages/settings/settings";
 import {CreateRPGPage} from "../pages/createRPG/createRPG";
 import {PostsPage} from "../pages/posts/posts";
 import {ChatPage} from "../pages/chat/chat";
+import {GlobalProvider} from "../provider/global";
+import {CharRegistrPage} from "../pages/charRegistr/charReg";
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import {ChatPage} from "../pages/chat/chat";
     SettingsPage,
     CreateRPGPage,
     PostsPage,
-    ChatPage
+    ChatPage,
+    CharRegistrPage
 
   ],
   imports: [
@@ -63,7 +66,8 @@ import {ChatPage} from "../pages/chat/chat";
     SettingsPage,
     CreateRPGPage,
     PostsPage,
-    ChatPage
+    ChatPage,
+    CharRegistrPage
 
   ],
   providers: [
@@ -72,7 +76,8 @@ import {ChatPage} from "../pages/chat/chat";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     File,
     Camera,
-    FileTransfer
+    FileTransfer,
+    GlobalProvider
   ]
 })
 export class AppModule {}

@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import {Events, NavController} from 'ionic-angular';
-import {CharacterEditPage} from "../character-edit/character-edit";
 
 @Component({
-  selector: 'page-character',
-  templateUrl: 'character.html'
+  selector: 'page-char-reg',
+  templateUrl: 'charReg.html'
 })
-export class CharacterPage {
+export class CharRegistrPage {
 
   public attributes: Array<any>;
   public description: string;
@@ -25,17 +24,8 @@ export class CharacterPage {
 
   }
 
-  editCharacter() {
-    this.navCtrl.push(CharacterEditPage);
-  }
-
-  ionViewDidLoad(){
-
-    if(this.ownChar) {
-      document.getElementById('editButton').style.visibility = 'visible';
-    } else {
-      document.getElementById('editButton').style.visibility = 'hidden';
-    }
+  goToPosts(){
+    this.events.publish('user:login', true);
   }
 
 }

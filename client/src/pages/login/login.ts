@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
 import {Http} from "@angular/http";
 import {map} from 'rxjs/operators';
-import { NavController, LoadingController, ToastController} from 'ionic-angular';
+import {NavController, LoadingController, ToastController, Events} from 'ionic-angular';
 import {RegisterPage} from "../register/register";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
-import {PostsPage} from "../posts/posts";
 import {TabsPage} from "../tabs/tabs";
 
 
@@ -23,7 +22,8 @@ export class LoginPage {
   constructor(private http: Http, public navCtrl:NavController,
               private transfer: FileTransfer,
               private camera: Camera,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController,
+              public events: Events) {
 
   }
 
@@ -36,8 +36,6 @@ export class LoginPage {
     // this.navCtrl.setRoot(RegisterPage);
     // this.navCtrl.popToRoot();
   }
-
-
 
   checkLogin() {
 
@@ -58,9 +56,7 @@ export class LoginPage {
       console.log('GET Response:', response);
     });*/
 
-    this.navCtrl.setRoot(TabsPage);
-    this.navCtrl.popToRoot();
-
+    this.events.publish('user:login', 'hurray');
   }
 
 }

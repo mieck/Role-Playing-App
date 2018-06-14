@@ -3,6 +3,7 @@ import {Http} from "@angular/http";
 import {map} from 'rxjs/operators';
 import { NavController} from 'ionic-angular';
 import {LoginPage} from "../login/login";
+import { Events } from 'ionic-angular';
 
 @Component({
   selector: 'page-profile',
@@ -13,13 +14,12 @@ export class ProfilePage {
   password:string;
   mail:string;
 
-  constructor(private http: Http, public navCtrl:NavController) {
+  constructor(private http: Http, public navCtrl:NavController, public events: Events) {
 
   }
 
   logout(){
-    this.navCtrl.setRoot(LoginPage);
-    this.navCtrl.popToRoot();
+    this.events.publish('user:logout', 'hurray');
   }
 
   editProfile() {

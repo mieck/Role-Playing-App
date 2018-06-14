@@ -19,7 +19,6 @@ export class SettingsPage {
   }
 
   goToPosts() {
-    this.navCtrl.setRoot(TabsPage);
     this.navCtrl.popToRoot();
   }
 

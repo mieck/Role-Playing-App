@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 import {CharacterPage} from "../character/character";
 import { AlertController } from 'ionic-angular';
 import {CameraOptions} from "@ionic-native/camera";
+import {GlobalProvider} from "../../provider/global";
+import {CharRegistrPage} from "../charRegistr/charReg";
 
 @Component({
   selector: 'page-character',
@@ -17,7 +19,7 @@ export class CharacterEditPage {
   public charExists: boolean;
 
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController) {
+  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider) {
     this.profileImage ="assets/imgs/ProfileImage.png"
 
     this.attributes = [
@@ -50,8 +52,13 @@ export class CharacterEditPage {
     if(!dataObj.hasOwnProperty("Name"))
       this.presentAlert();
     else{
-      this.navCtrl.setRoot(CharacterPage);
-      this.navCtrl.popToRoot();
+      if(!this.global.registrationComplete) {
+        this.navCtrl.setRoot(CharRegistrPage);
+        this.navCtrl.popToRoot();
+      }
+      else{
+        this.navCtrl.pop();
+      }
     }
   }
 

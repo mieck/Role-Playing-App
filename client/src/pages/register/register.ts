@@ -4,6 +4,7 @@ import {map} from 'rxjs/operators'
 import {NavController} from "ionic-angular";
 import {CreateRPGPage} from "../createRPG/createRPG";
 import {CharacterEditPage} from "../character-edit/character-edit";
+import {GlobalProvider} from "../../provider/global";
 
 @Component({
   selector: 'page-register',
@@ -18,7 +19,7 @@ export class RegisterPage {
 
   admin:boolean;
 
-  constructor(private http: Http, public navCtrl:NavController) {
+  constructor(private http: Http, public navCtrl:NavController, public global: GlobalProvider) {
 
   }
   checkRegister() {
@@ -51,6 +52,10 @@ export class RegisterPage {
      ).subscribe(response => {
        console.log('GET Response:', response);
      });*/
+  }
+
+  ionViewWillEnter(){
+    this.global.registrationComplete = false;
   }
 
 }
