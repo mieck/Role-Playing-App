@@ -1,15 +1,23 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
+    <ion-title id="header">
       Posts
     </ion-title>
+    <button id="profile" ion-button color="primary" (click)="goToProfile()">Profil</button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
 
-  <button ion-button color="primary" (click)="goToProfile()">Profil</button>
-  <button ion-button color="primary" (click)="goToCharacterEdit()">Charakter</button>
-  <button ion-button color="primary" (click)="goToSettings()">Settings</button>
+  <ion-grid *ngFor="let item of posts">
+    <ion-row id="firstBox">
+      <ion-col col-auto><img id="avatar" (click)="goToCharacter()" [src]=item.bild></ion-col>
+      <ion-col col-6 id="charName">{{item.character}}</ion-col>
+    </ion-row>
+
+    <ion-row id="secondBox">
+      <ion-col>{{item.text}}</ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

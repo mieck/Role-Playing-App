@@ -1,14 +1,15 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
+    <ion-title id="header">
       RPG-Einstellungen
     </ion-title>
+    <button id="profile" ion-button color="primary" (click)="goToProfile()">Profil</button>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-
+  Hier kommt eine vom Admin editierbare Tabelle mit allen Charakteren + Spielern
+  <br>
   <button ion-button color="primary" (click)="goToCharacter()">Charakter</button>
-  <button ion-button color="primary" (click)="goToPosts()">Posts</button>
 
 </ion-content>

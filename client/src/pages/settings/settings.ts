@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import {CharacterPage} from "../character/character";
 import {PostsPage} from "../posts/posts";
 import {TabsPage} from "../tabs/tabs";
+import {ProfilePage} from "../profile/profile";
 
 @Component({
   selector: 'page-settings',
@@ -18,8 +19,8 @@ export class SettingsPage {
     this.navCtrl.push(CharacterPage);
   }
 
-  goToPosts() {
-    this.navCtrl.popToRoot();
+  goToProfile() {
+    this.navCtrl.push(ProfilePage);
   }
 
 }

@@ -40,6 +40,10 @@ var postrpg = new Schema({
 
 var  spiel = new Schema ({
     PostID : [postrpg],
+    spielname: String,
+    genre: String,
+    spielbeschreibung: String,
+
 });
 
 var spieler = new Schema ({

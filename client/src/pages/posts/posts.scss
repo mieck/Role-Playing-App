@@ -1,3 +1,37 @@
 page-posts {
 
+  #firstBox{
+    border-style: groove;
+  }
+
+  #secondBox{
+    border-style: groove;
+  }
+
+  #charName{
+    font-family: Carlito;
+    font-weight: bold;
+    font-size: 20px;
+    color: midnightblue !important;
+  }
+
+  #avatar{
+    float: left;
+    margin: 0 auto;
+    max-width: 80px;
+    max-height: 80px;
+    min-height: 40px;
+    min-width: 40px;
+  }
+
+  #profile{
+    float: right;
+    display: inline-block;
+  }
+
+  #header{
+    float: left;
+    display: inline-block;
+  }
+
 }

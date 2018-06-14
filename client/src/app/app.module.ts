@@ -50,7 +50,7 @@ import {CharRegistrPage} from "../pages/charRegistr/charReg";
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {tabsPlacement: 'top'})
   ],
   bootstrap: [IonicApp],
   entryComponents: [
