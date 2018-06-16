@@ -61,14 +61,14 @@ app.post('/login',function(req,res,next) {
         if(user == null){
             console.log("Fehler ist aufgetreten");
             //console(err);
-            res.send({"Fehler":0,"message":"user not exit !"});
+            res.send({"message":"user not exit !"});
         }else if (user.spielerpasswort == req.body.spielerpasswort){
             console.log("gut getroffen!");
             console.log(user);
             res.send(user);
 
             }else {
-                res.send({"Fehler":1,"message": "Wrong Password!"})
+                res.send({"message": "Wrong Password!"})
             }
     })
 

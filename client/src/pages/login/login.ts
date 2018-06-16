@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Http} from "@angular/http";
 import {map} from 'rxjs/operators';
-import {NavController, LoadingController, ToastController, Events} from 'ionic-angular';
+import {NavController, LoadingController, ToastController, Events,AlertController} from 'ionic-angular';
 import {RegisterPage} from "../register/register";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
@@ -23,9 +23,49 @@ export class LoginPage {
               private transfer: FileTransfer,
               private camera: Camera,
               public loadingCtrl: LoadingController,
-              public events: Events) {
+              public events: Events,
+              public alerCtrl: AlertController) {
 
   }
+
+  showConfirm(title,message,firstAction,secongAction) {
+
+    const confirm = this.alerCtrl.create({
+      title: title,
+      message: message,
+      buttons: [
+        {
+          text: firstAction,
+          handler: () => {
+            this.navCtrl.push(RegisterPage);
+          }
+        },
+        {
+          text: secongAction,
+          handler: () => {
+            //console.log('Agree clicked');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
+  showAlert(title,message,action) {
+    const alert = this.alerCtrl.create({
+      title: title,
+      subTitle: message,
+      buttons:[
+        {
+          text: action,
+          handler: () => {
+            this.events.publish('user:login', 'hurray');
+          }
+        }]
+    });
+    alert.present();
+  }
+
 
 
   GoToRegister(){
@@ -47,7 +87,15 @@ export class LoginPage {
     this.http.post('http://localhost:8080/login', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
-      console.log('POST Response:', response);
+      if(response._id == undefined){
+        this.showConfirm(response.message,'Registrierung Falls du noch kein Konto hat!','Registrierung','Neue Versucht');
+        //console.log('POST Response:', response.message);
+      }
+      else {
+         this.showAlert('Bestätigen','benutzername und Passwort Richtig!','Spielen!');
+
+      }
+
     });
 
     /*this.http.get('http://localhost:8080/singup' + this.name).pipe(
@@ -56,7 +104,6 @@ export class LoginPage {
       console.log('GET Response:', response);
     });*/
 
-    this.events.publish('user:login', 'hurray');
   }
 
 }
