@@ -44,7 +44,7 @@ export class LoginPage {
         "spielerpasswort": this.password
     };
 
-    this.http.post('http://localhost:8080/way/login', data).pipe(
+    this.http.post('http://localhost:8080/login', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);

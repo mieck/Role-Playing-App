@@ -34,7 +34,7 @@ var postrpg = new Schema({
         unique:false,
         required:true
     },
-    Bild : {data:Buffer,contentType: String} // deel with image https://gist.github.com/aheckmann/2408370
+    Bild : {data:Buffer,contentType: String} // deal with image https://gist.github.com/aheckmann/2408370
 
 });
 
@@ -54,7 +54,7 @@ var spieler = new Schema ({
     },
     spielerpasswort : {
         type:String,
-        unique:true,
+        unique:false,
         required:true
     },
     spieleremail : {
@@ -64,10 +64,10 @@ var spieler = new Schema ({
     },
     admin :{
         type:Boolean,
-        required:true
+        required:false
     },
     charaters :[character],
     Spiels : [spiel],
-});
+})
 
 module.exports = mongoose.model('Waydb', spieler);

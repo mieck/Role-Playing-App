@@ -25,19 +25,20 @@ export class RegisterPage {
   checkRegister() {
 
     console.log('klicked!');
+    this.admin = true;  // erstmal damit der cran gut läuft!
     let data = {
       "spielername": this.name,
       "spielerpasswort": this.password,
       "spieleremail": this.mail,
     };
 
-    this.http.post('http://localhost:8080/way/singup', data).pipe(
+    this.http.post('http://localhost:8080/register', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
     });
 
-    this.admin = true;
+    //
     if(this.admin){
       this.navCtrl.setRoot(CreateRPGPage);
       this.navCtrl.popToRoot();
