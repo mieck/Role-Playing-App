@@ -57,16 +57,19 @@ app.get('/checkprofile', function(req, res, next){
 
 app.post('/login',function(req,res,next) {
     console.log("login!");
-    Spieler.find({"spielername": req.body.spielername,"spielerpasswort":req.body.spielerpasswort}, function (err,user) {
-        if(err){
+    Spieler.findOne({"spielername": req.body.spielername}, function (err,user) {
+        if(user == null){
             console.log("Fehler ist aufgetreten");
-            console(err);
-            return next(0);
-        } else {
+            //console(err);
+            res.send({"Fehler":0,"message":"user not exit !"});
+        }else if (user.spielerpasswort == req.body.spielerpasswort){
             console.log("gut getroffen!");
             console.log(user);
-            return next(user);
-        }
+            res.send(user);
+
+            }else {
+                res.send({"Fehler":1,"message": "Wrong Password!"})
+            }
     })
 
 });
