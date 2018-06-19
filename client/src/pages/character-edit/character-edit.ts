@@ -2,11 +2,11 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {CharacterPage} from "../character/character";
 import { AlertController } from 'ionic-angular';
-import {CameraOptions} from "@ionic-native/camera";
 import {GlobalProvider} from "../../provider/global";
 import {CharRegistrPage} from "../charRegistr/charReg";
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
+import {CameraOptions, Camera} from "@ionic-native/camera";
 
 @Component({
   selector: 'page-character',
@@ -17,12 +17,12 @@ export class CharacterEditPage {
   public attributes: Array<any>;
   public description: string;
   public name: string;
-  public profileImage: string;
+  profileImage: any;
   public charExists: boolean;
 
 
-  constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider) {
-    this.profileImage ="assets/imgs/ProfileImage.png"
+  constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider, private camera: Camera) {
+    this.profileImage = "assets/imgs/ProfileImage.png"
 
     this.attributes = [
       {attr: "Name", value: "Klaus", databaseAttr: "CharacterName"},
@@ -75,26 +75,25 @@ export class CharacterEditPage {
     });
   }
 
-  changeImage(){
-    this.profileImage = "assets/imgs/Natsume.png"
 
-      // get image from smartphone
+  // get image from librabry
+  // https://stackoverflow.com/questions/47118760/how-to-take-or-choose-image-from-gallery-in-ionic-3
+  getImage() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType : this.camera.PictureSourceType.SAVEDPHOTOALBUM
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      // imageData is either a base64 encoded string or a file URI
+      // If it's base64:
+      this.profileImage = 'data:image/jpeg;base64,' + imageData;
 
-      // const options: CameraOptions = {
-      //   quality: 100,
-      //   destinationType: this.camera.DestinationType.DATA_URL,
-      //   encodingType: this.camera.EncodingType.JPEG,
-      //   mediaType: this.camera.MediaType.PICTURE
-      // }
-      //
-      // this.camera.getPicture(options).then((imageData) => {
-      //   // imageData is either a base64 encoded string or a file URI
-      //   // If it's base64:
-      //   var base64Image = 'data:image/jpeg;base64,' + imageData;
-      // }, (err) => {
-      //   // Handle error
-      // });
-
+    }, (err) => {
+      // Handle error
+    });
   }
 
   deleteRows(){
