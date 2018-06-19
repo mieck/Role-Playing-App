@@ -17,6 +17,11 @@
         npm install --save @ionic-native/file-transfer
     File
         npm install --save @ionic-native/file
+# Hilfsmittel zum Chat modull
+    Back-end function
+    https://medium.freecodecamp.org/building-a-chat-application-with-mean-stack-637254d1136d
+    front-end Ionic
+    https://devdactic.com/ionic-realtime-socket-io/
 
    
     
