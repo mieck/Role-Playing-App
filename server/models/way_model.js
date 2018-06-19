@@ -2,10 +2,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-var Character = require('./charatere_model');
-var  Postrpg = require('./postrpg');
-var Spiel = require ('./spiel');
-
 var character = new Schema({
     CharacterName :{
         type: String,

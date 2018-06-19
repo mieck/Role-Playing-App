@@ -28,9 +28,6 @@ app.use(function (request, response, next) {
 
 // Models
 var Spieler = require('./models/way_model');  // the schema are defined in this file way_model.js
-var Character = require('./models/charatere_model');
-var  Postrpg = require('./models/postrpg');
-var Spiel = require ('./models/spiel');
 //___________________________________________________________________________________
 
 app.post('/checkname', function(req, res){
