@@ -5,6 +5,8 @@ import { AlertController } from 'ionic-angular';
 import {CameraOptions} from "@ionic-native/camera";
 import {GlobalProvider} from "../../provider/global";
 import {CharRegistrPage} from "../charRegistr/charReg";
+import {map} from "rxjs/operators";
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'page-character',
@@ -19,13 +21,13 @@ export class CharacterEditPage {
   public charExists: boolean;
 
 
-  constructor(public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider) {
+  constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider) {
     this.profileImage ="assets/imgs/ProfileImage.png"
 
     this.attributes = [
-      {attr: "Name", value: "Klaus"},
-      {attr: "Alter", value: "12"},
-      {attr: "Geschlecht", value: "männlich"},
+      {attr: "Name", value: "Klaus", databaseAttr: "CharacterName"},
+      {attr: "Alter", value: 12, databaseAttr: "CharacterAlter"},
+      {attr: "Geschlecht", value: "männlich", databaseAttr: "CharacterGeschlecht"},
     ];
 
     this.description = "Hier steht was";
@@ -41,17 +43,20 @@ export class CharacterEditPage {
 
     //dynamische Liste füllen
     for (let i = 0; i < arrayLength; i++) {
-      let attrName = this.attributes[i]["attr"];
+      let attrName = this.attributes[i]["databaseAttr"];
       let attrValue = this.attributes[i]["value"];
 
       dataObj[attrName] = attrValue;
     }
+    dataObj["CharacterBeschreibung"] = this.description;
 
-    console.log(this.attributes);
+    console.log(dataObj);
 
-    if(!dataObj.hasOwnProperty("Name"))
+    if(!dataObj.hasOwnProperty("CharacterName"))
       this.presentAlert();
     else{
+
+      this.sendData(dataObj);
       if(!this.global.registrationComplete) {
         this.navCtrl.setRoot(CharRegistrPage);
         this.navCtrl.popToRoot();
@@ -60,6 +65,14 @@ export class CharacterEditPage {
         this.navCtrl.pop();
       }
     }
+  }
+
+  sendData(data){
+    this.http.post('http://localhost:8080/new_character', data).pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+        console.log('POST Response:', response.message);
+    });
   }
 
   changeImage(){

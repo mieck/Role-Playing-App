@@ -28,7 +28,7 @@ export class LoginPage {
 
   }
 
-  showConfirm(title,message,firstAction,secongAction) {
+  showConfirm(title,message,firstAction,secondAction) {
 
     const confirm = this.alerCtrl.create({
       title: title,
@@ -41,7 +41,7 @@ export class LoginPage {
           }
         },
         {
-          text: secongAction,
+          text: secondAction,
           handler: () => {
             //console.log('Agree clicked');
           }
@@ -66,8 +66,6 @@ export class LoginPage {
     alert.present();
   }
 
-
-
   GoToRegister(){
     //Mit "Zurück"-Funktion
     this.navCtrl.push(RegisterPage);
@@ -88,11 +86,11 @@ export class LoginPage {
       map(res => res.json())
     ).subscribe(response => {
       if(response._id == undefined){
-        this.showConfirm(response.message,'Registrierung Falls du noch kein Konto hat!','Registrierung','Neue Versucht');
+        this.showConfirm(response.message,'Registriere dich, falls du noch kein Konto hast!','Registrierung','Neuer Versuch');
         //console.log('POST Response:', response.message);
       }
       else {
-         this.showAlert('Bestätigen','benutzername und Passwort Richtig!','Spielen!');
+         this.showAlert('Bestätigen','Benutzername und Passwort richtig!','Spielen!');
 
       }
 

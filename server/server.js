@@ -67,11 +67,11 @@ app.post('/register',function (req,res,next) {
     user.save(function (err) {
         if(err){
             console.log(err);
-            return next("username are already be used! ");
+            return next("Nutzername existiert bereits.");
         }
         else{
             console.log("gut");
-            return next("You are registered!");
+            return next("Sie sind registriert!");
         }
     });
 });
@@ -79,16 +79,16 @@ app.post('/login',function(req,res,next) {
     console.log("login!");
     Spieler.findOne({"spielername": req.body.spielername}, function (err,user) {
         if(user == null){
-            console.log("Fehler ist aufgetreten");
+            console.log("Ein Fehler ist aufgetreten.");
             //console(err);
-            res.send({"message":"user not exit !"});
+            res.send({"message":"Nutzername existiert nicht!"});
         }else if (user.spielerpasswort == req.body.spielerpasswort){
-            console.log("gut getroffen!");
+            console.log("Perfekt.");
             console.log(user);
             res.send(user);
 
         }else {
-            res.send({"message": "Wrong Password!"})
+            res.send({"message": "Falsches Passwort!"})
         }
     })
 
@@ -102,9 +102,9 @@ app.post('/new_character', function (req,res) {
    var newcharacter = {
        CharacterName:req.body.CharacterName,
            CharacterAlter:req.body.CharacterAlter,
-    CharacterGeschlecht:req.body.CharacterAlter,
+    CharacterGeschlecht:req.body.CharacterGeschlecht,
         CharacterBeschreibung:req.body.CharacterBeschreibung,
-            CharacterBild:req.body.CharacterBild,
+       CharacterBild:req.body.CharacterBild,
    };
 
    //Spieler.Spilercharaters.push(newcharacter);

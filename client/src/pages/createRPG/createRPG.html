@@ -9,8 +9,10 @@
 <ion-content padding>
   Es liegt noch kein RPG vor. Sie können als Erster das RPG erstellen!
 
-  <ion-label floating>RPG Name</ion-label>
-  <ion-input [(ngModel)]="name" type="text"></ion-input>
+  <ion-item>
+    <ion-label floating>RPG Name</ion-label>
+    <ion-input [(ngModel)]="name" type="text"></ion-input>
+  </ion-item>
 
   <button ion-button color="primary" (click)="save()">Speichern</button>
   <button ion-button color="secondary" (click)="abort()">Abbrechen</button>

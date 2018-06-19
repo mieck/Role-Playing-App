@@ -24,12 +24,12 @@ export class MyApp {
     this.global.registrationComplete = false;
 
     this.events.subscribe('user:logout', (data)  => {
-      console.log(data);
+      //console.log(data);
       this.appCtrl.getRootNav().setRoot(LoginPage);
     });
 
     this.events.subscribe('user:login', (data)  => {
-      console.log(data);
+      //console.log(data);
       this.appCtrl.getRootNav().setRoot(TabsPage);
       this.global.registrationComplete = true;
     });
