@@ -8,6 +8,10 @@ page-posts {
     border-style: groove;
   }
 
+  .writeBox{
+    border-style: groove;
+  }
+
   #charName{
     font-family: Carlito;
     font-weight: bold;
@@ -23,7 +27,14 @@ page-posts {
     min-height: 40px;
     min-width: 40px;
   }
-
+  #image{
+    float: left;
+    margin: 0 auto;
+    max-width: 80px;
+    max-height: 80px;
+    min-height: 40px;
+    min-width: 40px;
+  }
   #profile{
     float: right;
     display: inline-block;
@@ -33,5 +44,7 @@ page-posts {
     float: left;
     display: inline-block;
   }
-
+  .col{
+    border:  black;
+  }
 }
