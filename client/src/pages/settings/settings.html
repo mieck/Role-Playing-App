@@ -8,8 +8,41 @@
 </ion-header>
 
 <ion-content padding>
-  Hier kommt eine vom Admin editierbare Tabelle mit allen Charakteren + Spielern
-  <br>
-  <button ion-button color="primary" (click)="goToCharacter()">Charakter</button>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-5 >Spieler</ion-col>
+      <ion-col col-5 >Charakter</ion-col>
+      <ion-col col-2 ></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of players">
+      <ion-col col-5 >{{item.teilnehmer}}</ion-col>
+      <ion-col col-5>{{item.character}}  </ion-col>
+      <ion-col col-2 ><ion-icon name="contact" (click)="goToCharacter()"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item>
+      <label class="my-label" stacked>RPG-Name</label>
+      <div>{{rpg_name}}</div>
+    </ion-item>
+
+    <ion-item>
+      <label class="my-label" stacked>Genre</label>
+      <div>{{genre}}</div>
+    </ion-item>
+
+    <ion-item>
+      <label class="my-label" stacked>RPG-Beschreibung</label>
+      <div>{{rpg_description}}</div>
+    </ion-item>
+
+    <ion-item>
+      <label class="my-label" stacked>Admin</label>
+      <div>{{admin}}</div>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button id="editButton" (click)="editSettings()">Bearbeiten</button>
 
 </ion-content>

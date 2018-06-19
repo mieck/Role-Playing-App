@@ -26,6 +26,7 @@ import {PostsPage} from "../pages/posts/posts";
 import {ChatPage} from "../pages/chat/chat";
 import {GlobalProvider} from "../provider/global";
 import {CharRegistrPage} from "../pages/charRegistr/charReg";
+import {SettingsEditPage} from "../pages/setting-edit/settings-edit";
 
 
 @NgModule({
@@ -43,7 +44,8 @@ import {CharRegistrPage} from "../pages/charRegistr/charReg";
     CreateRPGPage,
     PostsPage,
     ChatPage,
-    CharRegistrPage
+    CharRegistrPage,
+    SettingsEditPage
 
   ],
   imports: [
@@ -67,7 +69,8 @@ import {CharRegistrPage} from "../pages/charRegistr/charReg";
     CreateRPGPage,
     PostsPage,
     ChatPage,
-    CharRegistrPage
+    CharRegistrPage,
+    SettingsEditPage
 
   ],
   providers: [

@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title id="header">
+      RPG-Einstellungen
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-5 >Spieler</ion-col>
+      <ion-col col-5 >Charakter</ion-col>
+      <ion-col col-2 ></ion-col>
+    </ion-row>
+    <ion-row *ngFor="let item of players">
+      <ion-col col-5 >{{item.teilnehmer}}</ion-col>
+      <ion-col col-5>{{item.character}}  </ion-col>
+      <ion-col col-2 ><ion-icon name="remove-circle" (click)="deletePlayer(players.indexOf(item))"></ion-icon></ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list>
+    <ion-item>
+      <ion-label class="my-label" stacked>RPG-Name</ion-label>
+      <ion-input [(ngModel)]="rpg_name" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="my-label" stacked>Genre</ion-label>
+      <ion-select [(ngModel)]="genre">
+        <ion-option *ngFor="let item of genres" [value]="item">{{item}}</ion-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="my-label" stacked>RPG-Beschreibung</ion-label>
+      <ion-textarea rows="6"type="text" [(ngModel)]="rpg_description"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="my-label" stacked>Admin</ion-label>
+      <ion-select [(ngModel)]="admin">
+        <ion-option *ngFor="let item of players" [value]="item.teilnehmer">{{item.teilnehmer}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+  <button ion-button id="editButton" (click)="saveEdits()">Speichern</button>
+
+</ion-content>
