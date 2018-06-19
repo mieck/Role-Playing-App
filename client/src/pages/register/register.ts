@@ -48,11 +48,6 @@ export class RegisterPage {
       this.navCtrl.popToRoot();
     }
 
-    /* this.http.get('http://localhost:8080/checkname/' + this.name).pipe(
-       map(res => res.json())
-     ).subscribe(response => {
-       console.log('GET Response:', response);
-     });*/
   }
 
   ionViewWillEnter(){

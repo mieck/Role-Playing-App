@@ -27,7 +27,10 @@ app.use(function (request, response, next) {
 });
 
 // Models
-var Spieler = require('./models/way_models');  // the schema are defined in this file way_models.js
+var Spieler = require('./models/way_model');  // the schema are defined in this file way_model.js
+var Character = require('./models/charatere_model');
+var  Postrpg = require('./models/postrpg');
+var Spiel = require ('./models/spiel');
 //___________________________________________________________________________________
 
 app.post('/checkname', function(req, res){
@@ -54,26 +57,6 @@ app.get('/checkprofile', function(req, res, next){
     })
 });
 
-
-app.post('/login',function(req,res,next) {
-    console.log("login!");
-    Spieler.findOne({"spielername": req.body.spielername}, function (err,user) {
-        if(user == null){
-            console.log("Fehler ist aufgetreten");
-            //console(err);
-            res.send({"message":"user not exit !"});
-        }else if (user.spielerpasswort == req.body.spielerpasswort){
-            console.log("gut getroffen!");
-            console.log(user);
-            res.send(user);
-
-            }else {
-                res.send({"message": "Wrong Password!"})
-            }
-    })
-
-});
-
 // player registration and login
 app.post('/register',function (req,res,next) {
     console.log("register!");
@@ -95,6 +78,82 @@ app.post('/register',function (req,res,next) {
         }
     });
 });
+app.post('/login',function(req,res,next) {
+    console.log("login!");
+    Spieler.findOne({"spielername": req.body.spielername}, function (err,user) {
+        if(user == null){
+            console.log("Fehler ist aufgetreten");
+            //console(err);
+            res.send({"message":"user not exit !"});
+        }else if (user.spielerpasswort == req.body.spielerpasswort){
+            console.log("gut getroffen!");
+            console.log(user);
+            res.send(user);
+
+        }else {
+            res.send({"message": "Wrong Password!"})
+        }
+    })
+
+});
+
+
+// Handeln Spielerscaracter
+//**********************************************************************************************************
+app.post('/new_character', function (req,res) {
+
+   var newcharacter = {
+       CharacterName:req.body.CharacterName,
+           CharacterAlter:req.body.CharacterAlter,
+    CharacterGeschlecht:req.body.CharacterAlter,
+        CharacterBeschreibung:req.body.CharacterBeschreibung,
+            CharacterBild:req.body.CharacterBild,
+   };
+
+   //Spieler.Spilercharaters.push(newcharacter);
+   Spieler.findOneAndUpdate(
+       { _id: req.body.spielerId },
+       { $push: { Spilercharaters: newcharacter } },
+       function (error, success) {
+           if (error) {
+               console.log(error);
+           } else {
+               console.log(success);
+           }
+       });
+
+});
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// Handeln Rpg Spiel
+//**********************************************************************************************************
+app.post('/new_spiel', function (req,res) {
+
+    var newspiel = {
+        spieltitle:req.body.spieltitle,
+        spielbeschreibung:req.body.spielbeschreibung,
+    };
+
+    //Spieler.Spilercharaters.push(newcharacter);
+    Spieler.findOneAndUpdate(
+        { _id: req.body.spielerId },
+        { $push: { SpielerSpiels: newspiel } },
+        function (error, success) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log(success);
+            }
+        });
+
+});
+//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+// handeln postrpg
+//*********************************************************************************************************
+app.post('')
+//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
 
 app.post('/way/singup', function (req,res) {
     if (!req.body.spielername || !req.body.spielerpasswort || !req.body.spieleremail){
