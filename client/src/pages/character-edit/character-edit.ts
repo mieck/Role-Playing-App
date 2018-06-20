@@ -52,8 +52,6 @@ export class CharacterEditPage {
     var spielerId = window.sessionStorage.getItem("id");
     dataObj["spielerId"] = spielerId;
 
-    console.log(dataObj);
-
     if(!dataObj.hasOwnProperty("CharacterName"))
       this.presentAlert();
     else{
@@ -73,7 +71,7 @@ export class CharacterEditPage {
     this.http.post('http://localhost:8080/new_character', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
-        console.log('POST Response:', response.message);
+        console.log('POST Response:', response);
     });
   }
 

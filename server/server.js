@@ -115,6 +115,19 @@ app.post('/new_character', function (req,res) {
            if (error) {
                console.log(error);
            } else {
+              Spieler.aggregate([
+                  { $project: {
+                          spielername:1,
+                          Newcharacter:{$arrayElemAt:["$Spilercharaters",-1]}
+                      }}
+              ], function (err,result) {
+                   if (err){
+                       console.log(err);
+                   }
+                   else {
+                       res.send(result);
+                   }
+              });
                console.log(success);
            }
        });
