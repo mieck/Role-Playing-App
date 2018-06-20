@@ -86,7 +86,7 @@ export class CharacterEditPage {
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      sourceType : this.camera.PictureSourceType.SAVEDPHOTOALBUM
+      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
     }
     this.camera.getPicture(options).then((imageURI) => {
       // imageData is either a base64 encoded string or a file URI
