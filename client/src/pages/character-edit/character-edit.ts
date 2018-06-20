@@ -49,6 +49,8 @@ export class CharacterEditPage {
       dataObj[attrName] = attrValue;
     }
     dataObj["CharacterBeschreibung"] = this.description;
+    var spielerId = window.sessionStorage.getItem("id");
+    dataObj["spielerId"] = spielerId;
 
     console.log(dataObj);
 
