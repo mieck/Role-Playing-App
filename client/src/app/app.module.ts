@@ -52,7 +52,7 @@ import {SettingsEditPage} from "../pages/setting-edit/settings-edit";
     BrowserModule,
     HttpModule,
     HttpClientModule,
-    IonicModule.forRoot(MyApp, {tabsPlacement: 'top'})
+    IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
   ],
   bootstrap: [IonicApp],
   entryComponents: [

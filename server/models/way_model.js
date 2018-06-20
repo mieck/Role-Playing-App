@@ -68,8 +68,8 @@ var spieler = new Schema ({
         type:Boolean,
         required:false
     },
-    Spilercharaters :[character],
-    SpielerSpiels : [spiel],
+    characters :[character],
+    Spiels : [spiel],
 });
 
 module.exports = mongoose.model('Waydb', spieler);

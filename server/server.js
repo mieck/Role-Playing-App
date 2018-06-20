@@ -106,15 +106,18 @@ app.post('/new_character', function (req,res) {
         CharacterBeschreibung:req.body.CharacterBeschreibung,
        CharacterBild:req.body.CharacterBild,
    };
+   console.log(req.body.spielerId);
 
    //Spieler.Spilercharaters.push(newcharacter);
    Spieler.findOneAndUpdate(
        { _id: req.body.spielerId },
-       { $push: { Spilercharaters: newcharacter } },
+       { $push: { characters: newcharacter } },
        function (error, success) {
            if (error) {
+               console.log("fehler");
                console.log(error);
            } else {
+               console.log("success");
                console.log(success);
            }
        });

@@ -5,6 +5,7 @@ import {NavController, LoadingController, ToastController, Events,AlertControlle
 import {RegisterPage} from "../register/register";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { ngStorage } from 'ngstorage';
 import {TabsPage} from "../tabs/tabs";
 
 
@@ -90,6 +91,7 @@ export class LoginPage {
         //console.log('POST Response:', response.message);
       }
       else {
+          var varstorage = new ngStorage();
          this.showAlert('Bestätigen','Benutzername und Passwort richtig!','Spielen!');
 
       }
