@@ -77,7 +77,6 @@ export class LoginPage {
   }
 
   checkLogin() {
-
     let data = {
         "spielername": this.name,
         "spielerpasswort": this.password
@@ -93,7 +92,10 @@ export class LoginPage {
       else {
           var varstorage = new ngStorage();
          this.showAlert('Bestätigen','Benutzername und Passwort richtig!','Spielen!');
+        window.sessionStorage.setItem("id", response._id);
 
+        var id = window.sessionStorage.getItem("id");
+        console.log(id);
       }
 
     });
