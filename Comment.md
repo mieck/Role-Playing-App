@@ -13,10 +13,10 @@
      https://gist.github.com/aheckmann/2408370
 
 
-    FileTransfer
-        npm install --save @ionic-native/file-transfer
-    File
-        npm install --save @ionic-native/file
+    Camera Plugiin
+        npm install --save @ionic-native/camera
+        ionic cordova plugin add cordova-plugin-camera
+
 # Hilfsmittel zum Chat modull
     Back-end function
     https://medium.freecodecamp.org/building-a-chat-application-with-mean-stack-637254d1136d
