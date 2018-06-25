@@ -9,8 +9,8 @@
 
 <ion-content padding>
 
-  <ion-grid *ngFor="let item of posts">
-    <ion-row id="firstBox">
+  <ion-grid  id="firstBox" *ngFor="let item of posts">
+    <ion-row >
       <ion-col col-auto><img id="avatar" (click)="goToCharacter()" [src]=item.bild></ion-col>
       <ion-col col-6 id="charName">{{item.character}}</ion-col>
     </ion-row>
@@ -21,15 +21,28 @@
   </ion-grid>
 
 
-    <ion-grid>
-    <ion-row class="writeBox">
-      <ion-col col-auto><img id="image" src="assets/imgs/ProfileImage.png"></ion-col>
-      <ion-col col-6 >Charaktername</ion-col>
+  <ion-grid class="writeBox">
+    <ion-row id="headPost">
+      <ion-col col-4>
+        <img id="image" src="assets/imgs/ProfileImage.png">
+      </ion-col>
+      <ion-col col-6>
+        <div>Charakternamesfsfsfsfsfsf</div>
+      </ion-col>
+      <ion-col col-2>
+        <ion-icon id="send" name="send" (click)="sendPost()"></ion-icon>
+      </ion-col>
     </ion-row>
-      <ion-row class="writeBox">
-        <ion-col><ion-textarea rows="6"type="text">Post</ion-textarea></ion-col>
-      </ion-row>
-
-    </ion-grid>
+    <ion-row>
+      <ion-col >
+        <textarea #myInput scrollHeight="30px" id="myInput" rows="1" maxLength="500" (keyup)="resize()" [(ngModel)]="text"></textarea></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >
+        <ion-icon class="arrow"name="arrow-round-down" (click)="resize()"></ion-icon>
+        <ion-icon class="arrow" name="arrow-round-up" (click)="decrease()"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

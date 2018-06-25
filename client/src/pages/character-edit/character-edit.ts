@@ -7,6 +7,7 @@ import {CharRegistrPage} from "../charRegistr/charReg";
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
 import {CameraOptions, Camera} from "@ionic-native/camera";
+import {DomSanitizer} from "@angular/platform-browser";
 
 @Component({
   selector: 'page-character',
@@ -17,11 +18,12 @@ export class CharacterEditPage {
   public attributes: Array<any>;
   public description: string;
   public name: string;
-  profileImage: any;
+  public profileImage: any;
+  public imagePath: any;
   public charExists: boolean;
 
 
-  constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider, private camera: Camera) {
+  constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer) {
     this.profileImage = "assets/imgs/ProfileImage.png"
 
     this.attributes = [
@@ -52,8 +54,6 @@ export class CharacterEditPage {
     var spielerId = window.sessionStorage.getItem("id");
     dataObj["spielerId"] = spielerId;
 
-    console.log(dataObj);
-
     if(!dataObj.hasOwnProperty("CharacterName"))
       this.presentAlert();
     else{
@@ -73,7 +73,7 @@ export class CharacterEditPage {
     this.http.post('http://localhost:8080/new_character', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
-        console.log('POST Response:', response.message);
+        console.log('POST Response:', response);
     });
   }
 
@@ -83,18 +83,16 @@ export class CharacterEditPage {
   getImage() {
     const options: CameraOptions = {
       quality: 100,
-      destinationType: this.camera.DestinationType.DATA_URL,
+      destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
-      sourceType : this.camera.PictureSourceType.SAVEDPHOTOALBUM
+      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
     }
-    this.camera.getPicture(options).then((imageData) => {
+    this.camera.getPicture(options).then((imageURI) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
-      this.profileImage = 'data:image/jpeg;base64,' + imageData;
-
-    }, (err) => {
-      // Handle error
+      this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(imageURI);
+      this.imagePath = imageURI;
     });
   }
 

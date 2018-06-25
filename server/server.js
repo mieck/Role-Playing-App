@@ -117,7 +117,23 @@ app.post('/new_character', function (req,res) {
                console.log("fehler");
                console.log(error);
            } else {
+<<<<<<< HEAD
                console.log("success");
+=======
+              Spieler.aggregate([
+                  { $project: {
+                          spielername:1,
+                          Newcharacter:{$arrayElemAt:["$Spilercharaters",-1]}
+                      }}
+              ], function (err,result) {
+                   if (err){
+                       console.log(err);
+                   }
+                   else {
+                       res.send(result);
+                   }
+              });
+>>>>>>> c96c9c3178fdb681a4c9a1ae23208d4a65004394
                console.log(success);
            }
        });

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {ProfilePage} from "../profile/profile";
 import {SettingsPage} from "../settings/settings";
@@ -8,9 +8,11 @@ import {CharacterPage} from "../character/character";
   selector: 'page-posts',
   templateUrl: 'posts.html'
 })
+
 export class PostsPage {
 
   public posts: Array<any>;
+  public text: String;
 
   constructor(public navCtrl: NavController) {
 
@@ -25,6 +27,7 @@ export class PostsPage {
         bild: "assets/imgs/ProfileImage.png"}
     ];
 
+    this.text = "";
   }
 
   goToCharacter() {
@@ -33,6 +36,18 @@ export class PostsPage {
 
   goToProfile() {
     this.navCtrl.push(ProfilePage);
+  }
+
+  sendPost(){
+
+  }
+
+  @ViewChild('myInput') myInput: ElementRef;
+  resize() {
+    this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
+  }
+  decrease(){
+    this.myInput.nativeElement.style.height = 100 + 'px';
   }
 
 }
