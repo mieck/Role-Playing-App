@@ -2,7 +2,7 @@ const Character = require('../models/Character.model');
 const Spieler = require('./Spieler.controller.js');
 module.exports = function (app) {
 
-exports.new_charcter = (req,res) =>{
+exports.new_character = (req,res) =>{
     let newcharacter = {
         CharacterName: req.body.CharacterName,
         CharacterAlter: req.body.CharacterAlter,
@@ -38,4 +38,23 @@ exports.new_charcter = (req,res) =>{
     }
 };
 
+exports.update_character = (req,res) =>{
+
+        //let spielerId = req.body.spielerId;
+        let characterId = req.body.characterId;
+        var new_value = {
+            new_CharacterName:req.body.CharacterName,
+            new_CharacterAlter:req.body.CharacterAlter,
+            new_CharacterGeschlecht:req.body.CharacterGeschlecht,
+            new_CharacterBeschreibung:req.body.CharacterBeschreibung,
+            new_CharacterBild:req.body.CharacterBild,
+        };
+
+    Character.update({_id:req.body.characterId},  { $set: { field : new_value} })
+        .then( character =>{
+            res.status(200).send(character);
+        }).catch(err =>{
+        res.status(500).send(err.message);
+    })
+};
 };
