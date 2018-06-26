@@ -1,23 +1,42 @@
 var express = require('express');
+var app = express(); // new
+
 var bodyParser = require('body-parser');
-var mongoose = require('mongoose');
-var logger = require('morgan');
+const mongoose = require('mongoose');
+
+/*var logger = require('morgan');
 var methodOverride = require('method-override');
-var cors = require('cors');
+var cors = require('cors'); */
 
 // Configuration connection
-mongoose.connect('mongodb://localhost:27017/WAY');
+
+/*mongoose.connect('mongodb://localhost:27017/WAY');
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
-db.on('error', console.error.bind(console, "MongoDB connection error"));
+db.on('error', console.error.bind(console, "MongoDB connection error"));*/
 
-const app = require('express')();
-app.use(logger('dev'));
-app.use(bodyParser.urlencoded({'extended':'true'}));
+const dbconfig = require('./config/mongodb.config');
+
+//mongoose.connect('mongodb://localhost:27017/WAY');
+mongoose.Promise = global.Promise;
+//var db = mongoose.connection;
+mongoose.connect(dbconfig.url)
+    .then(()=>{
+        console.log("Successfully connected to MongoDB!");
+    }).catch(err =>{
+    console.log('Could not connect to MongoDB.');
+    process.exit();
+});
+
+//db.on('error', console.error.bind(console, "MongoDB connection error"));
+
+//const app = require('express')();
+/*app.use(logger('dev'));
+app.use(bodyParser.urlencoded({'extended':'true'}));*/
 app.use(bodyParser.json());
-app.use(bodyParser.json({type: 'application/vnd.api+json'}));
+/*app.use(bodyParser.json({type: 'application/vnd.api+json'}));
 app.use(methodOverride());
-app.use(cors());
+app.use(cors());*/
 
 app.use(function (request, response, next) {
     response.header("Access-Control-Allow-Origin", "*");
@@ -27,122 +46,14 @@ app.use(function (request, response, next) {
 });
 
 // Models
-var Spieler = require('./models/way_model');  // the schema are defined in this file way_model.js
-//___________________________________________________________________________________
-
-app.post('/checkname', function(req, res){
-
-    if(req.body.name.toLowerCase() === 'homer'){
-
-        res.status(401).send({message: 'Sorry, no Homer\'s!'});
-
-    } else {
-
-        res.send({
-            passed: true,
-            message: 'Welcome, friend!'
-        });
-
-    }
-
-});
-
-app.get('/checkprofile', function(req, res, next){
-    Spieler.find().then(function (user) {
-        console.log(user);
-        res.send(user)
-    })
-});
-
-// player registration and login
-app.post('/register',function (req,res,next) {
-    console.log("register!");
-    var items = {
-        spielername :req.body.spielername,
-        spielerpasswort : req.body.spielerpasswort,
-        spieleremail : req.body.spieleremail,
-    };
-    console.log(items);
-    var user = new Spieler(items);
-    user.save(function (err) {
-        if(err){
-            console.log(err);
-            return next("Nutzername existiert bereits.");
-        }
-        else{
-            console.log("gut");
-            return next("Sie sind registriert!");
-        }
-    });
-});
-app.post('/login',function(req,res,next) {
-    console.log("login!");
-    Spieler.findOne({"spielername": req.body.spielername}, function (err,user) {
-        if(user == null){
-            console.log("Ein Fehler ist aufgetreten.");
-            //console(err);
-            res.send({"message":"Nutzername existiert nicht!"});
-        }else if (user.spielerpasswort == req.body.spielerpasswort){
-            console.log("Perfekt.");
-            console.log(user);
-            res.send(user);
-
-        }else {
-            res.send({"message": "Falsches Passwort!"})
-        }
-    })
-
-});
-
-
-// Handeln Spielerscaracter
-//**********************************************************************************************************
-app.post('/new_character', function (req,res) {
-
-   var newcharacter = {
-       CharacterName:req.body.CharacterName,
-           CharacterAlter:req.body.CharacterAlter,
-    CharacterGeschlecht:req.body.CharacterGeschlecht,
-        CharacterBeschreibung:req.body.CharacterBeschreibung,
-       CharacterBild:req.body.CharacterBild,
-   };
-   console.log(req.body.spielerId);
-
-   //Spieler.Spilercharaters.push(newcharacter);
-   Spieler.findOneAndUpdate(
-       { _id: req.body.spielerId },
-       { $push: { characters: newcharacter } },
-       function (error, success) {
-           if (error) {
-               console.log("fehler");
-               console.log(error);
-           } else {
-<<<<<<< HEAD
-               console.log("success");
-=======
-              Spieler.aggregate([
-                  { $project: {
-                          spielername:1,
-                          Newcharacter:{$arrayElemAt:["$Spilercharaters",-1]}
-                      }}
-              ], function (err,result) {
-                   if (err){
-                       console.log(err);
-                   }
-                   else {
-                       res.send(result);
-                   }
-              });
->>>>>>> c96c9c3178fdb681a4c9a1ae23208d4a65004394
-               console.log(success);
-           }
-       });
-
-});
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+//var Spieler = require('./models/way_model');  // the schema are defined in this file way_model.js
+require('./routes/Character.routes.js')(app);
+require('./routes/Post.routes.js')(app);
+require('./routes/RPG.routes.js')(app);
+require('./routes/Spieler.routes.js')(app);
 
 // Handeln Rpg Spiel
-//**********************************************************************************************************
+//!**********************************************************************************************************
 app.post('/new_spiel', function (req,res) {
 
     var newspiel = {
@@ -163,57 +74,26 @@ app.post('/new_spiel', function (req,res) {
         });
 
 });
-//++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-// handeln postrpg
-//*********************************************************************************************************
-app.post('');
-//+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+app.post('/update_spiel',function (req,res) {
+    spielerId = req.body.spielerId;
+    spielId = req.body.spielId;
+    var Spiel = {
+        newspieltitle:req.body.spieltitle,
+        newspielbeschreibung:req.body.spielbeschreibung,
+    };
+    Spieler.findOneAndUpdate({Spiels:spielId},
+        {$set:{Spiels:Spiel}},
+        function (error,Spiel) {
+            if (error){
+                console.log("fehler");
+                console.log(error);
+            }
+            else {
+                console.log(Spiel);
+            }
+        });
 
-
-app.post('/way/singup', function (req,res) {
-    if (!req.body.spielername || !req.body.spielerpasswort || !req.body.spieleremail){
-        res.json({succes: false, msg: 'Please give the name or password or email was empty!'});
-    }
-    else {
-        //create Spieler
-         var newSpieler = Spieler({
-             spielername: req.body.spielername,
-             spielerpasswort: req.body.spielerpasswort,
-             spieleremail: req.body.spieleremail
-         });
-        spieler.insert(newSpieler, function (err,result) {
-             if (err){
-                 console.log(err);
-                 res.json({succes: false, msg: 'error during creation!' + err});
-             }
-             else{
-                 console.log(result);
-                 res.json({succes: true, msg: 'creation' + result});
-             }
-         });
-
-    }
 });
-// create Spieler
-
-app.post('/way/new_spieler', function (req,res) {
-   spieler.create({
-       spielerId: "Rpg2015", //
-       spielername : req.body.spielername,
-       spielerpasswort : req.body.spielerpasswort,
-       spieleremail : req.body.spieleremail,
-       admin: false
-       //spielercharacterName: req.body.spielercharacterName,
-
-   },function (err, spieler) {
-       if (err)
-           res.send(err);
-
-       // redirect to create character ......
-       console.log("character hinzugefügt!");
-   });
-});
-
 app.listen(process.env.PORT || 8080);
 console.log("listening on port 8080");

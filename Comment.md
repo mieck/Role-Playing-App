@@ -22,6 +22,8 @@
     https://medium.freecodecamp.org/building-a-chat-application-with-mean-stack-637254d1136d
     front-end Ionic
     https://devdactic.com/ionic-realtime-socket-io/
+# neues Modellstrukture
 
+    http://javasampleapproach.com/node-js/mongoose-many-to-many-related-models-with-nodejs-express-mongodb
    
     
