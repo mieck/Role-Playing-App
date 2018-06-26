@@ -36,6 +36,7 @@ export class RegisterPage {
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
+      window.sessionStorage.setItem("id", response._id);
     });
 
     //
