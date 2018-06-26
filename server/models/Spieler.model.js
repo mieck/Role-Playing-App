@@ -22,8 +22,16 @@ const SpielerSchema = new Schema ({
         type:Boolean,
         required:false
     },
-    Characters :[{type:Schema.Types.ObjectId,ref:'Character'}],
-    Spiels : [{type:Schema.Types.ObjectId, ref:'Spiel'}]
+    Characters : [
+        {
+            type:Schema.Types.ObjectId,
+            ref:'Character'
+        }],
+    Spiels : [
+        {
+            type:Schema.Types.ObjectId,
+            ref:'Spiel'
+        }]
 });
 
 module.exports = mongoose.model('Spieler', SpielerSchema);

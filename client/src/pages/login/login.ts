@@ -7,6 +7,8 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {TabsPage} from "../tabs/tabs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {CharacterEditPage} from "../character-edit/character-edit";
+import {GlobalProvider} from "../../provider/global";
 
 
 @Component({
@@ -24,7 +26,8 @@ export class LoginPage {
               private camera: Camera,
               public loadingCtrl: LoadingController,
               public events: Events,
-              public alerCtrl: AlertController) {
+              public alerCtrl: AlertController,
+              public global: GlobalProvider) {
 
     this.user = new FormGroup({
       name: new FormControl('', Validators.required),
@@ -64,7 +67,9 @@ export class LoginPage {
         {
           text: action,
           handler: () => {
-            this.events.publish('user:login', 'hurray');
+            this.global.registrationComplete = false;
+            this.navCtrl.setRoot(CharacterEditPage);
+            this.navCtrl.popToRoot();
           }
         }]
     });
@@ -94,7 +99,12 @@ export class LoginPage {
         //console.log('POST Response:', response.message);
       }
       else {
-         this.showAlert('Bestätigen','Benutzername und Passwort richtig!','Spielen!');
+        console.log(response.Characters);
+        if(response.Characters.length > 0){
+          this.events.publish('user:login', 'hurray');
+        }else{
+          this.showAlert('Bestätigen','Sie müssen noch einen Charakter erstellen','Okay!');
+        }
         window.sessionStorage.setItem("id", response._id);
 
         var id = window.sessionStorage.getItem("id");

@@ -83,10 +83,11 @@ exports.findWithId = (SpielerId)=>{
 };
 
 exports.AddCharacterId = (SpielerId, characterId)=>{
-    Spieler.update({_id:SpielerId},  { $push: { characters: characterId } })
+    Spieler.findByIdAndUpdate(SpielerId,  { $push: { Characters: characterId }})
         .then( Spieler =>{
             console.log("Spieler Update  Beim AddCharacterID");
             console.log(Spieler);
+            console.log(Spieler.Characters);
             //return Spieler;
         }).catch(err =>{
             console.log("Fehler Beim AddCharacterID");
