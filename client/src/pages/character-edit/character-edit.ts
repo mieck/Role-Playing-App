@@ -58,18 +58,27 @@ export class CharacterEditPage {
       this.presentAlert();
     else{
 
-      this.sendData(dataObj);
       if(!this.global.registrationComplete) {
+        this.createData(dataObj);
         this.navCtrl.setRoot(CharRegistrPage);
         this.navCtrl.popToRoot();
       }
       else{
+        this.updateData(dataObj);
         this.navCtrl.pop();
       }
     }
   }
 
-  sendData(data){
+  createData(data){
+    this.http.post('http://localhost:8080/new_character', data).pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      console.log('POST Response:', response);
+    });
+  }
+
+  updateData(data){
     this.http.post('http://localhost:8080/update_character', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
