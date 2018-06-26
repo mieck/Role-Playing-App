@@ -26,9 +26,13 @@ exports.New_Spieler = (req,res)=>{
             //console.log(user);
             res.status(200).send(user);
         }).catch(err =>{
-            res.status(500).send({
-                message:err.message
-            })
+            if(err.code==11000) {
+                res.status(500).send("Name doppelt")
+            }else{
+                res.status(500).send({
+                    message: err.message
+                })
+            }
     })
 };
 
