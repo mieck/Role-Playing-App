@@ -4,6 +4,9 @@
     to start the client run the command "ionic serve" in to the folder client </br>
 to run server and ionic we need two terminal </br>
 
+#MongoDb
+    run "mongod.exe" in folder
+
        
     
     

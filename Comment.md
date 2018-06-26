@@ -16,6 +16,8 @@
     Camera Plugiin
         npm install --save @ionic-native/camera
         ionic cordova plugin add cordova-plugin-camera
+    Monoose Install
+        npm install mongoose --save
 
 # Hilfsmittel zum Chat modull
     Back-end function
