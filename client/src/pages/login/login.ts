@@ -6,6 +6,7 @@ import {RegisterPage} from "../register/register";
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer';
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import {TabsPage} from "../tabs/tabs";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 
 @Component({
@@ -13,8 +14,7 @@ import {TabsPage} from "../tabs/tabs";
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  name:string;
-  password:string;
+  user:any;
   imageURI:any;
   imageFileName:any;
   base64Image: string;
@@ -25,6 +25,11 @@ export class LoginPage {
               public loadingCtrl: LoadingController,
               public events: Events,
               public alerCtrl: AlertController) {
+
+    this.user = new FormGroup({
+      name: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required)
+    });
 
   }
 
@@ -77,8 +82,8 @@ export class LoginPage {
 
   checkLogin() {
     let data = {
-        "spielername": this.name,
-        "spielerpasswort": this.password
+        "spielername": this.user.controls.name.value,
+        "spielerpasswort": this.user.controls.password.value
     };
 
     this.http.post('http://localhost:8080/login', data).pipe(
