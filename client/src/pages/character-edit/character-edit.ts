@@ -8,6 +8,7 @@ import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
 import {CameraOptions, Camera} from "@ionic-native/camera";
 import {DomSanitizer} from "@angular/platform-browser";
+import {LoadingController, Loading} from "ionic-angular";
 
 @Component({
   selector: 'page-character',
@@ -21,9 +22,12 @@ export class CharacterEditPage {
   public profileImage: any;
   public imagePath: any;
   public charExists: boolean;
+  loading: Loading;
 
 
-  constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer) {
+  constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController,
+              public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
+              public loadingCtrl: LoadingController) {
     this.profileImage = "assets/imgs/ProfileImage.png"
 
     this.attributes = [
@@ -93,16 +97,27 @@ export class CharacterEditPage {
     const options: CameraOptions = {
       quality: 100,
       destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.JPEG,
+      encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE,
       sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
     }
+    this.loading = this.loadingCtrl.create({
+      content: 'Bild wird geladen',
+    });
+
+    this.loading.present();
+
     this.camera.getPicture(options).then((imageURI) => {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64:
       this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(imageURI);
       this.imagePath = imageURI;
+      setTimeout(() => {
+        this.loading.dismiss();
+      }, 3000);
+
     });
+
   }
 
   deleteRows(){
