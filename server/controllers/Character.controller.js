@@ -13,16 +13,12 @@ exports.newCharacter = (req,res) =>{
         };
         var character = new Character(newcharacter);
         console.log("Spieler Id lesen");
-        console.log(req.body.spielerId);
+        console.log(req.body);
         character.save()
             .then(new_character => {
-                result = Spieler.AddCharacterId(req.body.spielerId,new_character._id);
-                if (result._id == null){
-                    console.log("fehler beim Update Spieler Character!");
-                }
-                else {
-                    res.status(200).send(result);
-                }
+                Spieler.AddCharacterId(req.body.spielerId,new_character._id);
+                console.log(new_character);
+                res.status(200).send(new_character);
             }).catch(err =>{
             console.log("fehler beim Insert Character!");
             res.status(500).send({

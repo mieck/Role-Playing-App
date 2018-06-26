@@ -23,8 +23,8 @@ exports.New_Spieler = (req,res)=>{
     var user = new Spieler(items);
     user.save()
         .then(user => {
-            res.status(200).send({
-                message:user._id});
+            //console.log(user);
+            res.status(200).send(user);
         }).catch(err =>{
             res.status(500).send({
                 message:err.message
@@ -83,7 +83,7 @@ exports.AddCharacterId = (SpielerId, characterId)=>{
         .then( Spieler =>{
             console.log("Spieler Update  Beim AddCharacterID");
             console.log(Spieler);
-            return Spieler;
+            //return Spieler;
         }).catch(err =>{
             console.log("Fehler Beim AddCharacterID");
             return err.message;
