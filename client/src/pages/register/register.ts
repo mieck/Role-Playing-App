@@ -5,31 +5,36 @@ import {AlertController, NavController} from "ionic-angular";
 import {CreateRPGPage} from "../createRPG/createRPG";
 import {CharacterEditPage} from "../character-edit/character-edit";
 import {GlobalProvider} from "../../provider/global";
+import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html'
 })
 
-
 export class RegisterPage {
-  name:string;
-  password:string;
-  mail:string;
-
+  user:any;
   admin:boolean;
 
   constructor(private http: Http, public navCtrl:NavController, public global: GlobalProvider, public alerCtrl: AlertController) {
 
+    this.user = new FormGroup({
+      name: new FormControl('', Validators.required),
+      password: new FormControl('', Validators.required),
+      mail: new FormControl('')
+    });
   }
+
   checkRegister() {
 
     console.log('klicked!');
     this.admin = true;  // erstmal damit der cran gut läuft!
+
+    console.log(this.user);
     let data = {
-      "spielername": this.name,
-      "spielerpasswort": this.password,
-      "spieleremail": this.mail,
+      "spielername": this.user.controls.name.value,
+      "spielerpasswort": this.user.controls.password.value,
+      "spieleremail": this.user.controls.mail.value,
     };
 
     this.http.post('http://localhost:8080/register', data).pipe(

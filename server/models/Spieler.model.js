@@ -16,8 +16,7 @@ const SpielerSchema = new Schema ({
     },
     spieleremail : {
         type:String,
-        unique:false,
-        required:true
+        unique:false
     },
     admin :{
         type:Boolean,
