@@ -73,7 +73,6 @@ exports.findWithId = (SpielerId)=>{
     Spieler.findById(SpielerId)
         .then(Spieler =>{
             return(Spieler);
-            throw new Error({'hehe':'haha'});
         }).catch(err =>{
         return 0;
     })
@@ -82,8 +81,20 @@ exports.findWithId = (SpielerId)=>{
 exports.AddCharacterId = (SpielerId, characterId)=>{
     Spieler.update({_id:SpielerId},  { $push: { characters: characterId } })
         .then( Spieler =>{
+            console.log("Spieler Update  Beim AddCharacterID");
+            console.log(Spieler);
             return Spieler;
         }).catch(err =>{
+            console.log("Fehler Beim AddCharacterID");
             return err.message;
+    })
+};
+
+exports.AddSpielId = (SpielerId, spielId)=>{
+    Spieler.update({_id:SpielerId},  { $push: { Spiels: spielId } })
+        .then( Spieler =>{
+            return Spieler;
+        }).catch(err =>{
+        return err.message;
     })
 };

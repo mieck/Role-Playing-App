@@ -22,9 +22,9 @@ const characterschema = new Schema({
         unique:false,
         required:true
     },
-    CharacterBild : [{
+    CharacterBild : {
         data:Buffer,
-        contentType: String}],
+        contentType: String},
 });
 
 module.exports = mongoose.model('Character', characterschema);

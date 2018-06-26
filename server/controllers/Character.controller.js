@@ -1,5 +1,6 @@
 const Character = require('../models/Character.model');
 const Spieler = require('./Spieler.controller');
+const fs = require('fs');
 
 exports.newCharacter = (req,res) =>{
         console.log("new character!");
@@ -10,22 +11,13 @@ exports.newCharacter = (req,res) =>{
             CharacterBeschreibung: req.body.CharacterBeschreibung,
             CharacterBild: req.body.CharacterBild,
         };
-
-        var SpielerId = req.body.spielerId;
-
-
-    var UpdatSpieler = Spieler.findWithId(SpielerId);
-
-    if (isNullOrUndefined(UpdatSpieler)){
-        //res.send()
-        console.log("spielr findwithID hat ein Problem!");
-    }
-    else {
         var character = new Character(newcharacter);
+        console.log("Spieler Id lesen");
+        console.log(req.body.spielerId);
         character.save()
             .then(new_character => {
-                result = Spieler.AddCharacterId(UpdatSpieler._id,new_character._id)
-                if (isNullOrUndefined(result._id)){
+                result = Spieler.AddCharacterId(req.body.spielerId,new_character._id);
+                if (result._id == null){
                     console.log("fehler beim Update Spieler Character!");
                 }
                 else {
@@ -37,7 +29,6 @@ exports.newCharacter = (req,res) =>{
                 message:err.message
             })
         })
-    }
 };
 
 
@@ -46,11 +37,13 @@ exports.update_character = (req,res) =>{
     console.log("update character!");
     var characterId = req.body.characterId;
     var new_value = {
-        new_CharacterName:req.body.CharacterName,
-        new_CharacterAlter:req.body.CharacterAlter,
-        new_CharacterGeschlecht:req.body.CharacterGeschlecht,
-        new_CharacterBeschreibung:req.body.CharacterBeschreibung,
-        new_CharacterBild:req.body.CharacterBild,
+        CharacterName:req.body.CharacterName,
+        CharacterAlter:req.body.CharacterAlter,
+        CharacterGeschlecht:req.body.CharacterGeschlecht,
+        CharacterBeschreibung:req.body.CharacterBeschreibung,
+        CharacterBild:{
+            data :fs.readFileSync(req.body.Pathimage),
+            contentType : req.body.ImageType,},
     };
 
     Character.update({_id:req.body.characterId},  { $set: { field : new_value} })
@@ -59,4 +52,20 @@ exports.update_character = (req,res) =>{
         }).catch(err =>{
         res.status(500).send(err.message);
     })
+};
+
+exports.updateAddBild = (req,res) =>{
+    // Bild : {data:Buffer,contentType: String} // deal with image https://gist.github.com/aheckmann/2408370
+   var image ={
+       imagePath :req.body.imagePath,
+       imageType : req.body.ImageType
+   };
+
+    Character.update({_id:req.body.characterId},  { $set: { CharacterBild : image} })
+        .then( character =>{
+            res.status(200).send(character);
+        }).catch(err =>{
+        res.status(500).send(err.message);
+    })
+
 };

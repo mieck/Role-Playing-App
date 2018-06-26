@@ -52,48 +52,5 @@ require('./routes/Post.routes.js')(app);
 require('./routes/RPG.routes.js')(app);
 require('./routes/Spieler.routes.js')(app);
 
-// Handeln Rpg Spiel
-//!**********************************************************************************************************
-app.post('/new_spiel', function (req,res) {
-
-    var newspiel = {
-        spieltitle:req.body.spieltitle,
-        spielbeschreibung:req.body.spielbeschreibung,
-    };
-
-    //Spieler.Spilercharaters.push(newcharacter);
-    Spieler.findOneAndUpdate(
-        { _id: req.body.spielerId },
-        { $push: { SpielerSpiels: newspiel } },
-        function (error, success) {
-            if (error) {
-                console.log(error);
-            } else {
-                console.log(success);
-            }
-        });
-
-});
-
-app.post('/update_spiel',function (req,res) {
-    spielerId = req.body.spielerId;
-    spielId = req.body.spielId;
-    var Spiel = {
-        newspieltitle:req.body.spieltitle,
-        newspielbeschreibung:req.body.spielbeschreibung,
-    };
-    Spieler.findOneAndUpdate({Spiels:spielId},
-        {$set:{Spiels:Spiel}},
-        function (error,Spiel) {
-            if (error){
-                console.log("fehler");
-                console.log(error);
-            }
-            else {
-                console.log(Spiel);
-            }
-        });
-
-});
 app.listen(process.env.PORT || 8080);
 console.log("listening on port 8080");
