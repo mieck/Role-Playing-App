@@ -12,6 +12,7 @@ page-character {
   .my-label {
     color: #000000 !important;
     font-size: 16px !important;
+    background-color: ghostwhite
   }
 
   .attrButton{
@@ -20,6 +21,11 @@ page-character {
 
   #background {
     background-color: #cbe9fb ;
+  }
+
+  #save{
+    float: right;
+    display: inline-block;
   }
 
   #header {

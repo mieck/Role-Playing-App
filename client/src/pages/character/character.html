@@ -6,12 +6,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="background" padding>
   <img id="avatar" src="https://img1.ak.crunchyroll.com/i/spire3/3614810e9ada5235038e8deb4adc264c1447729591_large.jpg">
 
 
-  <ion-list>
-    <ion-item>
+  <ion-list >
+    <ion-item class="background">
       <ion-grid>
         <ion-row *ngFor="let item of attributes">
           <ion-col>{{item.attr}}</ion-col>
@@ -21,12 +21,12 @@
     </ion-item>
 
 
-    <ion-item>
-      <label class="my-label" stacked>Beschreibung</label>
+    <ion-item class="background">
+      <label id="my-label" stacked>Beschreibung</label>
       <div id="descr">{{description}}</div>
     </ion-item>
   </ion-list>
 
-  <button ion-button id="editButton" (click)="editCharacter()">Bearbeiten</button>
+  <button ion-button color="mycolor1" id="editButton" (click)="editCharacter()">Bearbeiten</button>
 
 </ion-content>

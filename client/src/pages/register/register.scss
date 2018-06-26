@@ -1,3 +1,29 @@
 page-register {
-
+  .background {
+    background-color: #cbe9fb;
+  }
+  #cool-button-div-reg {
+    position: center;
+    width:85%;
+    margin-top:10%;
+  }
+  .label {
+    font-family: "AR JULIAN";
+    font-size: 20px;
+    color: midnightblue !important;
+  }
+  #header {
+    float: left;
+    display: inline-block;
+    font-size: 30px;
+    margin-top:2%;
+    margin-left: 2%;
+  }
+  #logo {
+    float: right;
+    display: inline-block;
+    max-height: 45px;
+    max-width: 45px;
+    margin-right: 2%;
+  }
 }
