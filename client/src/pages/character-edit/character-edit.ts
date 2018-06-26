@@ -70,7 +70,7 @@ export class CharacterEditPage {
   }
 
   sendData(data){
-    this.http.post('http://localhost:8080/new_character', data).pipe(
+    this.http.post('http://localhost:8080/update_character', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
         console.log('POST Response:', response);

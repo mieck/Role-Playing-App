@@ -2,6 +2,7 @@ const Spieler = require('../models/Spieler.model.js');
 
 
 exports.findAll = (req,res)=>{
+    console.log("spieler");
     Spieler.find()
         .then(Spielers =>{
             res.send(Spielers);
@@ -72,6 +73,7 @@ exports.findWithId = (SpielerId)=>{
     Spieler.findById(SpielerId)
         .then(Spieler =>{
             return(Spieler);
+            throw new Error({'hehe':'haha'});
         }).catch(err =>{
         return 0;
     })

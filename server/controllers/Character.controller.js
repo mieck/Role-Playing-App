@@ -1,18 +1,20 @@
 const Character = require('../models/Character.model');
-const Spieler = require('./Spieler.controller.js');
-module.exports = function (app) {
+const Spieler = require('./Spieler.controller');
 
-exports.new_character = (req,res) =>{
-    let newcharacter = {
-        CharacterName: req.body.CharacterName,
-        CharacterAlter: req.body.CharacterAlter,
-        CharacterGeschlecht: req.body.CharacterGeschlecht,
-        CharacterBeschreibung: req.body.CharacterBeschreibung,
-        CharacterBild: req.body.CharacterBild,
-    };
-    let SpielerId = req.body.spielerId;
+exports.newCharacter = (req,res) =>{
+        console.log("new character!");
+        var newcharacter = {
+            CharacterName: req.body.CharacterName,
+            CharacterAlter: req.body.CharacterAlter,
+            CharacterGeschlecht: req.body.CharacterGeschlecht,
+            CharacterBeschreibung: req.body.CharacterBeschreibung,
+            CharacterBild: req.body.CharacterBild,
+        };
 
-    let UpdatSpieler = Spieler.findWithId(SpielerId);
+        var SpielerId = req.body.spielerId;
+
+
+    var UpdatSpieler = Spieler.findWithId(SpielerId);
 
     if (isNullOrUndefined(UpdatSpieler)){
         //res.send()
@@ -38,17 +40,18 @@ exports.new_character = (req,res) =>{
     }
 };
 
-exports.update_character = (req,res) =>{
 
-        //let spielerId = req.body.spielerId;
-        let characterId = req.body.characterId;
-        var new_value = {
-            new_CharacterName:req.body.CharacterName,
-            new_CharacterAlter:req.body.CharacterAlter,
-            new_CharacterGeschlecht:req.body.CharacterGeschlecht,
-            new_CharacterBeschreibung:req.body.CharacterBeschreibung,
-            new_CharacterBild:req.body.CharacterBild,
-        };
+exports.update_character = (req,res) =>{
+    //let spielerId = req.body.spielerId;
+    console.log("update character!");
+    var characterId = req.body.characterId;
+    var new_value = {
+        new_CharacterName:req.body.CharacterName,
+        new_CharacterAlter:req.body.CharacterAlter,
+        new_CharacterGeschlecht:req.body.CharacterGeschlecht,
+        new_CharacterBeschreibung:req.body.CharacterBeschreibung,
+        new_CharacterBild:req.body.CharacterBild,
+    };
 
     Character.update({_id:req.body.characterId},  { $set: { field : new_value} })
         .then( character =>{
@@ -56,5 +59,4 @@ exports.update_character = (req,res) =>{
         }).catch(err =>{
         res.status(500).send(err.message);
     })
-};
 };
