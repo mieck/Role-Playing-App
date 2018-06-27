@@ -21,7 +21,6 @@ export class CharacterEditPage {
   public name: string;
   public profileImage: any;
   public imagePath: any;
-  public charExists: boolean;
   loading: Loading;
 
 
@@ -37,8 +36,6 @@ export class CharacterEditPage {
     ];
 
     this.description = "Hier steht was";
-    this.charExists = false;
-
   }
 
   saveAttributes(){
@@ -55,19 +52,21 @@ export class CharacterEditPage {
       dataObj[attrName] = attrValue;
     }
     dataObj["CharacterBeschreibung"] = this.description;
-    var spielerId = window.sessionStorage.getItem("id");
-    dataObj["spielerId"] = spielerId;
 
     if(!dataObj.hasOwnProperty("CharacterName"))
       this.presentAlert();
     else{
 
       if(!this.global.registrationComplete) {
+        var spielerId = window.sessionStorage.getItem("id");
+        dataObj["spielerId"] = spielerId;
         this.createData(dataObj);
         this.navCtrl.setRoot(CharRegistrPage);
         this.navCtrl.popToRoot();
       }
       else{
+        var characterId = window.sessionStorage.getItem("char_id");
+        dataObj["characterId"] = characterId;
         this.updateData(dataObj);
         this.navCtrl.pop();
       }
@@ -159,7 +158,7 @@ export class CharacterEditPage {
 
   ionViewDidLoad(){
 
-    if(this.charExists) {
+    if(this.global.registrationComplete) {
       document.getElementById('notification').style.visibility = 'hidden';
     } else {
       document.getElementById('notification').style.visibility = 'visible';

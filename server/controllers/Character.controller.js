@@ -37,12 +37,12 @@ exports.update_character = (req,res) =>{
         CharacterAlter:req.body.CharacterAlter,
         CharacterGeschlecht:req.body.CharacterGeschlecht,
         CharacterBeschreibung:req.body.CharacterBeschreibung,
-        CharacterBild:{
-            data :fs.readFileSync(req.body.Pathimage),
-            contentType : req.body.ImageType,},
-    };
+    //     CharacterBild:{
+    //         data :fs.readFileSync(req.body.Pathimage),
+    //         contentType : req.body.ImageType,},
+         };
 
-    Character.update({_id:req.body.characterId},  { $set: { field : new_value} })
+    Character.findByIdAndUpdate({_id:req.body.characterId},  { $set: new_value })
         .then( character =>{
             res.status(200).send(character);
         }).catch(err =>{

@@ -102,13 +102,11 @@ export class LoginPage {
         console.log(response.Characters);
         if(response.Characters.length > 0){
           this.events.publish('user:login', 'hurray');
+          window.sessionStorage.setItem("char_id", response.Characters[0]);
         }else{
           this.showAlert('Bestätigen','Sie müssen noch einen Charakter erstellen','Okay!');
         }
         window.sessionStorage.setItem("id", response._id);
-
-        var id = window.sessionStorage.getItem("id");
-        console.log(id);
       }
 
     });
