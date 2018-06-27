@@ -78,6 +78,7 @@ export class CharacterEditPage {
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
+      window.sessionStorage.setItem("char_id", response._id);
     });
   }
 
