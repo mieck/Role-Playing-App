@@ -58,15 +58,26 @@ exports.login = function(req,res) {
 
 exports.updateProfil = (req, res)=>{
     var newitems = {
-        spielername :req.body.spielername,
         spielerpasswort : req.body.spielerpasswort,
         spieleremail : req.body.spieleremail,
     };
-    Spieler.update({_id:req.body.spielerId},  { $set: { field : newitems} })
+    Spieler.findByIdAndUpdate({_id:req.body.spielerId},  { $set: newitems })
         .then( Spieler =>{
             res.status(200).send(Spieler);
         }).catch(err =>{
         res.status(500).send(err.message);
+    })
+};
+
+exports.findOnePlayer = (req,res)=>{
+    console.log(req.body.id);
+    Spieler.findById(req.body.id)
+        .then(Spieler =>{
+            res.send(Spieler);
+        }).catch(err =>{
+            res.status(500).send({
+                message: err.message
+            })
     })
 };
 

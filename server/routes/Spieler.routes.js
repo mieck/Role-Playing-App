@@ -18,7 +18,9 @@ module.exports = function (app) {
         }
 
     });*/
-    app.get('/checkprofile', Spieler.findAll);
+    app.get('/settings', Spieler.findAll);
+    app.post('/checkprofile', Spieler.findOnePlayer);
+    app.post('/update_profile', Spieler.updateProfil);
     app.post('/register',Spieler.New_Spieler);
     app.post('/login',Spieler.login);
 

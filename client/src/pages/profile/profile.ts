@@ -13,9 +13,12 @@ export class ProfilePage {
   name:string;
   password:string;
   mail:string;
+  oldpassword:string;
+
+  saved:boolean;
 
   constructor(private http: Http, public navCtrl:NavController, public events: Events) {
-
+    this.saved = false;
   }
 
   logout(){
@@ -23,23 +26,48 @@ export class ProfilePage {
   }
 
   editProfile() {
+    this.saved = false;
 
-    let data = {
-      "name": this.name,
-      "password": this.password,
-      "mail": this.mail,
-    };
+    var id = window.sessionStorage.getItem("id");
+    let data = {};
 
-    this.http.post('http://localhost:8080/checkname', data).pipe(
+    console.log(this.password);
+
+    if(this.password == undefined) {
+      data = {
+        "spieleremail": this.mail,
+        "spielerpasswort": this.oldpassword,
+        "spielerId": id,
+      };
+    }else{
+      data = {
+        "spieleremail": this.mail,
+        "spielerpasswort": this.password,
+        "spielerId": id,
+      };
+    }
+
+    this.http.post('http://localhost:8080/update_profile', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
-      console.log('POST Response:', response);
-    });
+      console.log(response);
+      this.saved = true;
+    },(err) => {
 
-    this.http.get('http://localhost:8080/checkname/' + this.name).pipe(
+      }
+    );
+
+  }
+
+  ionViewDidLoad(){
+    var id = window.sessionStorage.getItem("id");
+
+    this.http.post('http://localhost:8080/checkprofile', {id: id}).pipe(
       map(res => res.json())
     ).subscribe(response => {
-      console.log('GET Response:', response);
+      this.name = response.spielername;
+      this.mail = response.spieleremail;
+      this.oldpassword = response.spieleremail;
     });
   }
 
