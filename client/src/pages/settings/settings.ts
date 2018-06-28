@@ -73,17 +73,24 @@ export class SettingsPage {
         var char_id = response[i].Characters[0];
         var spielername = response[i].spielername;
 
-        let insert = {"teilnehmer": spielername,
-          "charID": char_id};
+        if(char_id == undefined) {
+          console.log("undefined Id");
+        }else {
 
-        console.log(insert);
+          let insert = {
+            "teilnehmer": spielername,
+            "charID": char_id
+          };
 
-        this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(
-          map(res => res.json())
-        ).subscribe(response => {
-          insert["character"] = response.CharacterName;
-        });
-        this.players.push(insert);
+          console.log(insert);
+
+          this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(
+            map(res => res.json())
+          ).subscribe(response => {
+            insert["character"] = response.CharacterName;
+          });
+          this.players.push(insert);
+        }
       }
       console.log(this.players);
     });
