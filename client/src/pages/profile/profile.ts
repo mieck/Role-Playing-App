@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
 import {Http} from "@angular/http";
 import {map} from 'rxjs/operators';
-import { NavController} from 'ionic-angular';
+import {LoadingController, NavController, Loading} from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import { Events } from 'ionic-angular';
+import {CharRegistrPage} from "../charRegistr/charReg";
+
 
 @Component({
   selector: 'page-profile',
@@ -14,10 +16,11 @@ export class ProfilePage {
   password:string;
   mail:string;
   oldpassword:string;
-
+  loading: Loading;
   saved:boolean;
 
-  constructor(private http: Http, public navCtrl:NavController, public events: Events) {
+  constructor(private http: Http, public navCtrl:NavController, public events: Events,
+              public loadingCtrl: LoadingController) {
     this.saved = false;
   }
 
@@ -26,12 +29,21 @@ export class ProfilePage {
   }
 
   editProfile() {
+    this.loading = this.loadingCtrl.create({
+      spinner: 'ios',
+    });
+    this.loading.present();
+
     this.saved = false;
 
     var id = window.sessionStorage.getItem("id");
     let data = {};
 
     console.log(this.password);
+
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 1000);
 
     if(this.password == undefined) {
       data = {

@@ -1,32 +1,28 @@
 <ion-header>
   <ion-navbar>
     <div id="header">Profil</div>
-    <div id="logo"><img src="assets/imgs/Dummy_Profile_02.png" (click)="goToProfile()"/></div>
+    <div id="logo"><img src="assets/imgs/Dummy_Profile_02.png"/></div>
   </ion-navbar>
 </ion-header>
 
 <ion-content class="background" padding>
 
-    <ion-item no-lines id="namelabel">
-      <label stacked>Nutzername</label>
-      <div id="name"> {{name}}</div>
-    </ion-item>
-    <ion-item id="mail">
-      <ion-label floating>E-Mail</ion-label>
-      <ion-input [(ngModel)]="mail"></ion-input>
-    </ion-item>
-    <ion-item id="password">
-      <ion-label floating>Neues Passwort</ion-label>
-      <ion-input type="password" [(ngModel)]="password"></ion-input>
-    </ion-item>
+  <ion-item no-lines id="nameitem">
+    <label id="namelabel"stacked>Nutzername</label>
+    <div id="name"> {{name}}</div>
+  </ion-item>
+  <ion-item id="mailitem">
+    <ion-label id="maillabel" floating>E-Mail</ion-label>
+    <ion-input [(ngModel)]="mail"></ion-input>
+  </ion-item>
+  <ion-item id="passworditem">
+    <ion-label id="passwordlabel" floating>Neues Passwort</ion-label>
+    <ion-input type="password" [(ngModel)]="password"></ion-input>
+  </ion-item>
 
 
-  <button ion-button color="mycolor1" (click)="editProfile()">Bearbeiten</button>
-  <div *ngIf="saved">Gespeichert!</div>
-
-  <hr id="line">
-
-  <button ion-button color="mycolor2" (click)="logout()">Abmelden</button>
-
+  <button ion-button color="mycolor1" id="editButton" (click)="editProfile()"><ion-icon name="create"> Bearbeiten</ion-icon></button>
+  <div id="saved" *ngIf="saved">Gespeichert!</div>
+  <button ion-button color="mycolor2" id="logout" (click)="logout()"><ion-icon name="log-out"> Abmelden</ion-icon></button>
 
 </ion-content>

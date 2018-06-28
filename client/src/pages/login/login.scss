@@ -29,7 +29,7 @@ page-login {
     background-color: #cbe9fb;
   }
   .label {
-    font-family: "AR JULIAN";
+    font-family: "Georgia";
     font-size: 20px;
     color: midnightblue !important;
   }
@@ -42,13 +42,14 @@ page-login {
     width:85%;
     margin-top:10%;
   }
-
   #cool-button-div-reg {
     position: center;
     width:85%;
   }
-
   .input-cover {
     position: static;
+  }
+  ion-icon {
+    font-size: 20px;
   }
 }

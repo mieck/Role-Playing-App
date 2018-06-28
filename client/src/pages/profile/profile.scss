@@ -3,6 +3,7 @@ page-profile {
   #name{
     padding-top: 2%;
     margin-bottom: 5%;
+    color: #488aff;
   }
   .input-cover {
     position: static;
@@ -25,26 +26,52 @@ page-profile {
     background-color: #cbe9fb;
   }
 
-  #namelabel{
+  #nameitem{
     background-color: #cbe9fb;
-    font-family: "AR JULIAN";
     font-size: 20px;
-    color: midnightblue !important;
   }
-  #mail{
+  #mailitem{
     background-color: #cbe9fb;
-    font-family: "AR JULIAN";
     font-size: 20px;
-    color: midnightblue !important;
   }
-  #password{
+  #passworditem{
     background-color: #cbe9fb;
-    font-family: "AR JULIAN";
     font-size: 20px;
-    color: midnightblue !important;
     margin-bottom: 10%;
   }
   #line{
-    width: 60%;
+    width: 0%;
   }
+  #passwordlabel{
+    color: midnightblue;
+    font-family: "Georgia";
+  }
+  #maillabel{
+    color: midnightblue;
+    font-family: "Georgia";
+  }
+  #namelabel{
+    color: midnightblue;
+    font-family: "Georgia";
+  }
+  ion-icon {
+    font-size: 20px;
+  }
+  #editButton{
+    position: absolute;
+    right: 10%;
+  }
+  #logout{
+    position: absolute;
+    right: 10%;
+    margin-top: 25%;
+  }
+  #saved{
+    position: absolute;
+    left: 10%;
+    margin-top: 2%;
+    font-size: 17px;
+    color: black;
+  }
+
 }

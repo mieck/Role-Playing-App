@@ -23,7 +23,6 @@ export class CharacterEditPage {
   public imagePath: any;
   loading: Loading;
 
-
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController,
               public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
               public loadingCtrl: LoadingController) {
@@ -57,7 +56,7 @@ export class CharacterEditPage {
         dataObj["spielerId"] = spielerId;
         this.createData(dataObj);
         this.loading = this.loadingCtrl.create({
-          spinner: 'bubbles',
+          spinner: 'ios',
           content: 'Charakter wird erstellt',
         });
         this.loading.present();
@@ -108,7 +107,7 @@ export class CharacterEditPage {
       sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
     }
     this.loading = this.loadingCtrl.create({
-      spinner: 'bubbles',
+      spinner: 'ios',
     });
 
     this.loading.present();
