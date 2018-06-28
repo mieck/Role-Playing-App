@@ -107,7 +107,7 @@ exports.AddCharacterId = (SpielerId, characterId)=>{
 };
 
 exports.AddSpielId = (SpielerId, spielId)=>{
-    Spieler.update({_id:SpielerId},  { $push: { Spiels: spielId } })
+    Spieler.findByIdAndUpdate(SpielerId,  { $set: { admin: true } })
         .then( Spieler =>{
             return Spieler;
         }).catch(err =>{

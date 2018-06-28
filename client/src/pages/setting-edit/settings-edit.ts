@@ -29,7 +29,7 @@ export class SettingsEditPage {
     this.rpg_description  = "A rpg";
     this.admin = "Player1";
 
-    this.genres = ["Action", "Romance", "Comedy"]
+    this.genres = ["Action", "Romance", "Comedy", "Fantasy", "Sci-Fi", "Slice of Life", "Horror", "Drama"]
 
   }
 

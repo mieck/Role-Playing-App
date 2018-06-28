@@ -8,13 +8,27 @@
 
 <ion-content padding>
   Es liegt noch kein RPG vor. Sie können als Erster das RPG erstellen!
+  <form [formGroup]="rpg" (ngSubmit)="save()">
+    <ion-item>
+      <ion-label class="my-label" stacked>RPG-Name</ion-label>
+      <ion-input formControlName="rpg_name" type="text"></ion-input>
+    </ion-item>
 
-  <ion-item>
-    <ion-label floating>RPG Name</ion-label>
-    <ion-input [(ngModel)]="name" type="text"></ion-input>
-  </ion-item>
+    <ion-item>
+      <ion-label class="my-label" stacked>Genre</ion-label>
+      <ion-select formControlName="genre">
+        <ion-option *ngFor="let item of genres" [value]="item">{{item}}</ion-option>
+      </ion-select>
+    </ion-item>
 
-  <button ion-button color="primary" (click)="save()">Speichern</button>
+    <ion-item>
+      <ion-label class="my-label" stacked>RPG-Beschreibung</ion-label>
+      <ion-textarea rows="6"type="text" formControlName="rpg_description"></ion-textarea>
+    </ion-item>
+
+    <button ion-button color="primary" type="submit" [disabled]="!rpg.valid">Speichern</button>
+
+  </form>
   <button ion-button color="secondary" (click)="abort()">Abbrechen</button>
 
 

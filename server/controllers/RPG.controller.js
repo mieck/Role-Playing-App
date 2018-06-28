@@ -6,21 +6,21 @@ exports.newSpiel = (req,res)=>{
         var newspiel = {
             spieltitle:req.body.spieltitle,
             spielbeschreibung:req.body.spielbeschreibung,
+            admin:req.body.admin,
+            spielgenre:req.body.spielgenre
         };
+        var SpielerId = req.body.admin;
 
-
-        var SpielerId = req.body.SpielerId;
-
-        var spiel = new Spieler(newspiel);
+        var spiel = new Spiel(newspiel);
         spiel.save()
-            .then(spiel => {
-                result = Spieler.AddSpielId(SpielerId,spiel._id)
-                if (result._id == null){
-                    console.log("fehler beim Update Spieler Character!");
-                }
-                else {
-                    res.status(200).send(result);
-                }
+            .then(new_spiel => {
+                Spieler.AddSpielId(SpielerId);
+                // if (result._id == null){
+                //     console.log("fehler beim Update Spieler Character!");
+                // }
+                // else {
+                //     res.status(200).send(result);
+                // }
             }).catch(err =>{
             console.log("fehler beim Insert Character!");
             res.status(500).send({
@@ -36,6 +36,8 @@ exports.updateSpiel = (req,res) =>{
     var new_value = {
         spieltitle:req.body.spieltitle,
         spielbeschreibung:req.body.spielbeschreibung,
+        admin:req.body.admin,
+        spielgenre:req.body.spielgenre
     };
 
     Character.update({_id:req.body.spielId},  { $set: { field : new_value} })
@@ -50,9 +52,9 @@ exports.updateSpiel = (req,res) =>{
 
 exports.findOneSpielById = (req,res)=>{
 
-    Spiel.findById(req.body.spielId)
+    Spiel.findById(req.body.id)
         .then(Spiel =>{
-            res.status(200).send(spiel);
+            res.status(200).send(Spiel);
         }).catch(err =>{
             res.status(500).send(err.message);
     })
