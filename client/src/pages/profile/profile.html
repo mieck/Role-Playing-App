@@ -1,34 +1,32 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      <div id="header">Profil</div>
-      <div id="profil">Profilogo</div>
-    </ion-title>
+    <div id="header">Profil</div>
+    <div id="logo"><img src="assets/imgs/Dummy_Profile_02.png" (click)="goToProfile()"/></div>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="background" padding>
 
-  <ion-list>
-    <ion-item>
+    <ion-item no-lines id="namelabel">
       <label stacked>Nutzername</label>
-      <div>{{name}}</div>
+      <div id="name"> {{name}}</div>
     </ion-item>
-    <ion-item>
+    <ion-item id="mail">
       <ion-label floating>E-Mail</ion-label>
       <ion-input [(ngModel)]="mail"></ion-input>
     </ion-item>
-    <ion-item>
+    <ion-item id="password">
       <ion-label floating>Neues Passwort</ion-label>
       <ion-input type="password" [(ngModel)]="password"></ion-input>
     </ion-item>
-  </ion-list>
 
-  <button ion-button color="primary" (click)="editProfile()">Bearbeiten</button>
+
+  <button ion-button color="mycolor1" (click)="editProfile()">Bearbeiten</button>
   <div *ngIf="saved">Gespeichert!</div>
-  <hr>
 
-  <button ion-button color="secondary" (click)="logout()">Abmelden</button>
+  <hr id="line">
+
+  <button ion-button color="mycolor2" (click)="logout()">Abmelden</button>
 
 
 </ion-content>

@@ -1,15 +1,45 @@
 page-profile {
   $farbe: #3BBFCE;
-
-  #header {
-    float: left;
-    display: inline-block;
+  #name{
+    padding-top: 2%;
+    margin-bottom: 5%;
   }
-  #profil {
+  .input-cover {
+    position: static;
+  }
+  #logo {
     float: right;
     display: inline-block;
+    max-height: 45px;
+    max-width: 45px;
+    margin-right: 2%;
   }
-  #login {
-    text-align: center;
+
+  #header{
+    float: left;
+    display: inline-block;
+    font-size: 35px;
+    margin-left: 2%;
+  }
+  .background{
+    background-color: #cbe9fb;
+  }
+  .label {
+    font-family: "AR JULIAN";
+    font-size: 20px;
+    color: midnightblue !important;
+  }
+  #namelabel{
+    background-color: #cbe9fb;
+  }
+  #mail{
+    background-color: #cbe9fb;
+  }
+  #password{
+    background-color: #cbe9fb;
+    margin-bottom: 10%;
+  }
+  #line{
+
   }
 }

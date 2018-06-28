@@ -10,7 +10,7 @@ page-posts {
 
   .writeBox{
     border-style: groove;
-    background-color: #62c0e2;
+    background-color: white;
   }
 
   #charName{
@@ -34,15 +34,21 @@ page-posts {
     min-height: 40px;
     min-width: 40px;
   }
-  #profile{
+  #logo {
     float: right;
     display: inline-block;
+    max-height: 45px;
+    max-width: 45px;
+    margin-right: 2%;
   }
 
   #header{
     float: left;
     display: inline-block;
+    font-size: 35px;
+    margin-left: 2%;
   }
+
   .col{
     border:  black;
   }

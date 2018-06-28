@@ -7,7 +7,7 @@
 
 <ion-content id="background" padding>
   <form [formGroup]="user" (ngSubmit)="checkLogin()">
-    <ion-list>
+
         <ion-item id="name">
           <ion-label floating>Nutzername</ion-label>
           <ion-input formControlName="name" type="text" ></ion-input>
@@ -17,7 +17,6 @@
             <ion-input formControlName="password" type="password" ></ion-input>
         </ion-item>
 
-    </ion-list>
 
     <ion-grid id="cool-button-div-log">
       <button ion-button color="mycolor1" type="submit" [disabled]="!user.valid"><ion-icon name="log-in"> Einloggen</ion-icon></button>

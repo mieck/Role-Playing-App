@@ -7,10 +7,10 @@
 
 <ion-content class="background" padding>
 
-  <ion-list>
+
     <form [formGroup]="user" (ngSubmit)="checkRegister()">
       <ion-item class="background">
-        <ion-label floating>Nutzername eingeben</ion-label>
+        <ion-label floating>Nutzername</ion-label>
         <ion-input formControlName="name" type="text"></ion-input>
       </ion-item>
       <ion-item class="background">
@@ -26,6 +26,6 @@
       </ion-grid>
 
     </form>
-  </ion-list>
+
 
 </ion-content>

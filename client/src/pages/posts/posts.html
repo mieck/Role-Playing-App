@@ -1,9 +1,7 @@
 <ion-header>
   <ion-navbar>
-    <ion-title id="header">
-      Posts
-    </ion-title>
-    <button id="profile" ion-button color="primary" (click)="goToProfile()">Profil</button>
+      <div id="header">Posts</div>
+      <div id="logo"><img src="assets/imgs/Dummy_Profile_02.png" (click)="goToProfile()"/></div>
   </ion-navbar>
 </ion-header>
 
@@ -24,7 +22,7 @@
   <ion-grid class="writeBox">
     <ion-row id="headPost">
       <ion-col col-4>
-        <img id="image" src="assets/imgs/ProfileImage.png">
+        <img id="image" src="assets/imgs/ProfileImage.png" >
       </ion-col>
       <ion-col col-6>
         <div>Charakternamesfsfsfsfsfsf</div>
@@ -39,7 +37,7 @@
     </ion-row>
     <ion-row>
       <ion-col >
-        <ion-icon class="arrow"name="arrow-round-down" (click)="resize()"></ion-icon>
+        <ion-icon class="arrow" name="arrow-round-down" (click)="resize()"></ion-icon>
         <ion-icon class="arrow" name="arrow-round-up" (click)="decrease()"></ion-icon>
       </ion-col>
     </ion-row>
