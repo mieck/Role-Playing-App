@@ -21,7 +21,7 @@ export class CharRegistrPage {
     this.events.publish('user:login', true);
   }
 
-  ionViewWillEnter(){
+  ionViewDidLoad(){
 
     var char_id = window.sessionStorage.getItem("char_id");
 

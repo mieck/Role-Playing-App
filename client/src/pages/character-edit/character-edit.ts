@@ -56,8 +56,18 @@ export class CharacterEditPage {
         var spielerId = window.sessionStorage.getItem("id");
         dataObj["spielerId"] = spielerId;
         this.createData(dataObj);
-        this.navCtrl.setRoot(CharRegistrPage);
-        this.navCtrl.popToRoot();
+        this.loading = this.loadingCtrl.create({
+          content: 'Charakter wird erstellt',
+        });
+        this.loading.present();
+
+        setTimeout(() => {
+          this.navCtrl.setRoot(CharRegistrPage);
+          this.navCtrl.popToRoot();
+
+          this.loading.dismiss();
+        }, 1000);
+
       }
       else{
         var characterId = window.sessionStorage.getItem("char_id");
