@@ -4,6 +4,8 @@ import {CharacterPage} from "../character/character";
 import {ProfilePage} from "../profile/profile";
 import {SettingsEditPage} from "../setting-edit/settings-edit";
 import {GlobalProvider} from "../../provider/global";
+import {map} from "rxjs/operators";
+import {Http} from "@angular/http";
 
 
 @Component({
@@ -19,15 +21,12 @@ export class SettingsPage {
   public rpg_description: String;
   public admin: String;
   public isAdmin: boolean;
+  public adminID: String;
 
-  constructor(public navCtrl: NavController, public global: GlobalProvider){
+  constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider){
 
-    this.players = [
-      {teilnehmer: "Player1",
-        character: "Bob"},
-      {teilnehmer: "Player2",
-        character: "Alice"},
-    ];
+    this.players = [];
+
     this.rpg_name = "rpg";
     this.genre = "Action";
     this.rpg_description  = "A rpg";
@@ -49,7 +48,45 @@ export class SettingsPage {
 
   ionViewWillEnter(){
     this.isAdmin = this.global.isAdmin;
-    console.log(this.global.isAdmin)
+
+    this.http.get('http://localhost:8080/find_spiel').pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      this.rpg_name = response.spieltitle;
+      this.rpg_description = response.spielbeschreibung;
+      this.genre = response.spielgenre;
+      this.adminID = response.admin;
+    });
+
+    this.players = [];
+
+    this.http.get('http://localhost:8080/settings').pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      let arrayLength = response.length;
+      for (let i = 0; i < arrayLength; i++) {
+
+        if(response[i].admin){
+          this.admin = response[i].spielername;
+        }
+
+        var char_id = response[i].Characters[0];
+        var spielername = response[i].spielername;
+
+        let insert = {"teilnehmer": spielername,
+          "charID": char_id};
+
+        console.log(insert);
+
+        this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(
+          map(res => res.json())
+        ).subscribe(response => {
+          insert["character"] = response.CharacterName;
+        });
+        this.players.push(insert);
+      }
+      console.log(this.players);
+    });
   }
 
 }

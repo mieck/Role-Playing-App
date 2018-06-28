@@ -51,9 +51,9 @@ exports.updateSpiel = (req,res) =>{
 };
 
 
-exports.findOneSpielById = (req,res)=>{
+exports.findOneSpiel= (req,res)=>{
 
-    Spiel.findById(req.body.id)
+    Spiel.findOne()
         .then(Spiel =>{
             res.status(200).send(Spiel);
         }).catch(err =>{

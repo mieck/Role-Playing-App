@@ -34,16 +34,21 @@ export class ProfilePage {
     });
     this.loading.present();
 
-    this.saved = false;
-
     var id = window.sessionStorage.getItem("id");
     let data = {};
 
     console.log(this.password);
+    this.saved = false;
 
     setTimeout(() => {
       this.loading.dismiss();
-    }, 1000);
+      this.http.post('http://localhost:8080/update_profile', data).pipe(
+        map(res => res.json())
+      ).subscribe(response => {
+        console.log(response);
+        this.saved = true;
+      });
+    }, 1000)
 
     if(this.password == undefined) {
       data = {
@@ -58,16 +63,6 @@ export class ProfilePage {
         "spielerId": id,
       };
     }
-
-    this.http.post('http://localhost:8080/update_profile', data).pipe(
-      map(res => res.json())
-    ).subscribe(response => {
-      console.log(response);
-      this.saved = true;
-    },(err) => {
-
-      }
-    );
 
   }
 

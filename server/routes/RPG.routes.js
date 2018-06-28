@@ -6,7 +6,7 @@ module.exports = function (app) {
 
     app.post('/update_spiel',Spiel.updateSpiel);
 
-    app.post('/find_spiel', Spiel.findOneSpielById);
+    app.get('/find_spiel', Spiel.findOneSpiel);
 
     app.get('/find_all', Spiel.findAll);
 
