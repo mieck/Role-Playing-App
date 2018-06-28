@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import {Events, NavController} from 'ionic-angular';
 import {CharacterEditPage} from "../character-edit/character-edit";
+import {map} from "rxjs/operators";
+import {Http} from "@angular/http";
+import {GlobalProvider} from "../../provider/global";
 
 @Component({
   selector: 'page-character',
@@ -10,32 +13,38 @@ export class CharacterPage {
 
   public attributes: Array<any>;
   public description: string;
-  public ownChar: boolean;
+  public name: string;
 
-
-  constructor(public navCtrl: NavController, public events: Events) {
-    this.attributes = [
-      {attr: "Name", value: "Klaus"},
-      {attr: "Alter", value: 12},
-      {attr: "Geschlecht", value: "männlich"},
-    ];
-
-    this.description = "Hier steht was";
-    this.ownChar = true;
-
+  constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
   }
 
   editCharacter() {
     this.navCtrl.push(CharacterEditPage);
   }
 
-  ionViewDidLoad(){
+  ionViewDidLoad() {
 
-    if(this.ownChar) {
+    var char_id = window.sessionStorage.getItem("char_id");
+    this.global.otherCharID = char_id;
+
+    if (char_id == this.global.otherCharID) {
       document.getElementById('editButton').style.visibility = 'visible';
     } else {
       document.getElementById('editButton').style.visibility = 'hidden';
     }
+  }
+
+  ionViewWillEnter(){
+
+    var char_id = window.sessionStorage.getItem("char_id");
+
+    this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      this.name = response.CharacterName;
+      this.description = response.CharacterBeschreibung;
+      this.attributes = response.CharacterAttributes;
+    });
   }
 
 }

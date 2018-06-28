@@ -16,6 +16,21 @@
 
   <ion-list>
       <ion-grid>
+
+        <ion-row>
+          <ion-col col-5>
+            <ion-item class="table">
+              Name
+            </ion-item>
+          </ion-col>
+
+          <ion-col col-7>
+            <ion-item class="table">
+              <ion-input [(ngModel)]="name" type="text"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+
         <ion-row *ngFor="let item of attributes">
 
           <ion-col col-5>

@@ -6,4 +6,6 @@ module.exports = function (app) {
 //character Update
     app.post('/update_character', Character.update_character);
 
+    app.post('/find_character', Character.findOneCharacter);
+
 };

@@ -5,5 +5,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class GlobalProvider {
 
-  public registrationComplete;
+  public registrationComplete:boolean;
+
+  public otherCharID:String;
 }

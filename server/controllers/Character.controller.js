@@ -6,9 +6,8 @@ exports.newCharacter = (req,res) =>{
         console.log("new character!");
         var newcharacter = {
             CharacterName: req.body.CharacterName,
-            CharacterAlter: req.body.CharacterAlter,
-            CharacterGeschlecht: req.body.CharacterGeschlecht,
-            CharacterBeschreibung: req.body.CharacterBeschreibung,
+            CharacterAttributes: req.body.CharacterAttributes,
+            CharacterBeschreibung:req.body.CharacterBeschreibung,
             CharacterBild: req.body.CharacterBild,
         };
         var character = new Character(newcharacter);
@@ -34,8 +33,7 @@ exports.update_character = (req,res) =>{
     var characterId = req.body.characterId;
     var new_value = {
         CharacterName:req.body.CharacterName,
-        CharacterAlter:req.body.CharacterAlter,
-        CharacterGeschlecht:req.body.CharacterGeschlecht,
+        CharacterAttributes: req.body.CharacterAttributes,
         CharacterBeschreibung:req.body.CharacterBeschreibung,
     //     CharacterBild:{
     //         data :fs.readFileSync(req.body.Pathimage),
@@ -64,4 +62,16 @@ exports.updateAddBild = (req,res) =>{
         res.status(500).send(err.message);
     })
 
+};
+
+exports.findOneCharacter = (req,res)=>{
+    console.log(req.body.id);
+    Character.findById(req.body.id)
+        .then(Character =>{
+            res.send(Character);
+        }).catch(err =>{
+        res.status(500).send({
+            message: err.message
+        })
+    })
 };

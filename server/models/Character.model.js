@@ -7,20 +7,14 @@ const characterschema = new Schema({
         unique:false,
         required:true
     },
-    CharacterAlter:{
-        type:Number,
-        unique:false,
-        required:false
-    },
-    CharacterGeschlecht :{
-        type:String,
-        unique:false,
-        required:true
-    },
+    CharacterAttributes: [{
+        attr: String,
+        value: String,
+    }],
     CharacterBeschreibung: {
         type:String,
         unique:false,
-        required:true
+        required:false
     },
     CharacterBild : {
         data:Buffer,

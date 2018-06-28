@@ -28,34 +28,29 @@ export class CharacterEditPage {
               public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
               public loadingCtrl: LoadingController) {
     this.profileImage = "assets/imgs/ProfileImage.png"
+    this.name = "";
+    this.description = "";
+    this.attributes = [];
 
-    this.attributes = [
-      {attr: "Name", value: "Klaus", databaseAttr: "CharacterName"},
-      {attr: "Alter", value: 12, databaseAttr: "CharacterAlter"},
-      {attr: "Geschlecht", value: "männlich", databaseAttr: "CharacterGeschlecht"},
-    ];
-
-    this.description = "Hier steht was";
   }
 
   saveAttributes(){
+    if(this.name == undefined || this.name == '')
+      this.presentAlert();
+    else{
 
     this.deleteRows();
     let arrayLength = this.attributes.length;
-    let dataObj = {};
+    let dataObj = {CharacterAttributes:[]};
 
     //dynamische Liste füllen
     for (let i = 0; i < arrayLength; i++) {
-      let attrName = this.attributes[i]["databaseAttr"];
-      let attrValue = this.attributes[i]["value"];
-
-      dataObj[attrName] = attrValue;
+      dataObj.CharacterAttributes.push(this.attributes[i]);
     }
+    dataObj["CharacterName"] = this.name;
     dataObj["CharacterBeschreibung"] = this.description;
 
-    if(!dataObj.hasOwnProperty("CharacterName"))
-      this.presentAlert();
-    else{
+    console.log(dataObj);
 
       if(!this.global.registrationComplete) {
         var spielerId = window.sessionStorage.getItem("id");
@@ -164,8 +159,17 @@ export class CharacterEditPage {
     } else {
       document.getElementById('notification').style.visibility = 'visible';
     }
+
+    var char_id = window.sessionStorage.getItem("char_id");
+
+    if(this.global.registrationComplete){
+      this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(
+        map(res => res.json())
+      ).subscribe(response => {
+        this.name = response.CharacterName;
+        this.description = response.CharacterBeschreibung;
+        this.attributes = response.CharacterAttributes;
+      });
+    }
   }
-
-
-
 }

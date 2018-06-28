@@ -13,6 +13,10 @@
   <ion-list >
     <ion-item class="background">
       <ion-grid>
+        <ion-row>
+          <ion-col>Name</ion-col>
+          <ion-col>{{name}}</ion-col>
+        </ion-row>
         <ion-row *ngFor="let item of attributes">
           <ion-col>{{item.attr}}</ion-col>
           <ion-col>{{item.value}}</ion-col>
