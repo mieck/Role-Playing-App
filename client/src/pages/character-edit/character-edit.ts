@@ -57,6 +57,7 @@ export class CharacterEditPage {
         dataObj["spielerId"] = spielerId;
         this.createData(dataObj);
         this.loading = this.loadingCtrl.create({
+          spinner: 'bubbles',
           content: 'Charakter wird erstellt',
         });
         this.loading.present();
@@ -107,7 +108,7 @@ export class CharacterEditPage {
       sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
     }
     this.loading = this.loadingCtrl.create({
-      content: 'Bild wird geladen',
+      spinner: 'bubbles',
     });
 
     this.loading.present();
