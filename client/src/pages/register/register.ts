@@ -14,7 +14,6 @@ import {FormControl, FormGroup, Validators} from "@angular/forms";
 
 export class RegisterPage {
   user:any;
-  admin:boolean;
 
   constructor(private http: Http, public navCtrl:NavController, public global: GlobalProvider, public alerCtrl: AlertController) {
 
@@ -26,9 +25,6 @@ export class RegisterPage {
   }
 
   checkRegister() {
-
-    console.log('klicked!');
-    this.admin = true;  // erstmal damit der cran gut läuft!
 
     console.log(this.user);
     let data = {
@@ -42,25 +38,30 @@ export class RegisterPage {
     ).subscribe((response) => {
       console.log('POST Response:', response);
       window.sessionStorage.setItem("id", response._id);
-      console.log(response._id);
-      var id = window.sessionStorage.getItem("id");
-      console.log(id);
 
-      if(this.admin){
-        this.navCtrl.setRoot(CreateRPGPage);
-        this.navCtrl.popToRoot();
-      }
-      else{
-        this.navCtrl.setRoot(CharacterEditPage);
-        this.navCtrl.popToRoot();
-      }
-    },
-      (err) => {
+      this.findRPG();
+
+    },(err) => {
       console.log(err._body);
         if(err._body=="Name doppelt")
           this.showConfirm(err._body,'Der Name ist schon vergeben!','Neuer Versuch');
     });
 
+  }
+
+  findRPG() {
+    this.http.get('http://localhost:8080/find_all').pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      console.log(response.length);
+      if (response.length > 0) {
+        this.navCtrl.setRoot(CharacterEditPage);
+        this.navCtrl.popToRoot();
+      } else {
+        this.navCtrl.setRoot(CreateRPGPage);
+        this.navCtrl.popToRoot();
+      }
+    });
   }
 
   showConfirm(title,message,firstAction) {

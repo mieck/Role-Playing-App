@@ -20,6 +20,7 @@ const spielSchema = new Schema ({
     },
     admin: {
         type: String,
+        default: false,
         unique:false,
         required:true
     },

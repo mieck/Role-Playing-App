@@ -8,4 +8,6 @@ export class GlobalProvider {
   public registrationComplete:boolean;
 
   public otherCharID:String;
+
+  public isAdmin:boolean;
 }

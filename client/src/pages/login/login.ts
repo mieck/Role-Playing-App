@@ -9,6 +9,7 @@ import {TabsPage} from "../tabs/tabs";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {CharacterEditPage} from "../character-edit/character-edit";
 import {GlobalProvider} from "../../provider/global";
+import {CreateRPGPage} from "../createRPG/createRPG";
 
 
 @Component({
@@ -99,14 +100,8 @@ export class LoginPage {
         //console.log('POST Response:', response.message);
       }
       else {
-        console.log(response.Characters);
-        if(response.Characters.length > 0){
-          this.events.publish('user:login', 'hurray');
-          window.sessionStorage.setItem("char_id", response.Characters[0]);
-        }else{
-          this.showAlert('Bestätigen','Sie müssen noch einen Charakter erstellen','Okay!');
-        }
         window.sessionStorage.setItem("id", response._id);
+        this.findRPG(response);
       }
 
     });
@@ -117,6 +112,27 @@ export class LoginPage {
       console.log('GET Response:', response);
     });*/
 
+  }
+
+  findRPG(spieler) {
+    this.http.get('http://localhost:8080/find_all').pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      console.log(response.length);
+      if (response.length > 0) {
+        this.global.isAdmin = spieler.admin;
+
+        if(spieler.Characters.length > 0){
+          this.events.publish('user:login', 'hurray');
+          window.sessionStorage.setItem("char_id", spieler.Characters[0]);
+        }else{
+          this.showAlert('Bestätigen','Sie müssen noch einen Charakter erstellen','Okay!');
+        }
+      } else {
+        this.navCtrl.setRoot(CreateRPGPage);
+        this.navCtrl.popToRoot();
+      }
+    });
   }
 
 }

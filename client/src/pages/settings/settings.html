@@ -41,6 +41,6 @@
     </ion-item>
   </ion-list>
 
-  <button ion-button id="editButton" (click)="editSettings()">Bearbeiten</button>
+  <button *ngIf="isAdmin" ion-button id="editButton" (click)="editSettings()">Bearbeiten</button>
 
 </ion-content>

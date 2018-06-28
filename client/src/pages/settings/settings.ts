@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import {CharacterPage} from "../character/character";
 import {ProfilePage} from "../profile/profile";
 import {SettingsEditPage} from "../setting-edit/settings-edit";
+import {GlobalProvider} from "../../provider/global";
 
 
 @Component({
@@ -17,8 +18,9 @@ export class SettingsPage {
   public genre: String;
   public rpg_description: String;
   public admin: String;
+  public isAdmin: boolean;
 
-  constructor(public navCtrl: NavController){
+  constructor(public navCtrl: NavController, public global: GlobalProvider){
 
     this.players = [
       {teilnehmer: "Player1",
@@ -43,6 +45,11 @@ export class SettingsPage {
 
   editSettings() {
     this.navCtrl.push(SettingsEditPage);
+  }
+
+  ionViewWillEnter(){
+    this.isAdmin = this.global.isAdmin;
+    console.log(this.global.isAdmin)
   }
 
 }

@@ -4,6 +4,7 @@ import {CharacterEditPage} from "../character-edit/character-edit";
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {GlobalProvider} from "../../provider/global";
 
 @Component({
   selector: 'page-createRPG',
@@ -19,7 +20,7 @@ export class CreateRPGPage {
   public genres: Array<String>;
   public rpg:any;
 
-  constructor(public navCtrl: NavController, private http: Http,) {
+  constructor(public navCtrl: NavController, private http: Http, public global: GlobalProvider) {
 
     this.genres = ["Action", "Romance", "Comedy", "Fantasy", "Sci-Fi", "Slice of Life", "Horror", "Drama"]
 
@@ -44,10 +45,10 @@ export class CreateRPGPage {
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
+      this.global.isAdmin = true;
+      this.navCtrl.setRoot(CharacterEditPage);
+      this.navCtrl.popToRoot();
     });
-
-    this.navCtrl.setRoot(CharacterEditPage);
-    this.navCtrl.popToRoot();
   }
 
   abort(){

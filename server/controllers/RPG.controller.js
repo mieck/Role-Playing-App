@@ -13,7 +13,7 @@ exports.newSpiel = (req,res)=>{
 
         var spiel = new Spiel(newspiel);
         spiel.save()
-            .then(new_spiel => {
+            .then(spiel => {
                 Spieler.AddSpielId(SpielerId);
                 // if (result._id == null){
                 //     console.log("fehler beim Update Spieler Character!");
@@ -21,6 +21,7 @@ exports.newSpiel = (req,res)=>{
                 // else {
                 //     res.status(200).send(result);
                 // }
+                res.status(200).send(spiel);
             }).catch(err =>{
             console.log("fehler beim Insert Character!");
             res.status(500).send({
@@ -57,5 +58,17 @@ exports.findOneSpielById = (req,res)=>{
             res.status(200).send(Spiel);
         }).catch(err =>{
             res.status(500).send(err.message);
+    })
+};
+
+exports.findAll = (req,res)=>{
+    console.log("Spiel");
+    Spiel.find()
+        .then(Spiele =>{
+            res.send(Spiele);
+        }).catch(err =>{
+        res.status(500).send({
+            message:err.message
+        })
     })
 };
