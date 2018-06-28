@@ -5,21 +5,21 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="background" padding>
 
-  <ion-grid  id="firstBox" *ngFor="let item of posts">
+  <ion-grid  id="firstBox" *ngFor="let item of posts" >
     <ion-row >
       <ion-col col-auto><img id="avatar" (click)="goToCharacter()" [src]=item.bild></ion-col>
       <ion-col col-6 id="charName">{{item.character}}</ion-col>
     </ion-row>
-
-    <ion-row id="secondBox">
+    <hr id="line">
+    <ion-row id="text">
       <ion-col>{{item.text}}</ion-col>
     </ion-row>
   </ion-grid>
 
 
-  <ion-grid class="writeBox">
+  <ion-grid id="writeBox">
     <ion-row id="headPost">
       <ion-col col-4>
         <img id="image" src="assets/imgs/ProfileImage.png" >
