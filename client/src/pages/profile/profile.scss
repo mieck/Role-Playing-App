@@ -24,19 +24,24 @@ page-profile {
   .background{
     background-color: #cbe9fb;
   }
-  .label {
+
+  #namelabel{
+    background-color: #cbe9fb;
     font-family: "AR JULIAN";
     font-size: 20px;
     color: midnightblue !important;
   }
-  #namelabel{
-    background-color: #cbe9fb;
-  }
   #mail{
     background-color: #cbe9fb;
+    font-family: "AR JULIAN";
+    font-size: 20px;
+    color: midnightblue !important;
   }
   #password{
     background-color: #cbe9fb;
+    font-family: "AR JULIAN";
+    font-size: 20px;
+    color: midnightblue !important;
     margin-bottom: 10%;
   }
   #line{

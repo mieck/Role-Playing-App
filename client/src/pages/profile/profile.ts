@@ -67,7 +67,7 @@ export class ProfilePage {
     ).subscribe(response => {
       this.name = response.spielername;
       this.mail = response.spieleremail;
-      this.oldpassword = response.spieleremail;
+      this.oldpassword = response.spielerpasswort;
     });
   }
 
