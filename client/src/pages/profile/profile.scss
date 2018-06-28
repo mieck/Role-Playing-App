@@ -73,5 +73,7 @@ page-profile {
     font-size: 17px;
     color: black;
   }
-
+  ion-item:not(.error) .item-inner {
+    border-color: black !important;
+  }
 }

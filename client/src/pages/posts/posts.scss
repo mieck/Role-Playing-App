@@ -1,25 +1,24 @@
 page-posts {
-
+  .background {
+    background-color: #cbe9fb ;
+  }
   #firstBox{
+    border-radius: 20px !important;
     border-style: groove;
-  }
-
-  #secondBox{
-    border-style: groove;
-  }
-
-  .writeBox{
-    border-style: groove;
+    margin-bottom: 5%;
     background-color: white;
   }
-
+  #writeBox{
+    border-style: groove;
+    border-radius: 20px !important;
+    background-color: white;
+  }
   #charName{
     font-family: Carlito;
     font-weight: bold;
     font-size: 20px;
     color: midnightblue !important;
   }
-
   #avatar{
     float: left;
     max-width: 80px;
@@ -41,41 +40,46 @@ page-posts {
     max-width: 45px;
     margin-right: 2%;
   }
-
   #header{
     float: left;
     display: inline-block;
     font-size: 35px;
     margin-left: 2%;
   }
-
   .col{
     border:  black;
   }
-
   .arrow{
     float: right;
     font-size: 20pt;
     margin-left: 15px;
   }
-
   #headPost{
     border-bottom: groove;
 
   }
-
   #send{
     float: right;
     padding: 0.5em;
     font-size: 20pt;
 
   }
-
   #myInput{
     width: calc(100% - 10px);
     height: 100px;
     border: 0;
     border-radius: 0;
     background: transparent;
+  }
+  #line{
+    width: 97%;
+    border-bottom: groove;
+    height:1px;
+  }
+  #text{
+    margin-bottom: 2%;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
   }
 }

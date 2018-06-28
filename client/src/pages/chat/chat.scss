@@ -1,12 +1,16 @@
 page-chat {
-  #profile{
+  #logo {
     float: right;
     display: inline-block;
+    max-height: 45px;
+    max-width: 45px;
+    margin-right: 2%;
   }
-
   #header{
     float: left;
     display: inline-block;
+    font-size: 35px;
+    margin-left: 2%;
   }
 
 }

@@ -52,4 +52,7 @@ page-login {
   ion-icon {
     font-size: 20px;
   }
+  ion-item:not(.error) .item-inner {
+    border-color: black !important;
+  }
 }
