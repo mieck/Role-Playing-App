@@ -34,8 +34,9 @@ export class SettingsPage {
 
   }
 
-  goToCharacter() {
+  goToCharacter(charID) {
     this.navCtrl.push(CharacterPage);
+    this.global.otherCharID = charID;
   }
 
   goToProfile() {
@@ -47,7 +48,13 @@ export class SettingsPage {
   }
 
   ionViewWillEnter(){
-    this.isAdmin = this.global.isAdmin;
+    this.global.isAdmin;
+
+    if (this.global.isAdmin) {
+      document.getElementById('editButton').style.visibility = 'visible';
+    } else {
+      document.getElementById('editButton').style.visibility = 'hidden';
+    }
 
     this.http.get('http://localhost:8080/find_spiel').pipe(
       map(res => res.json())

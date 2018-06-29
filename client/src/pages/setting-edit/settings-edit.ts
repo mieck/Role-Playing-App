@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {AlertController, NavController} from 'ionic-angular';
+import {AlertController, Loading, LoadingController, NavController} from 'ionic-angular';
 import {RegisterPage} from "../register/register";
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
+import {GlobalProvider} from "../../provider/global";
 
 @Component({
   selector: 'page-settings',
@@ -18,28 +19,73 @@ export class SettingsEditPage {
   public admin: String;
   public genres: Array<String>;
   public adminID: String;
+  loading: Loading;
 
-  constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController){
+  constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider, public loadingCtrl: LoadingController){
 
     this.players = [];
     this.rpg_name = "rpg";
     this.genre = "Action";
     this.rpg_description  = "A rpg";
-    this.admin = "Player1";
 
     this.genres = ["Action", "Romance", "Comedy", "Fantasy", "Sci-Fi", "Slice of Life", "Horror", "Drama"]
 
   }
 
-  deletePlayer(index) {
-    if (this.admin != this.players[index].teilnehmer)
+  deletePlayer(index, charID) {
+    if (this.admin != this.players[index].spielerID)
       this.presentAlertDelete(index);
     else
       this.presentAlertAdmin();
   }
 
   saveEdits() {
-    this.navCtrl.pop();
+    this.loading = this.loadingCtrl.create({
+      spinner: 'ios',
+    });
+    this.loading.present();
+
+    let data = {
+      "spieltitle": this.rpg_name,
+      "spielbeschreibung": this.rpg_description,
+      "spielgenre": this.genre,
+      "admin": this.admin,
+    }
+
+    setTimeout(() => {
+      this.loading.dismiss();
+      this.http.post('http://localhost:8080/update_spiel', data).pipe(
+        map(res => res.json())
+      ).subscribe(response => {
+        this.navCtrl.pop();
+      });
+
+      if(this.admin != this.adminID) {
+        let settingAdmin = {
+          "admin": true,
+          "spielerId": this.admin,
+        };
+
+        this.http.post('http://localhost:8080/set_admin', settingAdmin).pipe(
+          map(res => res.json())
+        ).subscribe(response => {
+          console.log(response);
+        });
+
+        let removingOldAdmin = {
+          "admin": false,
+          "spielerId": this.adminID,
+        };
+
+        this.http.post('http://localhost:8080/set_admin', removingOldAdmin).pipe(
+          map(res => res.json())
+        ).subscribe(response => {
+          console.log(response);
+          this.global.isAdmin = false;
+        });
+      }
+    }, 2000)
+
   }
 
   presentAlertDelete(index) {
@@ -88,18 +134,18 @@ export class SettingsEditPage {
       for (let i = 0; i < arrayLength; i++) {
 
         if(response[i].admin){
-          this.admin = response[i].spielername;
+          this.admin = response[i]._id;
         }
-
+        var spieler_id = response[i]._id;
         var char_id = response[i].Characters[0];
         var spielername = response[i].spielername;
-        console.log(char_id);
 
         if(char_id == undefined) {
           console.log("undefined Id");
         }else{
           let insert = {"teilnehmer": spielername,
-            "charID": char_id};
+            "charID": char_id,
+          "spielerID": spieler_id};
           console.log(insert);
 
           this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(

@@ -16,7 +16,7 @@
     <ion-row *ngFor="let item of players">
       <ion-col col-5 >{{item.teilnehmer}}</ion-col>
       <ion-col col-5>{{item.character}}  </ion-col>
-      <ion-col col-2 ><ion-icon name="remove-circle" id="deleteIcon" (click)="deletePlayer(players.indexOf(item))"></ion-icon></ion-col>
+      <ion-col col-2 ><ion-icon name="remove-circle" id="deleteIcon" (click)="deletePlayer(players.indexOf(item), item.charID)"></ion-icon></ion-col>
     </ion-row>
   </ion-grid>
 
@@ -41,7 +41,7 @@
     <ion-item>
       <ion-label class="my-label" stacked>Admin</ion-label>
       <ion-select [(ngModel)]="admin">
-        <ion-option *ngFor="let item of players" [value]="item.teilnehmer">{{item.teilnehmer}}</ion-option>
+        <ion-option *ngFor="let item of players" [value]="item.spielerID">{{item.teilnehmer}}</ion-option>
       </ion-select>
     </ion-item>
   </ion-list>

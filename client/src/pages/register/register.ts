@@ -55,6 +55,7 @@ export class RegisterPage {
     ).subscribe(response => {
       console.log(response.length);
       if (response.length > 0) {
+        this.global.isAdmin = false;
         this.navCtrl.setRoot(CharacterEditPage);
         this.navCtrl.popToRoot();
       } else {

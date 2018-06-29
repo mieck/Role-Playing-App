@@ -41,7 +41,7 @@ exports.updateSpiel = (req,res) =>{
         spielgenre:req.body.spielgenre
     };
 
-    Character.update({_id:req.body.spielId},  { $set: { field : new_value} })
+    Spiel.findOneAndUpdate(  { $set: new_value })
         .then( spiel =>{
             res.status(200).send(spiel);
         }).catch(err =>{

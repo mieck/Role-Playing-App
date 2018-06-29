@@ -25,7 +25,6 @@ export class CharacterPage {
   ionViewDidLoad() {
 
     var char_id = window.sessionStorage.getItem("char_id");
-    this.global.otherCharID = char_id;
 
     if (char_id == this.global.otherCharID) {
       document.getElementById('editButton').style.visibility = 'visible';
@@ -36,9 +35,7 @@ export class CharacterPage {
 
   ionViewWillEnter(){
 
-    var char_id = window.sessionStorage.getItem("char_id");
-
-    this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(
+    this.http.post('http://localhost:8080/find_character', {id: this.global.otherCharID}).pipe(
       map(res => res.json())
     ).subscribe(response => {
       this.name = response.CharacterName;

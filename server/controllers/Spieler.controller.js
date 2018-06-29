@@ -69,6 +69,18 @@ exports.updateProfil = (req, res)=>{
     })
 };
 
+exports.setAdmin = (req, res)=>{
+    var newitems = {
+        admin : req.body.admin,
+    };
+    Spieler.findByIdAndUpdate({_id:req.body.spielerId},  { $set: newitems })
+        .then( Spieler =>{
+            res.status(200).send(Spieler);
+        }).catch(err =>{
+        res.status(500).send(err.message);
+    })
+};
+
 exports.findOnePlayer = (req,res)=>{
     console.log(req.body.id);
     Spieler.findById(req.body.id)

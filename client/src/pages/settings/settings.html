@@ -15,7 +15,7 @@
     <ion-row *ngFor="let item of players">
       <ion-col col-5 >{{item.teilnehmer}}</ion-col>
       <ion-col col-5>{{item.character}}  </ion-col>
-      <ion-col col-2 ><ion-icon id="charIcon" name="contact" (click)="goToCharacter()"></ion-icon></ion-col>
+      <ion-col col-2 ><ion-icon id="charIcon" name="contact" (click)="goToCharacter(item.charID)"></ion-icon></ion-col>
     </ion-row>
   </ion-grid>
 
@@ -41,6 +41,6 @@
     </ion-item>
   </ion-list>
 
-  <button *ngIf="isAdmin" ion-button id="editButton" (click)="editSettings()">Bearbeiten</button>
+  <button ion-button id="editButton" (click)="editSettings()">Bearbeiten</button>
 
 </ion-content>

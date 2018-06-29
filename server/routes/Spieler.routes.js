@@ -23,5 +23,6 @@ module.exports = function (app) {
     app.post('/update_profile', Spieler.updateProfil);
     app.post('/register',Spieler.New_Spieler);
     app.post('/login',Spieler.login);
+    app.post('/set_admin', Spieler.setAdmin);
 
 };

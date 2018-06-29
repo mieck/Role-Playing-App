@@ -40,16 +40,6 @@ export class ProfilePage {
     console.log(this.password);
     this.saved = false;
 
-    setTimeout(() => {
-      this.loading.dismiss();
-      this.http.post('http://localhost:8080/update_profile', data).pipe(
-        map(res => res.json())
-      ).subscribe(response => {
-        console.log(response);
-        this.saved = true;
-      });
-    }, 1000)
-
     if(this.password == undefined) {
       data = {
         "spieleremail": this.mail,
@@ -63,6 +53,16 @@ export class ProfilePage {
         "spielerId": id,
       };
     }
+
+    setTimeout(() => {
+      this.loading.dismiss();
+      this.http.post('http://localhost:8080/update_profile', data).pipe(
+        map(res => res.json())
+      ).subscribe(response => {
+        console.log(response);
+        this.saved = true;
+      });
+    }, 1000)
 
   }
 
