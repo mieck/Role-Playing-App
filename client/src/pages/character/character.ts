@@ -14,6 +14,7 @@ export class CharacterPage {
   public attributes: Array<any>;
   public description: string;
   public name: string;
+  public ownChar:boolean;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
   }
@@ -22,18 +23,15 @@ export class CharacterPage {
     this.navCtrl.push(CharacterEditPage);
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter(){
 
     var char_id = window.sessionStorage.getItem("char_id");
 
     if (char_id == this.global.otherCharID) {
-      document.getElementById('editButton').style.visibility = 'visible';
+      this.ownChar = true;
     } else {
-      document.getElementById('editButton').style.visibility = 'hidden';
+      this.ownChar = false;
     }
-  }
-
-  ionViewWillEnter(){
 
     this.http.post(this.global.serverHost + '/find_character', {id: this.global.otherCharID}).pipe(
       map(res => res.json())

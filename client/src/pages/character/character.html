@@ -29,6 +29,6 @@
     </ion-item>
   </ion-list>
 
-  <button ion-button color="mycolor1" id="editButton" (click)="editCharacter()">Bearbeiten</button>
+  <button *ngIf="ownChar" ion-button color="mycolor1" id="editButton" (click)="editCharacter()">Bearbeiten</button>
 
 </ion-content>

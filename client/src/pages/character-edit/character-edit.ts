@@ -22,6 +22,7 @@ export class CharacterEditPage {
   public profileImage: any;
   public imagePath: any;
   loading: Loading;
+  public registered:boolean;
 
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController,
               public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
@@ -165,9 +166,9 @@ export class CharacterEditPage {
   ionViewDidLoad(){
 
     if(this.global.registrationComplete) {
-      document.getElementById('notification').style.visibility = 'hidden';
+      this.registered = true;
     } else {
-      document.getElementById('notification').style.visibility = 'visible';
+      this.registered = false;
     }
 
     var char_id = window.sessionStorage.getItem("char_id");

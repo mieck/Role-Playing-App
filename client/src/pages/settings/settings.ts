@@ -51,9 +51,9 @@ export class SettingsPage {
     this.global.isAdmin;
 
     if (this.global.isAdmin) {
-      document.getElementById('editButton').style.visibility = 'visible';
+      this.isAdmin = true;
     } else {
-      document.getElementById('editButton').style.visibility = 'hidden';
+      this.isAdmin = false;
     }
 
     this.http.get(this.global.serverHost + '/find_spiel').pipe(
