@@ -41,7 +41,7 @@ export class CreateRPGPage {
       "spielgenre": this.rpg.controls.genre.value
     }
 
-    this.http.post('http://localhost:8080/new_spiel', data).pipe(
+    this.http.post(this.global.serverHost + '/new_spiel', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);

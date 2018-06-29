@@ -35,7 +35,7 @@ export class CharacterPage {
 
   ionViewWillEnter(){
 
-    this.http.post('http://localhost:8080/find_character', {id: this.global.otherCharID}).pipe(
+    this.http.post(this.global.serverHost + '/find_character', {id: this.global.otherCharID}).pipe(
       map(res => res.json())
     ).subscribe(response => {
       this.name = response.CharacterName;

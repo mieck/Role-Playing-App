@@ -5,6 +5,7 @@ import {LoadingController, NavController, Loading} from 'ionic-angular';
 import {LoginPage} from "../login/login";
 import { Events } from 'ionic-angular';
 import {CharRegistrPage} from "../charRegistr/charReg";
+import {GlobalProvider} from "../../provider/global";
 
 
 @Component({
@@ -20,7 +21,7 @@ export class ProfilePage {
   saved:boolean;
 
   constructor(private http: Http, public navCtrl:NavController, public events: Events,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController, public global: GlobalProvider) {
     this.saved = false;
   }
 
@@ -56,7 +57,7 @@ export class ProfilePage {
 
     setTimeout(() => {
       this.loading.dismiss();
-      this.http.post('http://localhost:8080/update_profile', data).pipe(
+      this.http.post(this.global.serverHost + '/update_profile', data).pipe(
         map(res => res.json())
       ).subscribe(response => {
         console.log(response);
@@ -69,7 +70,7 @@ export class ProfilePage {
   ionViewDidLoad(){
     var id = window.sessionStorage.getItem("id");
 
-    this.http.post('http://localhost:8080/checkprofile', {id: id}).pipe(
+    this.http.post(this.global.serverHost + '/checkprofile', {id: id}).pipe(
       map(res => res.json())
     ).subscribe(response => {
       this.name = response.spielername;

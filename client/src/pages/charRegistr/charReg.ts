@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {Events, NavController} from 'ionic-angular';
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
+import {GlobalProvider} from "../../provider/global";
 
 @Component({
   selector: 'page-char-reg',
@@ -14,7 +15,7 @@ export class CharRegistrPage {
   public name: string;
 
 
-  constructor(private http: Http, public navCtrl: NavController, public events: Events) {
+  constructor(private http: Http, public navCtrl: NavController, public events: Events, public global: GlobalProvider,) {
   }
 
   goToPosts(){
@@ -25,7 +26,7 @@ export class CharRegistrPage {
 
     var char_id = window.sessionStorage.getItem("char_id");
 
-    this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(
+    this.http.post(this.global.serverHost + '/find_character', {id: char_id}).pipe(
       map(res => res.json())
     ).subscribe(response => {
       this.name = response.CharacterName;

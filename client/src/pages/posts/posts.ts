@@ -3,6 +3,7 @@ import { NavController } from 'ionic-angular';
 import {ProfilePage} from "../profile/profile";
 import {SettingsPage} from "../settings/settings";
 import {CharacterPage} from "../character/character";
+import {GlobalProvider} from "../../provider/global";
 
 @Component({
   selector: 'page-posts',
@@ -14,7 +15,7 @@ export class PostsPage {
   public posts: Array<any>;
   public text: String;
 
-  constructor(public navCtrl: NavController) {
+  constructor(public navCtrl: NavController, public global: GlobalProvider) {
 
     this.posts = [
       {character: "Beelzebub",

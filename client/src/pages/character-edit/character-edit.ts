@@ -79,7 +79,7 @@ export class CharacterEditPage {
   }
 
   createData(data){
-    this.http.post('http://localhost:8080/new_character', data).pipe(
+    this.http.post(this.global.serverHost + '/new_character', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
@@ -88,7 +88,7 @@ export class CharacterEditPage {
   }
 
   updateData(data){
-    this.http.post('http://localhost:8080/update_character', data).pipe(
+    this.http.post(this.global.serverHost + '/update_character', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
         console.log('POST Response:', response);
@@ -173,7 +173,7 @@ export class CharacterEditPage {
     var char_id = window.sessionStorage.getItem("char_id");
 
     if(this.global.registrationComplete){
-      this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(
+      this.http.post(this.global.serverHost + '/find_character', {id: char_id}).pipe(
         map(res => res.json())
       ).subscribe(response => {
         this.name = response.CharacterName;

@@ -33,7 +33,7 @@ export class RegisterPage {
       "spieleremail": this.user.controls.mail.value,
     };
 
-    this.http.post('http://localhost:8080/register', data).pipe(
+    this.http.post(this.global.serverHost + '/register', data).pipe(
       map(res => res.json())
     ).subscribe((response) => {
       console.log('POST Response:', response);
@@ -50,7 +50,7 @@ export class RegisterPage {
   }
 
   findRPG() {
-    this.http.get('http://localhost:8080/find_all').pipe(
+    this.http.get(this.global.serverHost + '/find_all').pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log(response.length);

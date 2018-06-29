@@ -56,7 +56,7 @@ export class SettingsPage {
       document.getElementById('editButton').style.visibility = 'hidden';
     }
 
-    this.http.get('http://localhost:8080/find_spiel').pipe(
+    this.http.get(this.global.serverHost + '/find_spiel').pipe(
       map(res => res.json())
     ).subscribe(response => {
       this.rpg_name = response.spieltitle;
@@ -67,7 +67,7 @@ export class SettingsPage {
 
     this.players = [];
 
-    this.http.get('http://localhost:8080/settings').pipe(
+    this.http.get(this.global.serverHost + '/settings').pipe(
       map(res => res.json())
     ).subscribe(response => {
       let arrayLength = response.length;
@@ -91,7 +91,7 @@ export class SettingsPage {
 
           console.log(insert);
 
-          this.http.post('http://localhost:8080/find_character', {id: char_id}).pipe(
+          this.http.post(this.global.serverHost + '/find_character', {id: char_id}).pipe(
             map(res => res.json())
           ).subscribe(response => {
             insert["character"] = response.CharacterName;

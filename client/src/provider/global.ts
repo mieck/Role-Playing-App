@@ -9,5 +9,7 @@ export class GlobalProvider {
 
   public otherCharID:String;
 
+  public serverHost:String = "http://localhost:8080";
+
   public isAdmin:boolean;
 }

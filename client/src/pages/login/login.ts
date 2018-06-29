@@ -92,7 +92,7 @@ export class LoginPage {
         "spielerpasswort": this.user.controls.password.value
     };
 
-    this.http.post('http://localhost:8080/login', data).pipe(
+    this.http.post(this.global.serverHost + '/login', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
       if(response._id == undefined){
@@ -115,7 +115,7 @@ export class LoginPage {
   }
 
   findRPG(spieler) {
-    this.http.get('http://localhost:8080/find_all').pipe(
+    this.http.get(this.global.serverHost + '/find_all').pipe(
       map(res => res.json())
     ).subscribe(response => {
       console.log(response.length);
