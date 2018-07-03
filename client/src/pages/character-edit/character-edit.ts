@@ -9,6 +9,7 @@ import {Http} from "@angular/http";
 import {CameraOptions, Camera} from "@ionic-native/camera";
 import {DomSanitizer} from "@angular/platform-browser";
 import {LoadingController, Loading} from "ionic-angular";
+import {Crop, CropOptions} from "@ionic-native/crop";
 
 @Component({
   selector: 'page-character',
@@ -26,7 +27,7 @@ export class CharacterEditPage {
 
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController,
               public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController, public cropService: Crop) {
     this.profileImage = "assets/imgs/ProfileImage.png"
     this.name = "";
     this.description = "";
@@ -102,10 +103,11 @@ export class CharacterEditPage {
   getImage() {
     const options: CameraOptions = {
       quality: 100,
+      allowEdit: true,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE,
-      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY
+      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY,
     }
     this.loading = this.loadingCtrl.create({
       spinner: 'ios',
@@ -114,9 +116,9 @@ export class CharacterEditPage {
     this.loading.present();
 
     this.camera.getPicture(options).then((imageURI) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64:
+      // show Image
       this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(imageURI);
+      //ImagePath with URI
       this.imagePath = imageURI;
       setTimeout(() => {
         this.loading.dismiss();

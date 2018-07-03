@@ -13,11 +13,14 @@
      https://gist.github.com/aheckmann/2408370
 
 
-    Camera Plugiin
+    Camera Plugin
         npm install --save @ionic-native/camera
         ionic cordova plugin add cordova-plugin-camera
     Monoose Install
         npm install mongoose --save
+    Crop Plugin, needs to be installed manuell
+        ionic cordova plugin add cordova-plugin-crop
+        npm install --save @ionic-native/crop
 
 # Hilfsmittel zum Chat modull
     Back-end function
