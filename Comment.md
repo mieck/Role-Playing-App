@@ -19,8 +19,8 @@
     Monoose Install
         npm install mongoose --save
     Crop Plugin, needs to be installed manuell
-        ionic cordova plugin add cordova-plugin-crop
         npm install --save @ionic-native/crop
+        ionic cordova plugin add cordova-plugin-crop
 
 # Hilfsmittel zum Chat modull
     Back-end function
