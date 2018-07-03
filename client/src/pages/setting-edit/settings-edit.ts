@@ -16,9 +16,9 @@ export class SettingsEditPage {
   public rpg_name: String;
   public genre: String;
   public rpg_description: String;
-  public admin: String;
+  public newAdmin: String;
   public genres: Array<String>;
-  public adminID: String;
+  public oldAdmin: String;
   loading: Loading;
 
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider, public loadingCtrl: LoadingController){
@@ -33,7 +33,7 @@ export class SettingsEditPage {
   }
 
   deletePlayer(index, charID) {
-    if (this.admin != this.players[index].spielerID)
+    if (this.newAdmin != this.players[index].spielerID)
       this.presentAlertDelete(index);
     else
       this.presentAlertAdmin();
@@ -49,7 +49,8 @@ export class SettingsEditPage {
       "spieltitle": this.rpg_name,
       "spielbeschreibung": this.rpg_description,
       "spielgenre": this.genre,
-      "admin": this.admin,
+      "admin": this.newAdmin,
+      "oldAdmin": this.oldAdmin
     }
 
     setTimeout(() => {
@@ -60,30 +61,8 @@ export class SettingsEditPage {
         this.navCtrl.pop();
       });
 
-      if(this.admin != this.adminID) {
-        let settingAdmin = {
-          "admin": true,
-          "spielerId": this.admin,
-        };
-
-        this.http.post(this.global.serverHost + '/set_admin', settingAdmin).pipe(
-          map(res => res.json())
-        ).subscribe(response => {
-          console.log(response);
-        });
-
-        let removingOldAdmin = {
-          "admin": false,
-          "spielerId": this.adminID,
-        };
-
-        this.http.post(this.global.serverHost + '/set_admin', removingOldAdmin).pipe(
-          map(res => res.json())
-        ).subscribe(response => {
-          console.log(response);
-          this.global.isAdmin = false;
-        });
-      }
+      if(this.newAdmin != this.oldAdmin)
+        this.global.isAdmin = false;
     }, 2000)
 
   }
@@ -122,7 +101,7 @@ export class SettingsEditPage {
       this.rpg_name = response.spieltitle;
       this.rpg_description = response.spielbeschreibung;
       this.genre = response.spielgenre;
-      this.adminID = response.admin;
+      this.oldAdmin = response.admin;
     });
 
     this.players = [];
@@ -134,7 +113,7 @@ export class SettingsEditPage {
       for (let i = 0; i < arrayLength; i++) {
 
         if(response[i].admin){
-          this.admin = response[i]._id;
+          this.newAdmin = response[i]._id;
         }
         var spieler_id = response[i]._id;
         var char_id = response[i].Characters[0];

@@ -69,11 +69,8 @@ exports.updateProfil = (req, res)=>{
     })
 };
 
-exports.setAdmin = (req, res)=>{
-    var newitems = {
-        admin : req.body.admin,
-    };
-    Spieler.findByIdAndUpdate({_id:req.body.spielerId},  { $set: newitems })
+exports.setAdmin = (SpielerId, shouldBeAdmin, res)=>{
+    Spieler.findByIdAndUpdate(SpielerId,  { $set: { admin: shouldBeAdmin } })
         .then( Spieler =>{
             res.status(200).send(Spieler);
         }).catch(err =>{
@@ -115,14 +112,5 @@ exports.AddCharacterId = (SpielerId, characterId)=>{
         }).catch(err =>{
             console.log("Fehler Beim AddCharacterID");
             return err.message;
-    })
-};
-
-exports.AddSpielId = (SpielerId, spielId)=>{
-    Spieler.findByIdAndUpdate(SpielerId,  { $set: { admin: true } })
-        .then( Spieler =>{
-            return Spieler;
-        }).catch(err =>{
-        return err.message;
     })
 };

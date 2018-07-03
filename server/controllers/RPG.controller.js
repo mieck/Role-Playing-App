@@ -14,7 +14,7 @@ exports.newSpiel = (req,res)=>{
         var spiel = new Spiel(newspiel);
         spiel.save()
             .then(spiel => {
-                Spieler.AddSpielId(SpielerId);
+                Spieler.setAdmin(SpielerId, true);
                 // if (result._id == null){
                 //     console.log("fehler beim Update Spieler Character!");
                 // }
@@ -40,9 +40,15 @@ exports.updateSpiel = (req,res) =>{
         admin:req.body.admin,
         spielgenre:req.body.spielgenre
     };
+    var newSpielerId = req.body.admin;
+    var oldSpielerId = req.body.oldAdmin;
 
     Spiel.findOneAndUpdate(  { $set: new_value })
         .then( spiel =>{
+            if(newSpielerId != oldSpielerId) {
+                Spieler.setAdmin(newSpielerId, true);
+                Spieler.setAdmin(oldSpielerId, false);
+            }
             res.status(200).send(spiel);
         }).catch(err =>{
         res.status(500).send(err.message);

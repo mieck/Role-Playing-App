@@ -40,7 +40,7 @@
 
     <ion-item>
       <ion-label class="my-label" stacked>Admin</ion-label>
-      <ion-select [(ngModel)]="admin">
+      <ion-select [(ngModel)]="newAdmin">
         <ion-option *ngFor="let item of players" [value]="item.spielerID">{{item.teilnehmer}}</ion-option>
       </ion-select>
     </ion-item>
