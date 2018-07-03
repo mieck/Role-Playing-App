@@ -75,3 +75,12 @@ exports.findOneCharacter = (req,res)=>{
         })
     })
 };
+
+exports.deleteCharacter = (ID,res)=>{
+    Character.findByIdAndRemove(ID)
+        .catch(err => {
+        res.status(500).send({
+            message: err.message
+        })
+    })
+};

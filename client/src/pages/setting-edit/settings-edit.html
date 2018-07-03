@@ -16,7 +16,7 @@
     <ion-row *ngFor="let item of players">
       <ion-col col-5 >{{item.teilnehmer}}</ion-col>
       <ion-col col-5>{{item.character}}  </ion-col>
-      <ion-col col-2 ><ion-icon name="remove-circle" id="deleteIcon" (click)="deletePlayer(players.indexOf(item), item.charID)"></ion-icon></ion-col>
+      <ion-col col-2 ><ion-icon name="remove-circle" id="deleteIcon" (click)="deletePlayer(players.indexOf(item), item.spielerID, item.charID)"></ion-icon></ion-col>
     </ion-row>
   </ion-grid>
 

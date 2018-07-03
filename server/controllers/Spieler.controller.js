@@ -1,5 +1,5 @@
 const Spieler = require('../models/Spieler.model.js');
-
+const Character = require('./Character.controller');
 
 exports.findAll = (req,res)=>{
     console.log("spieler");
@@ -113,4 +113,18 @@ exports.AddCharacterId = (SpielerId, characterId)=>{
             console.log("Fehler Beim AddCharacterID");
             return err.message;
     })
+};
+
+exports.deleteSpielerCharacter = (req,res)=>{
+    for (let i = 0; i < req.body.IDs.length; i++) {
+        Spieler.findByIdAndUpdate(req.body.IDs[i].spielerID,{ $pull: { Characters:  req.body.IDs[i].charID}})
+            .then(Spieler => {
+                Character.deleteCharacter(Spieler.Characters[0]);
+                res.send(Spieler);
+            }).catch(err => {
+            res.status(500).send({
+                message: err.message
+            })
+        })
+    }
 };

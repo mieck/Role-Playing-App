@@ -19,11 +19,13 @@ export class SettingsEditPage {
   public newAdmin: String;
   public genres: Array<String>;
   public oldAdmin: String;
+  public toBeDeleted;
   loading: Loading;
 
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController, public global: GlobalProvider, public loadingCtrl: LoadingController){
 
     this.players = [];
+    this.toBeDeleted = [];
     this.rpg_name = "rpg";
     this.genre = "Action";
     this.rpg_description  = "A rpg";
@@ -32,9 +34,9 @@ export class SettingsEditPage {
 
   }
 
-  deletePlayer(index, charID) {
+  deletePlayer(index, spielerID, charID) {
     if (this.newAdmin != this.players[index].spielerID)
-      this.presentAlertDelete(index);
+      this.presentAlertDelete(index, spielerID, charID);
     else
       this.presentAlertAdmin();
   }
@@ -54,20 +56,31 @@ export class SettingsEditPage {
     }
 
     setTimeout(() => {
+
       this.loading.dismiss();
+      if (this.toBeDeleted.length > 0){
+        console.log("Delete Character");
+          this.http.post(this.global.serverHost + '/delete_character', {IDs: this.toBeDeleted}).pipe(
+            map(res => res.json())
+          ).subscribe(response => {
+            console.log(response);
+          });
+        }
+
+
       this.http.post(this.global.serverHost + '/update_spiel', data).pipe(
         map(res => res.json())
       ).subscribe(response => {
+        if(this.newAdmin != this.oldAdmin)
+          this.global.isAdmin = false;
         this.navCtrl.pop();
       });
 
-      if(this.newAdmin != this.oldAdmin)
-        this.global.isAdmin = false;
     }, 2000)
 
   }
 
-  presentAlertDelete(index) {
+  presentAlertDelete(index, spielerID, charID) {
     const alert = this.alertCtrl.create({
       title: 'Sind Sie sicher, den Spieler entfernen zu wollen?',
       buttons: [
@@ -75,6 +88,11 @@ export class SettingsEditPage {
           text: "Ja",
           handler: () => {
             this.players.splice(index, 1);
+
+            let insert = {"charID": charID,
+              "spielerID": spielerID};
+
+            this.toBeDeleted.push(insert);
           }
         },
         {
@@ -125,7 +143,6 @@ export class SettingsEditPage {
           let insert = {"teilnehmer": spielername,
             "charID": char_id,
           "spielerID": spieler_id};
-          console.log(insert);
 
           this.http.post(this.global.serverHost + '/find_character', {id: char_id}).pipe(
             map(res => res.json())
@@ -135,7 +152,6 @@ export class SettingsEditPage {
           this.players.push(insert);
         }
       }
-      console.log(this.players);
     });
   }
 
