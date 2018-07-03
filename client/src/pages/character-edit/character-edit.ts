@@ -9,7 +9,6 @@ import {Http} from "@angular/http";
 import {CameraOptions, Camera} from "@ionic-native/camera";
 import {DomSanitizer} from "@angular/platform-browser";
 import {LoadingController, Loading} from "ionic-angular";
-import {Crop, CropOptions} from "@ionic-native/crop";
 
 @Component({
   selector: 'page-character',
@@ -27,7 +26,7 @@ export class CharacterEditPage {
 
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController,
               public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
-              public loadingCtrl: LoadingController, public cropService: Crop) {
+              public loadingCtrl: LoadingController) {
     this.profileImage = "assets/imgs/ProfileImage.png"
     this.name = "";
     this.description = "";
