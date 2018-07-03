@@ -106,7 +106,7 @@ export class CharacterEditPage {
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.PNG,
       mediaType: this.camera.MediaType.PICTURE,
-      sourceType : this.camera.PictureSourceType.PHOTOLIBRARY,
+      sourceType : this.camera.PictureSourceType.SAVEDPHOTOALBUM,
     }
     this.loading = this.loadingCtrl.create({
       spinner: 'ios',
