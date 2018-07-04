@@ -25,7 +25,8 @@ export class PostsPage {
     this.text = "";
   }
 
-  goToCharacter() {
+  goToCharacter(charID) {
+    this.global.otherCharID = charID;
     this.navCtrl.push(CharacterPage);
   }
 
@@ -48,6 +49,8 @@ export class PostsPage {
       map(res => res.json())
     ).subscribe(response => {
       this.posts.push(post);
+      this.text = "";
+      this.decrease();
     });
   }
 
@@ -82,6 +85,7 @@ export class PostsPage {
         let post = {
           "text": response[i].text,
           "avatar": "assets/imgs/ProfileImage.png",
+          "character": response[i].character,
           "name": response[i].name
         }
         this.posts.push(post);
