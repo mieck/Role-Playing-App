@@ -9,8 +9,8 @@
 
   <ion-grid  id="firstBox" *ngFor="let item of posts" >
     <ion-row >
-      <ion-col col-auto><img id="avatar" (click)="goToCharacter()" [src]=item.bild></ion-col>
-      <ion-col col-6 id="charName">{{item.character}}</ion-col>
+      <ion-col col-auto><img id="avatar" (click)="goToCharacter(item.character)" [src]=item.avatar></ion-col>
+      <ion-col col-6 id="charName">{{item.name}}</ion-col>
     </ion-row>
     <hr id="line">
     <ion-row id="text">

@@ -19,6 +19,10 @@ const characterschema = new Schema({
     CharacterBild : {
         data:Buffer,
         contentType: String},
+    Avatars : [{
+        data:Buffer,
+        contentType: String
+    }]
 });
 
 module.exports = mongoose.model('Character', characterschema);
