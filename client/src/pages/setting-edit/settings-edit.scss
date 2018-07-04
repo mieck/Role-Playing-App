@@ -14,4 +14,8 @@ page-settings-edit{
   ion-item:not(.error) .item-inner {
     border-color: black !important;
   }
+
+  #descr{
+    white-space: pre-line;
+  }
 }

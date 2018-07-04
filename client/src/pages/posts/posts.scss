@@ -71,6 +71,7 @@ page-posts {
     border-radius: 0;
     background: #86cee9;
     resize: none;
+    white-space: pre-line;
   }
   #line{
     width: 97%;
@@ -78,6 +79,7 @@ page-posts {
     height:1px;
   }
   #text{
+    white-space: pre-line;
     margin-bottom: 2%;
     margin-top: 1%;
     margin-left: 2%;

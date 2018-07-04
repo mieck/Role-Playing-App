@@ -17,6 +17,7 @@ export class PostsPage {
   public posts: Array<any>;
   public text: String;
   public image: String;
+  public charactername: String;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
 
@@ -71,6 +72,16 @@ export class PostsPage {
   }
   decrease(){
     this.myInput.nativeElement.style.height = 100 + 'px';
+  }
+
+  ionViewWillEnter(){
+    var char_id = window.sessionStorage.getItem("char_id");
+
+    this.http.post(this.global.serverHost + '/find_character', {id: char_id}).pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      this.charactername = response.CharacterName;
+    });
   }
 
 }
