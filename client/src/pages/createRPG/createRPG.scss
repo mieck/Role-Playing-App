@@ -26,11 +26,9 @@ page-createRPG {
     background-color: #cbe9fb;
   }
   #save {
-    position: absolute;
-    right: 10%;
+    float: right;
   }
   #abort {
-    position: absolute;
-    right: 10%;
+    float: left;
   }
 }

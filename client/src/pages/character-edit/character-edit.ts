@@ -23,6 +23,7 @@ export class CharacterEditPage {
   public imagePath: any;
   loading: Loading;
   public registered:boolean;
+  public images: Array<String>;
 
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController,
               public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
@@ -31,6 +32,8 @@ export class CharacterEditPage {
     this.name = "";
     this.description = "";
     this.attributes = [];
+
+    this.images = ["assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Laughs.png", "assets/imgs/Charakter_01_Smiles.png", "assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Angry.png"];
 
   }
 
@@ -164,12 +167,20 @@ export class CharacterEditPage {
     alert.present();
   }
 
+  changeAvatars() {
+  }
+
   ionViewDidLoad(){
 
     if(this.global.registrationComplete) {
       this.registered = true;
     } else {
       this.registered = false;
+    }
+
+    for (let i = 0; i < this.images.length; i++) {
+      if (this.images.length < 8)
+        this.images.push("assets/imgs/ProfileImage.png");
     }
 
     var char_id = window.sessionStorage.getItem("char_id");

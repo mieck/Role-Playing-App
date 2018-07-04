@@ -11,7 +11,16 @@
   <div *ngIf="!registered" id="notification">Erstelle einen neuen Charakter! Du kannst ihn auch später ändern.</div>
   <br>
   <img id="avatar"  [src]="profileImage" (click)="getImage()" >
-  <ion-textarea rows="3" [placeholder]="imagePath"></ion-textarea>
+  <!--<ion-textarea rows="3" [placeholder]="imagePath"></ion-textarea>-->
+
+  Avatare hinzufügen:
+  <ion-grid>
+    <ion-row >
+      <ion-col col-3 *ngFor="let file of images">
+        <img [src]="file" >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 
   <ion-list>
