@@ -4,6 +4,8 @@ import {ProfilePage} from "../profile/profile";
 import {SettingsPage} from "../settings/settings";
 import {CharacterPage} from "../character/character";
 import {GlobalProvider} from "../../provider/global";
+import {map} from "rxjs/operators";
+import {Http} from "@angular/http";
 
 @Component({
   selector: 'page-posts',
@@ -14,8 +16,9 @@ export class PostsPage {
 
   public posts: Array<any>;
   public text: String;
+  public image: String;
 
-  constructor(public navCtrl: NavController, public global: GlobalProvider) {
+  constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
 
     this.posts = [
       {character: "Beelzebub",
@@ -29,6 +32,7 @@ export class PostsPage {
     ];
 
     this.text = "";
+    this.image = "";
   }
 
   goToCharacter() {
@@ -41,6 +45,18 @@ export class PostsPage {
 
   sendPost(){
 
+    var char_id = window.sessionStorage.getItem("char_id");
+
+    let post = {
+      "text": this.text,
+      "bild": this.image,
+      "charID": char_id,
+    };
+
+    // this.http.post(this.global.serverHost + '/send_post', post).pipe(
+    //   map(res => res.json())
+    // ).subscribe(response => {
+    // });
   }
 
   @ViewChild('myInput') myInput: ElementRef;
