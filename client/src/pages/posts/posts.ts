@@ -38,6 +38,8 @@ export class PostsPage {
 
     var char_id = window.sessionStorage.getItem("char_id");
 
+    this.removeWhiteSpace();
+
     let post = {
       "text": this.text,
       "avatar": "assets/imgs/ProfileImage.png",
@@ -51,10 +53,18 @@ export class PostsPage {
       this.posts.push(post);
       this.text = "";
       this.decrease();
+    },(err) => {
+      console.log(err);
     });
+
   }
 
   @ViewChild('myInput') myInput: ElementRef;
+  removeWhiteSpace(){
+    var input = this.myInput.nativeElement.value;
+    this.text = input.replace(/^\s*|\s*$/g,'');
+  }
+
   resize() {
     var text = this.myInput.nativeElement.value;
     var lines = text.split("\n");
