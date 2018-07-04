@@ -16,24 +16,13 @@ export class PostsPage {
 
   public posts: Array<any>;
   public text: String;
-  public image: String;
   public charactername: String;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
 
-    this.posts = [
-      {character: "Beelzebub",
-        text: "Die Mittagssonne prasselte unaufhaltsam auf seine Haut, während der Braunhaarige die überfüllten Straßen entlang ging und Ausschau nach einem Platz zum Ausruhen suchte. Wegen dieser einen Information war Jean nun schon wochenlang unterwegs, ohne ein bequemes Bett oder eine nahrhafte Mahlzeit sein Eigen genannt zu haben. Einzig allein ein abgetragener Hut, der ihn nur bedingt vor der Sonne schützte, konnte er als erfolgreiche Ausbeute der vergangenen Tage seinen Erinnerungen entnehmen.\n" +
-        "Er blinzelte mehrfach durch seine Sonnenbrille hindurch, um die Schilder der Geschäfte näher betrachten zu können. Es war ihm ganz egal was; sobald er etwas zu Essen finden sollte, würde es nehmen, denn sein Magenknurren hatte sich seit zwei Stunden entschlossen, keine Pausen mehr einzulegen.",
-        bild: "assets/imgs/ProfileImage.png"},
-      {character: "Beelzebub",
-        text: "Die Mittagssonne prasselte unaufhaltsam auf seine Haut, während der Braunhaarige die überfüllten Straßen entlang ging und Ausschau nach einem Platz zum Ausruhen suchte. Wegen dieser einen Information war Jean nun schon wochenlang unterwegs, ohne ein bequemes Bett oder eine nahrhafte Mahlzeit sein Eigen genannt zu haben. Einzig allein ein abgetragener Hut, der ihn nur bedingt vor der Sonne schützte, konnte er als erfolgreiche Ausbeute der vergangenen Tage seinen Erinnerungen entnehmen.\n" +
-        "Er blinzelte mehrfach durch seine Sonnenbrille hindurch, um die Schilder der Geschäfte näher betrachten zu können. Es war ihm ganz egal was; sobald er etwas zu Essen finden sollte, würde es nehmen, denn sein Magenknurren hatte sich seit zwei Stunden entschlossen, keine Pausen mehr einzulegen.",
-        bild: "assets/imgs/ProfileImage.png"}
-    ];
+    this.posts = [];
 
     this.text = "";
-    this.image = "";
   }
 
   goToCharacter() {
@@ -50,14 +39,16 @@ export class PostsPage {
 
     let post = {
       "text": this.text,
-      "bild": this.image,
-      "charID": char_id,
+      "avatar": "assets/imgs/ProfileImage.png",
+      "character": char_id,
+      "name": this.charactername
     };
 
-    // this.http.post(this.global.serverHost + '/send_post', post).pipe(
-    //   map(res => res.json())
-    // ).subscribe(response => {
-    // });
+    this.http.post(this.global.serverHost + '/send_post', post).pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      this.posts.push(post);
+    });
   }
 
   @ViewChild('myInput') myInput: ElementRef;
@@ -75,12 +66,26 @@ export class PostsPage {
   }
 
   ionViewWillEnter(){
+    this.posts = [];
     var char_id = window.sessionStorage.getItem("char_id");
 
     this.http.post(this.global.serverHost + '/find_character', {id: char_id}).pipe(
       map(res => res.json())
     ).subscribe(response => {
       this.charactername = response.CharacterName;
+    });
+
+    this.http.get(this.global.serverHost + '/list_posts').pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      for (let i = 0; i < response.length; i++) {
+        let post = {
+          "text": response[i].text,
+          "avatar": "assets/imgs/ProfileImage.png",
+          "name": response[i].name
+        }
+        this.posts.push(post);
+      }
     });
   }
 

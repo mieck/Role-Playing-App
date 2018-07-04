@@ -9,6 +9,15 @@ const PostSchema = new Schema({
         unique:false,
         required:true
     },
+    avatar: {
+        data:Buffer,
+        contentType: String,
+    },
+    name: {
+        type:String,
+        unique:false,
+        required:true
+    },
     character :{type:Schema.Types.ObjectId,ref:'Character'},
 
 });
