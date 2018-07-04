@@ -30,5 +30,6 @@
 # neues Modellstrukture
 
     http://javasampleapproach.com/node-js/mongoose-many-to-many-related-models-with-nodejs-express-mongodb
-   
+# File transfert ionic 3 to server js
+https://www.djamware.com/post/599da16580aca768e4d2b130/how-to-upload-file-on-ionic-3-using-native-file-transfer-plugin
     
