@@ -18,7 +18,7 @@
         ionic cordova plugin add cordova-plugin-camera
     Monoose Install
         npm install mongoose --save
-    Crop Plugin, needs to be installed manuell
+    Crop Plugin
         npm install --save @ionic-native/crop
         ionic cordova plugin add cordova-plugin-crop
 

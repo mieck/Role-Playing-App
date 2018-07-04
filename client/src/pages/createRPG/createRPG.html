@@ -1,35 +1,33 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>
-      RPG erstellen
-    </ion-title>
+    <div id="header">RPG Erstellung</div>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content id="background" padding>
   Es liegt noch kein RPG vor. Sie können als Erster das RPG erstellen!
   <form [formGroup]="rpg" (ngSubmit)="save()">
-    <ion-item>
+    <ion-item id="rpgName">
       <ion-label class="my-label" stacked>RPG-Name</ion-label>
       <ion-input formControlName="rpg_name" type="text"></ion-input>
     </ion-item>
 
-    <ion-item>
+    <ion-item id="rpgGenre">
       <ion-label class="my-label" stacked>Genre</ion-label>
       <ion-select formControlName="genre">
         <ion-option *ngFor="let item of genres" [value]="item">{{item}}</ion-option>
       </ion-select>
     </ion-item>
 
-    <ion-item>
+    <ion-item id="rpgDesc">
       <ion-label class="my-label" stacked>RPG-Beschreibung</ion-label>
       <ion-textarea rows="6"type="text" formControlName="rpg_description"></ion-textarea>
     </ion-item>
 
-    <button ion-button color="primary" type="submit" [disabled]="!rpg.valid">Speichern</button>
+    <button id ="save" ion-button color="mycolor1" type="submit" [disabled]="!rpg.valid">Speichern</button>
 
   </form>
-  <button ion-button color="secondary" (click)="abort()">Abbrechen</button>
+  <button id = "abort" ion-button color="mycolor2" (click)="abort()">Abbrechen</button>
 
 
 </ion-content>

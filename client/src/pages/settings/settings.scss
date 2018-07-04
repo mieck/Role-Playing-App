@@ -1,5 +1,4 @@
 page-settings{
-
   #logo {
     float: right;
     display: inline-block;
@@ -7,23 +6,21 @@ page-settings{
     max-width: 45px;
     margin-right: 2%;
   }
-
   #header{
     float: left;
     display: inline-block;
     font-size: 35px;
     margin-left: 2%;
   }
-
   .my-label {
     font-weight: bold;
     color: #000000 !important;
     font-size: 16px !important;
   }
-
   #charIcon{
     font-size: 15pt;
   }
-
-
+  ion-item:not(.error) .item-inner {
+    border-color: black !important;
+  }
 }
