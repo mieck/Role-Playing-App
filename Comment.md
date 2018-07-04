@@ -21,6 +21,9 @@
     Crop Plugin
         npm install --save @ionic-native/crop
         ionic cordova plugin add cordova-plugin-crop
+    FileTransfer
+        npm install --save @ionic-native/file-transfer
+        ionic cordova plugin add cordova-plugin-file-transfer
 
 # Hilfsmittel zum Chat modull
     Back-end function

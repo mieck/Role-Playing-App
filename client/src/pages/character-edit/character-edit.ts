@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController  } from 'ionic-angular';
 import {CharacterPage} from "../character/character";
 import { AlertController } from 'ionic-angular';
 import {GlobalProvider} from "../../provider/global";
@@ -9,6 +9,7 @@ import {Http} from "@angular/http";
 import {CameraOptions, Camera} from "@ionic-native/camera";
 import {DomSanitizer} from "@angular/platform-browser";
 import {LoadingController, Loading} from "ionic-angular";
+import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
 
 @Component({
   selector: 'page-character',
@@ -24,10 +25,12 @@ export class CharacterEditPage {
   loading: Loading;
   public registered:boolean;
   public images: Array<String>;
+  public imageFileName:any;
+  public Ausgabe: String;
 
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController,
               public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
-              public loadingCtrl: LoadingController) {
+              public loadingCtrl: LoadingController, private transfer: FileTransfer, public toastCtrl: ToastController) {
     this.profileImage = "assets/imgs/ProfileImage.png"
     this.name = "";
     this.description = "";
@@ -46,12 +49,16 @@ export class CharacterEditPage {
     let arrayLength = this.attributes.length;
     let dataObj = {CharacterAttributes:[]};
 
+    //if(this.imagePath != undefined)
+    //this.updateAddBild();
+
     //dynamische Liste füllen
     for (let i = 0; i < arrayLength; i++) {
       dataObj.CharacterAttributes.push(this.attributes[i]);
     }
     dataObj["CharacterName"] = this.name;
     dataObj["CharacterBeschreibung"] = this.description;
+    dataObj["CharacterBild"] = this.imageFileName;
 
     console.log(dataObj);
 
@@ -99,6 +106,41 @@ export class CharacterEditPage {
     });
   }
 
+  updateAddBild(){
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    let options: FileUploadOptions = {
+      fileKey: 'profileImage',
+      fileName: 'profileImage',
+      chunkedMode: false,
+      mimeType: "image/png",
+      headers: {}
+    }
+
+    fileTransfer.upload(this.imagePath, this.global.serverHost + '/api/uploadImage', options)
+      .then((data) => {
+        this.Ausgabe = data+" Uploaded Successfully";
+        this.imageFileName = this.global.serverHost + '/static/images/' + this.name +'.png';
+        this.presentToast("Image uploaded successfully");
+      }, (err) => {
+        console.log(err);
+        this.presentToast(err);
+      });
+  }
+
+  presentToast(msg) {
+    let toast = this.toastCtrl.create({
+      message: msg,
+      duration: 3000,
+      position: 'bottom'
+    });
+
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+
+    toast.present();
+  }
 
   // get image from librabry
   // https://stackoverflow.com/questions/47118760/how-to-take-or-choose-image-from-gallery-in-ionic-3
@@ -123,9 +165,9 @@ export class CharacterEditPage {
       //ImagePath with URI
       this.imagePath = imageURI;
       setTimeout(() => {
+        this.updateAddBild();
         this.loading.dismiss();
-      }, 3000);
-
+      }, 1000);
     });
 
   }
