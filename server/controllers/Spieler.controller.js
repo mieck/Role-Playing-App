@@ -65,17 +65,16 @@ exports.updateProfil = (req, res)=>{
         .then( Spieler =>{
             res.status(200).send(Spieler);
         }).catch(err =>{
-        res.status(500).send(err.message);
+            res.status(500).send(err.message);
     })
 };
 
 exports.setAdmin = (SpielerId, shouldBeAdmin, res)=>{
     Spieler.findByIdAndUpdate(SpielerId,  { $set: { admin: shouldBeAdmin } })
         .then( Spieler =>{
-            res.status(200).send(Spieler);
         }).catch(err =>{
-        res.status(500).send(err.message);
-    })
+            return err.message;
+        })
 };
 
 exports.findOnePlayer = (req,res)=>{
