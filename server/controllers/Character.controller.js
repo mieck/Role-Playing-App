@@ -1,4 +1,7 @@
+//import {UPLOAD_PATH} from "../server";
+//const UPLOAD_PATH = require('../config/ImageFolder.config.js');
 const Character = require('../models/Character.model');
+const Image = require('../models/image.model');
 const Spieler = require('./Spieler.controller');
 const fs = require('fs');
 
@@ -65,8 +68,8 @@ exports.updateAddBild = (req,res) =>{
 };
 
 exports.findOneCharacter = (req,res)=>{
-    console.log(req.body.id);
-    Character.findById(req.body.id)
+    console.log(req.body.characterid);
+    Character.findById(req.body.characterid)
         .then(Character =>{
             res.send(Character);
         }).catch(err =>{
@@ -76,9 +79,56 @@ exports.findOneCharacter = (req,res)=>{
     })
 };
 
-exports.deleteCharacter = (ID,res)=>{
-    Character.findByIdAndRemove(ID)
-        .catch(err => {
-            return err.message;
-        })
+exports.findImageCharacter = (req,res) =>{
+    Character.findById(req.body.characterId)
+        .then(char =>{
+                Image.findById(char.CharacterBild)
+                    .then(imag =>{
+                        res.setRequestHeader('Content-Type', 'image/jpeg');
+                        fs.createReadStream(path.join(UPLOAD_PATH, imag.filename)).pipe(res);
+                    }).catch(err =>{
+                        res.sendStatus(400);
+                })
+        }).catch(err =>{
+           console.log(err);
+    })
+};
+
+
+//#############################################################################################
+// Interne
+//###############################################################################################
+exports.findWithId = (characterId)=>{
+    Character.findById(characterId)
+        .then(char =>{
+            return(char);
+        }).catch(err =>{
+        return 0;
+    })
+};
+
+exports.AddImageIdCharacter = (characterId, imgageId)=>{
+    CharacterBild.findByIdAndUpdate(characterId,  { $set: { CharacterBild: imgageId }})
+        .then( characterupdate =>{
+            console.log("Spieler Update  Beim AddCharacterID");
+            console.log(characterupdate);
+            console.log(characterupdate.CharacterBild);
+            //return Spieler;
+        }).catch(err =>{
+        console.log("Fehler Beim AddCharacterID");
+        return err.message;
+    })
+};
+
+exports.AddImageIdCharacterAvatar = (characterId, imgageId)=>{
+    CharacterBild.findByIdAndUpdate(characterId,  { $push: { avatar: imgageId }})
+        .then( characterupdate =>{
+            console.log("Spieler Update  Beim AddCharacterID");
+            console.log(characterupdate);
+            console.log(characterupdate.CharacterBild);
+            //return Spieler;
+        }).catch(err =>{
+        console.log("Fehler Beim AddCharacterID");
+        return err.message;
+    })
 };

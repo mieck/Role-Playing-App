@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const image =require('./image.model.js');
 
 const characterschema = new Schema({
     CharacterName :{
@@ -16,13 +17,8 @@ const characterschema = new Schema({
         unique:false,
         required:false
     },
-    CharacterBild : {
-        data:Buffer,
-        contentType: String},
-    Avatars : [{
-        data:Buffer,
-        contentType: String
-    }]
+    CharacterBild : {type:Schema.Types.ObjectId,ref:'image'},
+    avatar :[{type:Schema.Types.ObjectId,ref:'image'}],
 });
 
 module.exports = mongoose.model('Character', characterschema);
