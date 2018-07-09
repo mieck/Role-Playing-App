@@ -7,6 +7,12 @@ const mongoose = require('mongoose');
 
 const dbconfig = require('./config/mongodb.config');
 
+
+// Please always use this line below to refer to the port
+// that the server is supposed to listen to. tyvm
+// by: marvinlwenzel
+const port = 8080;
+
 //mongoose.connect('mongodb://localhost:27017/WAY');
 mongoose.Promise = global.Promise;
 //var db = mongoose.connection;
@@ -34,5 +40,5 @@ require('./routes/RPG.routes.js')(app);
 require('./routes/Spieler.routes.js')(app);
 require('./routes/image.routes')(app);
 
-app.listen(process.env.PORT || 8080);
-console.log("listening on port 8080");
+app.listen(port);
+console.log("listening on port " + port);
