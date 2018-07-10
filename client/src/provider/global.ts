@@ -16,7 +16,9 @@ export class GlobalProvider {
   //public serverHost:String ="http://192.168.0.25:8080";
 
   //Local Host
-  public serverHost:String = "http://localhost:8080";
+  //public serverHost:String = "http://localhost:8080";
+
+  public serverHost:String = "https://marvinlwenzel-dev.ddns.net/api/roleplayingapp"
 
   public isAdmin:boolean;
 }
