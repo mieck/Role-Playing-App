@@ -68,8 +68,8 @@ exports.updateAddBild = (req,res) =>{
 };
 
 exports.findOneCharacter = (req,res)=>{
-    console.log(req.body.characterid);
-    Character.findById(req.body.characterid)
+    console.log(req.body.id);
+    Character.findById(req.body.id)
         .then(Character =>{
             res.send(Character);
         }).catch(err =>{
@@ -131,4 +131,11 @@ exports.AddImageIdCharacterAvatar = (characterId, imgageId)=>{
         console.log("Fehler Beim AddCharacterID");
         return err.message;
     })
+};
+
+exports.deleteCharacter = (ID,res)=>{
+    Character.findByIdAndRemove(ID)
+        .catch(err => {
+            return err.message;
+        })
 };
