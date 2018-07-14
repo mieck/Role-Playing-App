@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {NavController, Platform} from 'ionic-angular';
 import {CharacterEditPage} from "../character-edit/character-edit";
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
@@ -20,10 +20,10 @@ export class CreateRPGPage {
   public genres: Array<String>;
   public rpg:any;
 
-  constructor(public navCtrl: NavController, private http: Http, public global: GlobalProvider) {
+  constructor(public navCtrl: NavController, private http: Http, public global: GlobalProvider, public platform: Platform) {
 
     this.genres = ["Action", "Romance", "Comedy", "Fantasy", "Sci-Fi", "Slice of Life", "Horror", "Drama"]
-
+    this.platform = platform;
     this.rpg = new FormGroup({
       rpg_name: new FormControl('', Validators.required),
       rpg_description: new FormControl('', Validators.required),
@@ -52,7 +52,8 @@ export class CreateRPGPage {
   }
 
   abort(){
-
+    this.platform.exitApp()
+    console.log("App closed")
   }
 
 }

@@ -21,8 +21,8 @@ export class ChooseAvatarPage {
     this.images = ["assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Laughs.png", "assets/imgs/Charakter_01_Smiles.png"];
   }
 
-  chosenAvatar(file, i){
-    console.log(i)
+  chosenAvatar(i){
+    console.log(this.images[i])
     this.navCtrl.push(PostsPage);
   }
 
