@@ -27,6 +27,7 @@ import {ChatPage} from "../pages/chat/chat";
 import {GlobalProvider} from "../provider/global";
 import {CharRegistrPage} from "../pages/charRegistr/charReg";
 import {SettingsEditPage} from "../pages/setting-edit/settings-edit";
+import {ChooseAvatarPage} from "../pages/chooseAvatar/chooseAvatar";
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import {SettingsEditPage} from "../pages/setting-edit/settings-edit";
     PostsPage,
     ChatPage,
     CharRegistrPage,
-    SettingsEditPage
+    SettingsEditPage,
+    ChooseAvatarPage
 
   ],
   imports: [
@@ -70,7 +72,8 @@ import {SettingsEditPage} from "../pages/setting-edit/settings-edit";
     PostsPage,
     ChatPage,
     CharRegistrPage,
-    SettingsEditPage
+    SettingsEditPage,
+    ChooseAvatarPage
 
   ],
   providers: [

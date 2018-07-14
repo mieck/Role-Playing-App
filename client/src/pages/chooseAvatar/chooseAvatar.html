@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+      Wähle einen Avatar
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content class="background" padding>
+
+  <ion-grid>
+    <ion-row >
+      <ion-col col-3 *ngFor="let file of images; let i= index">
+        <img (click)="chosenAvatar(file, i)" [src]="file" >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

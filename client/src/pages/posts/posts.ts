@@ -6,6 +6,7 @@ import {CharacterPage} from "../character/character";
 import {GlobalProvider} from "../../provider/global";
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
+import {ChooseAvatarPage} from "../chooseAvatar/chooseAvatar";
 
 @Component({
   selector: 'page-posts',
@@ -19,9 +20,7 @@ export class PostsPage {
   public charactername: String;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
-
     this.posts = [];
-
     this.text = "";
   }
 
@@ -35,7 +34,6 @@ export class PostsPage {
   }
 
   sendPost(){
-
     var char_id = window.sessionStorage.getItem("char_id");
 
     this.removeWhiteSpace();
@@ -56,7 +54,10 @@ export class PostsPage {
     },(err) => {
       console.log(err);
     });
+  }
 
+  chooseAvatar(){
+    this.navCtrl.push(ChooseAvatarPage);
   }
 
   @ViewChild('myInput') myInput: ElementRef;
@@ -77,6 +78,7 @@ export class PostsPage {
   decrease(){
     this.myInput.nativeElement.style.height = 100 + 'px';
   }
+
 
   ionViewWillEnter(){
     this.posts = [];

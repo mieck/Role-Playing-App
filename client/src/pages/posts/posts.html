@@ -22,7 +22,7 @@
   <ion-grid id="writeBox">
     <ion-row id="headPost">
       <ion-col col-4>
-        <img id="image" src="assets/imgs/ProfileImage.png" >
+        <img id="image" (click)="chooseAvatar()" src="assets/imgs/ProfileImage.png" >
       </ion-col>
       <ion-col col-6>
         <div>{{charactername}}</div>
