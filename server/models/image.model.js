@@ -4,7 +4,6 @@ const Schema = mongoose.Schema;
 const imageSchema = new mongoose.Schema({
     filename: String,
     originalName: String,
-    desc: String,
-    created: { type: Date, default: Date.now }
+    destination: String
 });
 module.exports = mongoose.model('Image', imageSchema);

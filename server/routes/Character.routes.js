@@ -8,5 +8,7 @@ module.exports = function (app) {
 
     app.post('/find_character', Character.findOneCharacter);
 
+    app.post('/uploadImage', Character.updateAddBild);
+
 
 };

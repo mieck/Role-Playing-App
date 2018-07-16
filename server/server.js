@@ -1,7 +1,7 @@
 var cors = require('cors');
 var express = require('express');
 var app = express(); // new
-
+var path = require('path');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 
@@ -32,6 +32,7 @@ app.use(function (request, response, next) {
     response.header("Access-Control-Allow-Headers", "origin, X-Requested-With, Content-Type, Accept");
     next();
 });
+app.use('/public', express.static(process.cwd() + '/public'));
 
 // Models
 require('./routes/Character.routes.js')(app);

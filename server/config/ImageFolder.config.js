@@ -1,3 +1,1 @@
-module.exports = {
-    UPLOAD_PATH :'ImageUploads'
-}
+module.exports = '../public/resources/';

@@ -10,6 +10,7 @@ import {CameraOptions, Camera} from "@ionic-native/camera";
 import {DomSanitizer} from "@angular/platform-browser";
 import {LoadingController, Loading} from "ionic-angular";
 import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
+import {File} from "@ionic-native/file";
 
 @Component({
   selector: 'page-character',
@@ -30,7 +31,8 @@ export class CharacterEditPage {
 
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController,
               public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
-              public loadingCtrl: LoadingController, private transfer: FileTransfer, public toastCtrl: ToastController) {
+              public loadingCtrl: LoadingController,
+              private transfer: FileTransfer, public toastCtrl: ToastController, private file: File) {
     this.profileImage = "assets/imgs/ProfileImage.png"
     this.name = "";
     this.description = "";
@@ -107,20 +109,32 @@ export class CharacterEditPage {
   }
 
   updateAddBild(){
-    const fileTransfer: FileTransferObject = this.transfer.create();
 
     let options: FileUploadOptions = {
-      fileKey: 'profileImage',
-      fileName: 'profileImage',
+      fileKey: 'file',
+      fileName: this.imageFileName,
       chunkedMode: false,
       mimeType: "image/png",
+      httpMethod:'POST',
       headers: {}
-    }
+    };
 
-    fileTransfer.upload(this.imagePath, this.global.serverHost + '/api/uploadImage', options)
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    /*let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: this.imageFileName,
+      chunkedMode: false,
+      mimeType: "image/png",
+      httpMethod:'POST',
+      headers: {}
+    };*/
+
+      console.log("file transfert");
+    fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_charcater', options)
       .then((data) => {
         this.Ausgabe = data+" Uploaded Successfully";
-        this.imageFileName = this.global.serverHost + '/static/images/' + this.name +'.png';
+        //this.imageFileName = this.global.serverHost + '/static/images/' + this.name +'.png';
         this.presentToast("Image uploaded successfully");
       }, (err) => {
         console.log(err);
@@ -164,6 +178,7 @@ export class CharacterEditPage {
       this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(imageURI);
       //ImagePath with URI
       this.imagePath = imageURI;
+      this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer zwwischen 1 und 50
       setTimeout(() => {
         this.updateAddBild();
         this.loading.dismiss();

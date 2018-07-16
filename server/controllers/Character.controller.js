@@ -54,14 +54,17 @@ exports.update_character = (req,res) =>{
 exports.updateAddBild = (req,res) =>{
     // Bild : {data:Buffer,contentType: String} // deal with image https://gist.github.com/aheckmann/2408370
    var image ={
-       imagePath :req.body.imagePath,
-       imageType : req.body.ImageType
+       filename :req.body.fileName,
+       ImageUri:req.body.imagePath
    };
 
     Character.update({_id:req.body.characterId},  { $set: { CharacterBild : image} })
         .then( character =>{
+            console.log("character success");
             res.status(200).send(character);
         }).catch(err =>{
+            console.log("character bild problem");
+            console.log(err.message);
         res.status(500).send(err.message);
     })
 
@@ -92,6 +95,10 @@ exports.findImageCharacter = (req,res) =>{
         }).catch(err =>{
            console.log(err);
     })
+};
+
+exports.uploadImage = (req,res) =>{
+
 };
 
 
