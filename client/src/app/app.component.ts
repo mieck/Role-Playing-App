@@ -32,6 +32,7 @@ export class MyApp {
       //console.log(data);
       this.appCtrl.getRootNav().setRoot(TabsPage);
       this.global.registrationComplete = true;
+      this.global.avatar = "assets/imgs/ProfileImage.png";
     });
 
   }

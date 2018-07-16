@@ -4,7 +4,6 @@ import {CharacterEditPage} from "../character-edit/character-edit";
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
 import {GlobalProvider} from "../../provider/global";
-import {PostsPage} from "../posts/posts";
 
 @Component({
   selector: 'page-chooseAvatar',
@@ -18,12 +17,13 @@ export class ChooseAvatarPage {
   public images: Array<String>;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
-    this.images = ["assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Laughs.png", "assets/imgs/Charakter_01_Smiles.png"];
+    this.images = ["assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Laughs.png", "assets/imgs/Charakter_01_Smiles.png",
+      "assets/imgs/Charakter_02_Angry.png", "assets/imgs/Charakter_02_Laughs.png", "assets/imgs/Charakter_02_Smiles.png"];
   }
 
-  chosenAvatar(i){
-    console.log(this.images[i])
-    this.navCtrl.push(PostsPage);
+  chosenAvatar(file, index){
+    this.global.avatar = file;
+    this.navCtrl.pop();
   }
 
 }

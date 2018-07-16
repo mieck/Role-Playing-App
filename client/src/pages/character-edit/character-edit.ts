@@ -36,9 +36,6 @@ export class CharacterEditPage {
     this.name = "";
     this.description = "";
     this.attributes = [];
-
-    this.images = ["assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Laughs.png", "assets/imgs/Charakter_01_Smiles.png", "assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Angry.png"];
-
   }
 
   saveAttributes(){

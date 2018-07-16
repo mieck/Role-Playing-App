@@ -9,10 +9,11 @@
 
   <ion-grid>
     <ion-row >
-      <ion-col col-3 *ngFor="let file of images; let i= index">
-        <img (click)="chosenAvatar(i)" [src]="file" >
+      <ion-col col-3 *ngFor="let file of images">
+        <img (click)="chosenAvatar(file, images.indexOf(file))" [src]="file" >
       </ion-col>
     </ion-row>
   </ion-grid>
 
 </ion-content>
+

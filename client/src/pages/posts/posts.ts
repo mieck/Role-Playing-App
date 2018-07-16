@@ -18,10 +18,12 @@ export class PostsPage {
   public posts: Array<any>;
   public text: String;
   public charactername: String;
+  public avatar: String;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
     this.posts = [];
     this.text = "";
+    this.avatar = this.global.avatar;
   }
 
   goToCharacter(charID) {
@@ -46,20 +48,23 @@ export class PostsPage {
 
     let post = {
       "text": this.text,
-      "avatar": "assets/imgs/ProfileImage.png",
+      "avatar": this.avatar,
       "character": char_id,
       "name": this.charactername
     };
 
-    this.http.post(this.global.serverHost + '/send_post', post).pipe(
-      map(res => res.json())
-    ).subscribe(response => {
-      this.posts.push(post);
-      this.text = "";
-      this.decrease();
-    },(err) => {
-      console.log(err);
-    });
+    if(this.text != undefined && this.text != ""){
+
+      this.http.post(this.global.serverHost + '/send_post', post).pipe(
+        map(res => res.json())
+      ).subscribe(response => {
+        this.posts.push(post);
+        this.text = "";
+        this.decrease();
+      },(err) => {
+        console.log(err);
+      });
+    }
   }
 
   chooseAvatar(){
@@ -87,6 +92,7 @@ export class PostsPage {
 
 
   ionViewWillEnter(){
+    this.avatar = this.global.avatar;
     this.posts = [];
     var char_id = window.sessionStorage.getItem("char_id");
 
@@ -99,14 +105,16 @@ export class PostsPage {
     this.http.get(this.global.serverHost + '/list_posts').pipe(
       map(res => res.json())
     ).subscribe(response => {
-      for (let i = 0; i < response.length; i++) {
-        let post = {
-          "text": response[i].text,
-          "avatar": "assets/imgs/ProfileImage.png",
-          "character": response[i].character,
-          "name": response[i].name
+      if (response.length > 0){
+        for (let i = 0; i < response.length; i++) {
+          let post = {
+            "text": response[i].text,
+            "avatar": response[i].avatar,
+            "character": response[i].character,
+            "name": response[i].name
+          }
+          this.posts.push(post);
         }
-        this.posts.push(post);
       }
     });
   }

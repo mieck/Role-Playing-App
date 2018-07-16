@@ -9,6 +9,8 @@ export class GlobalProvider {
 
   public otherCharID:String;
 
+  public avatar:String = "assets/imgs/ProfileImage.png";
+
   //IP Marie PC cmd -> ipconfig -> IPv4 Adresse
   //public serverHost:String ="http://192.168.0.20:8080";
 
