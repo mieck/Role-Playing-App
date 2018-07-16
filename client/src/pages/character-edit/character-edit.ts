@@ -211,7 +211,7 @@ export class CharacterEditPage {
   }
 
   changeAvatars() {
-    this.navCtrl.push(AddAvatarPage)
+    this.navCtrl.push(AddAvatarPage);
   }
 
   ionViewDidLoad(){

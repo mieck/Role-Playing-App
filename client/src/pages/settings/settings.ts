@@ -35,8 +35,8 @@ export class SettingsPage {
   }
 
   goToCharacter(charID) {
-    this.navCtrl.push(CharacterPage);
     this.global.otherCharID = charID;
+    this.navCtrl.push(CharacterPage);
   }
 
   goToProfile() {

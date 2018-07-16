@@ -29,8 +29,10 @@ export class PostsPage {
     this.navCtrl.push(CharacterPage);
   }
 
-  playerCharacter(charID){
-    console.log("click works")
+  playerCharacter(){
+    var char_id = window.sessionStorage.getItem("char_id");
+    this.global.otherCharID = char_id;
+    this.navCtrl.push(CharacterPage);
   }
 
   goToProfile() {
