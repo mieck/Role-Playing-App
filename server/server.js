@@ -43,7 +43,7 @@ require('./routes/RPG.routes.js')(app);
 require('./routes/Spieler.routes.js')(app);
 require('./routes/image.routes')(app);
 
-//Chat
+//Chat Funktion
 io.on('connection', (socket) => {
 
     socket.on('disconnect', function(){
