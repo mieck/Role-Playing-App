@@ -1,5 +1,5 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
-import { NavController } from 'ionic-angular';
+import {Content, NavController} from 'ionic-angular';
 import {ProfilePage} from "../profile/profile";
 import {SettingsPage} from "../settings/settings";
 import {CharacterPage} from "../character/character";
@@ -71,6 +71,11 @@ export class PostsPage {
     this.navCtrl.push(ChooseAvatarPage);
   }
 
+  @ViewChild('content') content: Content;
+  scrollToBottom(){
+    this.content.scrollToBottom();
+  }
+
   @ViewChild('myInput') myInput: ElementRef;
   removeWhiteSpace(){
     var input = this.myInput.nativeElement.value;
@@ -92,6 +97,7 @@ export class PostsPage {
 
 
   ionViewWillEnter(){
+
     this.avatar = this.global.avatar;
     this.posts = [];
     var char_id = window.sessionStorage.getItem("char_id");
@@ -117,6 +123,10 @@ export class PostsPage {
         }
       }
     });
+  }
+
+  ionViewDidEnter(){
+    this.scrollToBottom();
   }
 
 }
