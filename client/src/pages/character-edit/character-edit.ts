@@ -219,10 +219,7 @@ export class CharacterEditPage {
       this.registered = false;
     }
 
-    for (let i = 0; i < this.images.length; i++) {
-      if (this.images.length < 8)
-        this.images.push("assets/imgs/ProfileImage.png");
-    }
+
 
     var char_id = window.sessionStorage.getItem("char_id");
 

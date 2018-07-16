@@ -19,5 +19,8 @@ export class AddAvatarPage {
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
     this.images = ["assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Laughs.png", "assets/imgs/Charakter_01_Smiles.png"];
   }
-
+  //for (let i = 0; i < this.images.length; i++) {
+  //  if (this.images.length < 8)
+  //this.images.push("assets/imgs/ProfileImage.png");
+  //}
 }
