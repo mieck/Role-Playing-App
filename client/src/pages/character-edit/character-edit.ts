@@ -136,7 +136,7 @@ export class CharacterEditPage {
       .then((data) => {
         this.Ausgabe = data+" Uploaded Successfully";
         //this.imageFileName = this.global.serverHost + '/static/images/' + this.name +'.png';
-        this.imageFileName = data.response.filename;
+        //this.imageFileName = data.filename;
 
         this.presentToast("Image uploaded successfully");
       }, (err) => {
