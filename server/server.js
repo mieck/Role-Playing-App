@@ -4,6 +4,8 @@ var app = express(); // new
 var path = require('path');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+let http = require('http').Server(app);
+var io = require('socket.io')(http);
 
 const dbconfig = require('./config/mongodb.config');
 
@@ -40,6 +42,23 @@ require('./routes/Post.routes.js')(app);
 require('./routes/RPG.routes.js')(app);
 require('./routes/Spieler.routes.js')(app);
 require('./routes/image.routes')(app);
+
+//Chat
+io.on('connection', (socket) => {
+
+    socket.on('disconnect', function(){
+        io.emit('users-changed', {user: socket.nickname, event: 'left'});
+    });
+
+    socket.on('set-nickname', (nickname) => {
+        socket.nickname = nickname;
+        io.emit('users-changed', {user: nickname, event: 'joined'});
+    });
+
+    socket.on('add-message', (message) => {
+        io.emit('message', {text: message.text, from: socket.nickname, created: new Date()});
+    });
+});
 
 app.listen(port);
 console.log("listening on port " + port);

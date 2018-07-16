@@ -29,6 +29,9 @@ import {CharRegistrPage} from "../pages/charRegistr/charReg";
 import {SettingsEditPage} from "../pages/setting-edit/settings-edit";
 import {ChooseAvatarPage} from "../pages/chooseAvatar/chooseAvatar";
 import {AddAvatarPage} from "../pages/addAvatar/addAvatar";
+import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
+const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
+//const config: SocketIoConfig = { url: 'https://marvinlwenzel-dev.ddns.net/api/roleplayingapp', options: {} };
 
 
 @NgModule({
@@ -57,6 +60,7 @@ import {AddAvatarPage} from "../pages/addAvatar/addAvatar";
     HttpModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
+    SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
