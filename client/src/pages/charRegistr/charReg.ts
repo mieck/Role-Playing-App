@@ -13,9 +13,10 @@ export class CharRegistrPage {
   public attributes: Array<any>;
   public description: string;
   public name: string;
-
+  public profileImage:String;
 
   constructor(private http: Http, public navCtrl: NavController, public events: Events, public global: GlobalProvider,) {
+    this.profileImage = "assets/imgs/ProfileImage.png";
   }
 
   goToPosts(){
@@ -32,6 +33,7 @@ export class CharRegistrPage {
       this.name = response.CharacterName;
       this.description = response.CharacterBeschreibung;
       this.attributes = response.CharacterAttributes;
+      this.profileImage = "assets/imgs/ProfileImage.png";
     });
   }
 
