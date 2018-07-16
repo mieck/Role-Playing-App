@@ -10,7 +10,11 @@ import {CameraOptions, Camera} from "@ionic-native/camera";
 import {DomSanitizer} from "@angular/platform-browser";
 import {LoadingController, Loading} from "ionic-angular";
 import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
+<<<<<<< HEAD
 import {File} from "@ionic-native/file";
+=======
+import {AddAvatarPage} from "../addAvatar/addAvatar";
+>>>>>>> 4958a24a55d4a09b2c49cc53d50254f6bf335b3c
 
 @Component({
   selector: 'page-character',
@@ -37,9 +41,6 @@ export class CharacterEditPage {
     this.name = "";
     this.description = "";
     this.attributes = [];
-
-    this.images = ["assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Laughs.png", "assets/imgs/Charakter_01_Smiles.png", "assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Angry.png"];
-
   }
 
   saveAttributes(){
@@ -225,6 +226,7 @@ export class CharacterEditPage {
   }
 
   changeAvatars() {
+    this.navCtrl.push(AddAvatarPage);
   }
 
   ionViewDidLoad(){
@@ -235,10 +237,7 @@ export class CharacterEditPage {
       this.registered = false;
     }
 
-    for (let i = 0; i < this.images.length; i++) {
-      if (this.images.length < 8)
-        this.images.push("assets/imgs/ProfileImage.png");
-    }
+
 
     var char_id = window.sessionStorage.getItem("char_id");
 

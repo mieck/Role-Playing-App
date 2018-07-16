@@ -10,8 +10,9 @@ const PostSchema = new Schema({
         required:true
     },
     avatar: {
-        data:Buffer,
-        contentType: String,
+        type:String,
+        unique:false,
+        required:true
     },
     name: {
         type:String,

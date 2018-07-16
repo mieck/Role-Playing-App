@@ -15,8 +15,10 @@ export class CharacterPage {
   public description: string;
   public name: string;
   public ownChar:boolean;
+  public profileImage:String;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
+    this.profileImage = "assets/imgs/ProfileImage.png";
   }
 
   editCharacter() {
@@ -39,6 +41,7 @@ export class CharacterPage {
       this.name = response.CharacterName;
       this.description = response.CharacterBeschreibung;
       this.attributes = response.CharacterAttributes;
+      this.profileImage = "assets/imgs/ProfileImage.png";
     });
   }
 

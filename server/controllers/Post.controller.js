@@ -6,6 +6,7 @@ exports.SavePost = (req,res)=>{
         text:req.body.text,
         character:req.body.character,
         name:req.body.name,
+        avatar:req.body.avatar,
     };
 
     var post = new PostMessage(newspost);
