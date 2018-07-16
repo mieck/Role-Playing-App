@@ -10,11 +10,11 @@ import {CameraOptions, Camera} from "@ionic-native/camera";
 import {DomSanitizer} from "@angular/platform-browser";
 import {LoadingController, Loading} from "ionic-angular";
 import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
-<<<<<<< HEAD
+
 import {File} from "@ionic-native/file";
-=======
+
 import {AddAvatarPage} from "../addAvatar/addAvatar";
->>>>>>> 4958a24a55d4a09b2c49cc53d50254f6bf335b3c
+
 
 @Component({
   selector: 'page-character',
@@ -136,6 +136,8 @@ export class CharacterEditPage {
       .then((data) => {
         this.Ausgabe = data+" Uploaded Successfully";
         //this.imageFileName = this.global.serverHost + '/static/images/' + this.name +'.png';
+        this.imageFileName = data.response.filename;
+
         this.presentToast("Image uploaded successfully");
       }, (err) => {
         console.log(err);
