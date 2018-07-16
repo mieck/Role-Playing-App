@@ -10,6 +10,7 @@ import {CameraOptions, Camera} from "@ionic-native/camera";
 import {DomSanitizer} from "@angular/platform-browser";
 import {LoadingController, Loading} from "ionic-angular";
 import {FileTransfer, FileTransferObject, FileUploadOptions} from "@ionic-native/file-transfer";
+import {AddAvatarPage} from "../addAvatar/addAvatar";
 
 @Component({
   selector: 'page-character',
@@ -210,6 +211,7 @@ export class CharacterEditPage {
   }
 
   changeAvatars() {
+    this.navCtrl.push(AddAvatarPage)
   }
 
   ionViewDidLoad(){

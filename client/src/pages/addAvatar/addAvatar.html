@@ -1,16 +1,17 @@
 <ion-header>
   <ion-navbar>
     <ion-title>
-      Wähle einen Avatar
+      Avatare hinzufügen
     </ion-title>
   </ion-navbar>
 </ion-header>
+
 <ion-content id="background" padding>
 
   <ion-grid>
     <ion-row >
-      <ion-col col-3 *ngFor="let file of images; let i= index">
-        <img (click)="chosenAvatar(i)" [src]="file" >
+      <ion-col col-3 *ngFor="let file of images">
+        <img [src]="file" >
       </ion-col>
     </ion-row>
   </ion-grid>

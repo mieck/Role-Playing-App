@@ -29,6 +29,10 @@ export class PostsPage {
     this.navCtrl.push(CharacterPage);
   }
 
+  playerCharacter(charID){
+    console.log("click works")
+  }
+
   goToProfile() {
     this.navCtrl.push(ProfilePage);
   }

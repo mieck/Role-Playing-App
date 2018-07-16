@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
     <ion-title>
       Charakter
     </ion-title>
@@ -13,14 +13,8 @@
   <img id="avatar"  [src]="profileImage" (click)="getImage()" >
   <!--<ion-textarea rows="3" [placeholder]="imagePath"></ion-textarea>-->
 
-  Avatare hinzufügen:
-  <ion-grid>
-    <ion-row >
-      <ion-col col-3 *ngFor="let file of images">
-        <img [src]="file" >
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
+  <button ion-button color="mycolor1" (click)="changeAvatars()">Avatare</button>
 
   <ion-list>
       <ion-grid>

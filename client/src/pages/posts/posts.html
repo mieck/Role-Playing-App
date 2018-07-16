@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar hideBackButton="true">
       <div id="header">Posts</div>
       <div id="logo"><img src="assets/imgs/Dummy_Profile_02.png" (click)="goToProfile()"/></div>
   </ion-navbar>
@@ -25,7 +25,7 @@
         <img id="image" (click)="chooseAvatar()" src="assets/imgs/ProfileImage.png" >
       </ion-col>
       <ion-col col-6>
-        <div>{{charactername}}</div>
+        <div tappable (click)="playerCharacter()">{{charactername}}</div>
       </ion-col>
       <ion-col col-2>
         <img  src="assets/imgs/Senden.png" (click)="sendPost()" >
