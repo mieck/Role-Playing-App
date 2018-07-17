@@ -1,4 +1,13 @@
 page-settings{
+  .background {
+    background-color: #cbe9fb ;
+  }
+  ion-grid:first-child {background: #62c0e2}
+  ion-row:nth-child(even) {background: #86cee9}
+  ion-row:nth-child(odd) {background: #cbe9fb}
+  .darker{
+    background: #62c0e2
+  }
   #logo {
     float: right;
     display: inline-block;
@@ -7,6 +16,8 @@ page-settings{
     margin-right: 2%;
   }
   #header{
+    background: #eef9ff;
+    font-family: Carlito;
     float: left;
     display: inline-block;
     font-size: 35px;

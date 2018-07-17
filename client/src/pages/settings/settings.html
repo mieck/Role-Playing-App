@@ -5,12 +5,12 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="background" padding>
   <ion-grid>
-    <ion-row>
-      <ion-col col-5 >Spieler</ion-col>
-      <ion-col col-5 >Charakter</ion-col>
-      <ion-col col-2 ></ion-col>
+    <ion-row id = "clmm">
+      <ion-col class = "darker" col-5 >Spieler</ion-col>
+      <ion-col class = "darker" col-5 >Charakter</ion-col>
+      <ion-col class = "darker" col-2 ></ion-col>
     </ion-row>
     <ion-row *ngFor="let item of players">
       <ion-col col-5 >{{item.teilnehmer}}</ion-col>
@@ -20,22 +20,22 @@
   </ion-grid>
 
   <ion-list>
-    <ion-item>
+    <ion-item class="background">
       <label class="my-label" stacked>RPG-Name</label>
       <div>{{rpg_name}}</div>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="background">
       <label class="my-label" stacked>Genre</label>
       <div>{{genre}}</div>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="background">
       <label class="my-label" stacked>RPG-Beschreibung</label>
       <div id="descr">{{rpg_description}}</div>
     </ion-item>
 
-    <ion-item>
+    <ion-item class="background">
       <label class="my-label" stacked>Admin</label>
       <div>{{admin}}</div>
     </ion-item>
