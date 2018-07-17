@@ -40,7 +40,16 @@ page-posts {
     max-width: 45px;
     margin-right: 2%;
   }
+  #charaName{
+    font-family: Carlito;
+    font-weight: bold;
+    font-size: 20px;
+    color: midnightblue !important;
+
+  }
   #header{
+    background: #eef9ff;
+    font-family: Carlito;
     float: left;
     display: inline-block;
     font-size: 35px;
@@ -69,7 +78,7 @@ page-posts {
     height: 100px;
     border: 0;
     border-radius: 0;
-    background: #86cee9;
+    background: #eef9ff;
     resize: none;
     white-space: pre-line;
   }
