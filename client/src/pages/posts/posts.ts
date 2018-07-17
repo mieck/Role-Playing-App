@@ -8,6 +8,7 @@ import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
 import {ChooseAvatarPage} from "../chooseAvatar/chooseAvatar";
 
+const postsPerPage = 15;
 @Component({
   selector: 'page-posts',
   templateUrl: 'posts.html'
@@ -16,14 +17,22 @@ import {ChooseAvatarPage} from "../chooseAvatar/chooseAvatar";
 export class PostsPage {
 
   public posts: Array<any>;
+  public postsToShow: Array<any>;
   public text: String;
   public charactername: String;
   public avatar: String;
+  public numberOfPages: number;
+  public currentPage: number;
+  public lastPage: boolean;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
     this.posts = [];
+    this.postsToShow = [];
     this.text = "";
     this.avatar = this.global.avatar;
+    this.numberOfPages = 1;
+    this.currentPage = 1;
+    this.lastPage = true;
   }
 
   goToCharacter(charID) {
@@ -59,6 +68,7 @@ export class PostsPage {
         map(res => res.json())
       ).subscribe(response => {
         this.posts.push(post);
+        this.postsToShow = this.posts.slice(postsPerPage*(this.numberOfPages-1), this.posts.length);
         this.text = "";
         this.decrease();
       },(err) => {
@@ -95,6 +105,35 @@ export class PostsPage {
     this.myInput.nativeElement.style.height = 100 + 'px';
   }
 
+  toFirstPage(){
+    this.currentPage = 1;
+    this.postsToShow = this.posts.slice(postsPerPage*(this.currentPage-1), (postsPerPage*this.currentPage));
+    this.lastPage = false;
+  }
+
+  toPageBefore(){
+    if(this.currentPage > 1){
+      this.currentPage = this.currentPage - 1;
+      this.postsToShow = this.posts.slice(postsPerPage*(this.currentPage-1), (postsPerPage*this.currentPage));
+      this.lastPage = false;
+    }
+  }
+
+  toPageAfter(){
+    if(this.currentPage < this.numberOfPages){
+      this.currentPage = this.currentPage + 1;
+      this.postsToShow = this.posts.slice(postsPerPage*(this.currentPage-1), (postsPerPage*this.currentPage));
+
+      if(this.currentPage == this.numberOfPages)
+        this.lastPage = true;
+    }
+  }
+
+  toLastPage(){
+    this.currentPage = this.numberOfPages;
+    this.postsToShow = this.posts.slice(postsPerPage*(this.currentPage-1), (postsPerPage*this.currentPage));
+    this.lastPage = true;
+  }
 
   ionViewWillEnter(){
 
@@ -121,6 +160,10 @@ export class PostsPage {
           }
           this.posts.push(post);
         }
+        this.numberOfPages = Math.ceil(this.posts.length/postsPerPage);
+        this.postsToShow = this.posts.slice(postsPerPage*(this.numberOfPages-1), this.posts.length);
+        this.currentPage = this.numberOfPages;
+        this.lastPage = true;
       }
     });
   }
