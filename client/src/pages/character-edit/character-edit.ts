@@ -105,9 +105,17 @@ export class CharacterEditPage {
     this.http.post(this.global.serverHost + '/update_character', data).pipe(
       map(res => res.json())
     ).subscribe(response => {
-        console.log('POST Response:', response);
+      console.log('POST Response:', response);
+      const url =  this.global.serverHost + '/public/resources/' + this.imageFileName;
+      this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(url);
     });
   }
+ /* getImageUdate(url){
+    this.http.get(url).map(res => res.json()).subscribe(data => {
+      this.presentToast(data);
+    });
+
+  }*/
 
   updateAddBild(){
 
@@ -122,24 +130,12 @@ export class CharacterEditPage {
 
     const fileTransfer: FileTransferObject = this.transfer.create();
 
-    /*let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: this.imageFileName,
-      chunkedMode: false,
-      mimeType: "image/png",
-      httpMethod:'POST',
-      headers: {}
-    };*/
-
       console.log("file transfert");
     fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_charcater', options)
       .then((data) => {
         this.Ausgabe = data+" Uploaded Successfully";
-        //this.imageFileName = this.global.serverHost + '/static/images/' + this.name +'.png';
-        //this.imageFileName = data.filename;
-
         this.presentToast("Image uploaded successfully");
-      }, (err) => {
+      },(err) => {
         console.log(err);
         this.presentToast(err);
       });
@@ -162,7 +158,7 @@ export class CharacterEditPage {
   // get image from librabry
   // https://stackoverflow.com/questions/47118760/how-to-take-or-choose-image-from-gallery-in-ionic-3
   getImage() {
-    const options: CameraOptions = {
+    const options: CameraOptions =  {
       quality: 100,
       allowEdit: true,
       destinationType: this.camera.DestinationType.FILE_URI,
@@ -179,10 +175,11 @@ export class CharacterEditPage {
     this.camera.getPicture(options).then((imageURI) => {
       // show Image
       this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(imageURI);
-      //ImagePath with URI
-      this.imagePath = imageURI;
-      this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer zwwischen 1 und 50
+      // show Image
+      this.imagePath= imageURI;
+      this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer
       setTimeout(() => {
+        this.imagePath= imageURI;
         this.updateAddBild();
         this.loading.dismiss();
       }, 1000);

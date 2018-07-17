@@ -55,3 +55,14 @@ exports.get_avatar_list = (req,res) =>{
 
 };
 
+//'########################################################################
+//interne
+//###############################################################################
+exports.findWithName = (imageName)=>{
+    Character.findOne({"filename":imageName})
+        .then(new_imge =>{
+            return(new_imge);
+        }).catch(err =>{
+        return 0;
+    })
+};

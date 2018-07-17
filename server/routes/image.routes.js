@@ -38,8 +38,9 @@ module.exports = function (app) {
         },
         filename:function(req,file,cb)
         {
-            var pathname = file.originalname.split('-');
-            var filename = pathname[0]+ '-' + Date.now();
+            //var pathname = file.originalname.split('-');
+            //var filename = pathname[0]+ '-' + Date.now();
+            var filename =file.originalname;
             console.log(filename);
             if(filename!=undefined)
                 cb(null, filename);
@@ -55,7 +56,6 @@ module.exports = function (app) {
         console.log("new Image!");
     var newImage = {
         filename:  req.file.filename,
-        originalName:req.file.originalname,
         destination:req.file.destination
     };
 
@@ -63,8 +63,6 @@ module.exports = function (app) {
 
     img.save()
         .then(new_image => {
-            //Character.AddImageIdCharacter(req.body.characterId,new_image._id);
-            //console.log(req.body.characterId);
             console.log(new_image);
             res.status(200).send(new_image);
         }).catch(err =>{
