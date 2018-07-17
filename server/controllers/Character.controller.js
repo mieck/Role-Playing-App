@@ -38,10 +38,8 @@ exports.update_character = (req,res) =>{
         CharacterName:req.body.CharacterName,
         CharacterAttributes: req.body.CharacterAttributes,
         CharacterBeschreibung:req.body.CharacterBeschreibung,
-    //     CharacterBild:{
-    //         data :fs.readFileSync(req.body.Pathimage),
-    //         contentType : req.body.ImageType,},
-         };
+        CharacterBild: req.body.CharacterBild
+    };
 
     Character.findByIdAndUpdate({_id:req.body.characterId},  { $set: new_value })
         .then( character =>{

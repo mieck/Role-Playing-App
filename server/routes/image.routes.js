@@ -51,7 +51,7 @@ module.exports = function (app) {
 
     //app.post('/new_image_charcater',upload.single('profileImage'), Image.new_character_image);
 
-    app.post('/new_image_charcater',upload.single('file'), (req, res)=>{
+    app.post('/new_image_character',upload.single('file'), (req, res)=>{
 
         console.log("new Image!");
     var newImage = {
