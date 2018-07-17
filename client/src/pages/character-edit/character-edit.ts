@@ -106,16 +106,19 @@ export class CharacterEditPage {
     let arrayLength = this.attributes.length;
     let dataObj = {CharacterAttributes:[]};
 
-    if(this.imagePath != undefined)
-      this.updateAddBild();
+      //dynamische Liste füllen
+      for (let i = 0; i < arrayLength; i++) {
+        dataObj.CharacterAttributes.push(this.attributes[i]);
+      }
+      dataObj["CharacterName"] = this.name;
+      dataObj["CharacterBeschreibung"] = this.description;
 
-    //dynamische Liste füllen
-    for (let i = 0; i < arrayLength; i++) {
-      dataObj.CharacterAttributes.push(this.attributes[i]);
+    if(this.imagePath != undefined){
+      this.updateAddBild();
+      dataObj["CharacterBild"] = this.global.serverHost + '/public/resources/' + this.imageFileName;
+    }else{
+      dataObj["CharacterBild"] = this.profileImage;
     }
-    dataObj["CharacterName"] = this.name;
-    dataObj["CharacterBeschreibung"] = this.description;
-    dataObj["CharacterBild"] = this.global.serverHost + '/public/resources/' + this.imageFileName;
 
     console.log(dataObj);
 
@@ -227,7 +230,7 @@ export class CharacterEditPage {
     } else {
       this.registered = false;
     }
-    
+
     var char_id = window.sessionStorage.getItem("char_id");
 
     if(this.global.registrationComplete){
