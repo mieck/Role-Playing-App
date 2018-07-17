@@ -107,15 +107,19 @@ export class PostsPage {
 
   toFirstPage(){
     this.currentPage = 1;
-    this.postsToShow = this.posts.slice(postsPerPage*(this.currentPage-1), (postsPerPage*this.currentPage));
-    this.lastPage = false;
+    if(this.currentPage != this.numberOfPages){
+      this.postsToShow = this.posts.slice(postsPerPage*(this.currentPage-1), (postsPerPage*this.currentPage));
+      this.lastPage = false;
+    }
   }
 
   toPageBefore(){
-    if(this.currentPage > 1){
+    if(this.currentPage > 1 ){
       this.currentPage = this.currentPage - 1;
-      this.postsToShow = this.posts.slice(postsPerPage*(this.currentPage-1), (postsPerPage*this.currentPage));
-      this.lastPage = false;
+      if(this.currentPage != this.numberOfPages) {
+        this.postsToShow = this.posts.slice(postsPerPage * (this.currentPage - 1), (postsPerPage * this.currentPage));
+        this.lastPage = false;
+      }
     }
   }
 
