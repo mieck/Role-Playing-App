@@ -13,7 +13,7 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ChatPage {
   messages = [];
-  nickname = '';
+  spieler = '';
   message = '';
 
   constructor(private http: Http, private navCtrl: NavController, private navParams: NavParams, private socket: Socket, private toastCtrl: ToastController, public global: GlobalProvider) {
@@ -37,7 +37,7 @@ export class ChatPage {
   }
 
   sendMessage() {
-    this.socket.emit('new-message', { message: this.message });
+    this.socket.emit('new-message', { message: this.message, spieler: this.spieler});
     this.message = '';
   }
 
@@ -79,8 +79,7 @@ export class ChatPage {
       map(res => res.json())
     ).subscribe(response => {
       this.socket.connect();
-      this.nickname = response.spielername;
-      this.socket.emit('set-nickname', this.nickname);
+      this.spieler = response.spielername;
     });
   }
 

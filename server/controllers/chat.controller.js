@@ -126,7 +126,7 @@ exports.getchats = () =>{
 exports.savemessage =(req,res) =>{
     const new_msg = {
         message:req.body.message,
-        spieler:req.body.name,
+        spieler:req.body.spieler,
     };
 
     const chat = new Chat(new_msg);
@@ -145,7 +145,7 @@ exports.savemessage =(req,res) =>{
 exports.savemessageohne =(data) =>{
     const new_msg = {
         message:data.message,
-        spieler:data.name,
+        spieler:data.spieler,
     };
 
     const chat = new Chat(new_msg);
@@ -155,6 +155,8 @@ exports.savemessageohne =(data) =>{
         }).catch(err =>{
         console.log(err);
          return 0;
+        console.log("Fehler");
+         return err.message;
     })
 
 };
