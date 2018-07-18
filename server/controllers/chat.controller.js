@@ -115,13 +115,27 @@ exports.sendReply = (req, res)=> {
 
 
 exports.getchats = () =>{
-      Chat.find().limit(100).sort({_id:1}).toArray()
+    console.log("get chats message");
+    Message.find().limit(100).sort({_id:1})
           .then( msg =>{
+              //console.log(msg);
               return msg;
       }).catch(err =>{
-          console.log(err);
-         return 0;
+          console.log(err.message);
+         return null;
       })
+};
+
+
+exports.getchatrequest = (req,res) =>{
+    console.log("get chats message");
+    Message.find().limit(100).sort({_id:1})
+        .then( msg =>{
+            res.status(200).send(msg);
+        }).catch(err =>{
+        console.log(err);
+        res.status(500).send(null);
+    })
 };
 exports.savemessage =(req,res) =>{
     const new_msg = {
@@ -129,8 +143,8 @@ exports.savemessage =(req,res) =>{
         spieler:req.body.spieler,
     };
 
-    const chat = new Chat(new_msg);
-    chat.save()
+    const new_message = new Message(new_msg);
+    new_message.save()
         .then(message => {
             res.status(200).send(message);
         }).catch(err =>{
@@ -148,15 +162,15 @@ exports.savemessageohne =(data) =>{
         spieler:data.spieler,
     };
 
-    const chat = new Chat(new_msg);
-    chat.save()
+    const new_message = new Message(new_msg);
+
+    new_message.save()
         .then(message => {
             return message;
         }).catch(err =>{
         console.log(err);
-         return 0;
-        console.log("Fehler");
-         return err.message;
+        console.log("Fehler beim Speichern ");
+        return null;
     })
 
 };

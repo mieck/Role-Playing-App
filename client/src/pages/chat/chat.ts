@@ -37,14 +37,15 @@ export class ChatPage {
   }
 
   sendMessage() {
+    console.log("sendMessage test");
     this.socket.emit('new-message', { message: this.message, spieler: this.spieler});
     this.message = '';
   }
 
   getMessages() {
     let observable = new Observable(observer => {
-      this.socket.on('connection', (data) => {
-        console.log("message test");
+
+      this.socket.emit('connection', (data) => {
         observer.next(data);
       });
     })

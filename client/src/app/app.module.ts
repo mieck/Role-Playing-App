@@ -30,8 +30,9 @@ import {SettingsEditPage} from "../pages/setting-edit/settings-edit";
 import {ChooseAvatarPage} from "../pages/chooseAvatar/chooseAvatar";
 import {AddAvatarPage} from "../pages/addAvatar/addAvatar";
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
-const config: SocketIoConfig = { url: 'http://127.0.0.1:8085', options: {} };
-//const config: SocketIoConfig = { url: 'https://marvinlwenzel-dev.ddns.net/api/roleplayingapp:8085', options: {} };
+//const config: SocketIoConfig = { url: 'http://127.0.0.1:8085', options: {} };
+//const config: SocketIoConfig = { url: 'http://192.168.1.5:8085', options: {} };
+const config: SocketIoConfig = { url: 'https://marvinlwenzel-dev.ddns.net/api/roleplayingapp:8085', options: {} };
 
 
 @NgModule({

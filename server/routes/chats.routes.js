@@ -10,8 +10,8 @@ module.exports = function (app) {
     app.post('/new/recipient', Chat.newConversation);*/
 
 
-
-    app.post('/chatmessgae', Chat.getchats);
+    app.get('/chatmessage', Chat.getchatrequest);
+    app.post('/chatmessage', Chat.getchats);
 
     app.post('/save_message', Chat.savemessageohne);
 };

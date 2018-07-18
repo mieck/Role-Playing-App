@@ -1,4 +1,3 @@
-const Spieler = require('../models/Spieler.model.js');
 const Character = require('./Character.controller');
 
 exports.findAll = (req,res)=>{
@@ -89,6 +88,21 @@ exports.findOnePlayer = (req,res)=>{
     })
 };
 
+exports.deleteSpielerCharacter = (req,res)=>{
+    for (let i = 0; i < req.body.IDs.length; i++) {
+        Spieler.findByIdAndUpdate(req.body.IDs[i].spielerID,{ $pull: { Characters:  req.body.IDs[i].charID}})
+            .then(Spieler => {
+                Character.deleteCharacter(Spieler.Characters[0]);
+                res.send(Spieler);
+            }).catch(err => {
+            res.status(500).send({
+                message: err.message
+            })
+        })
+    }
+};
+
+
 //#############################################################################################
 // Interne
 //###############################################################################################
@@ -114,16 +128,13 @@ exports.AddCharacterId = (SpielerId, characterId)=>{
     })
 };
 
-exports.deleteSpielerCharacter = (req,res)=>{
-    for (let i = 0; i < req.body.IDs.length; i++) {
-        Spieler.findByIdAndUpdate(req.body.IDs[i].spielerID,{ $pull: { Characters:  req.body.IDs[i].charID}})
-            .then(Spieler => {
-                Character.deleteCharacter(Spieler.Characters[0]);
-                res.send(Spieler);
-            }).catch(err => {
-            res.status(500).send({
-                message: err.message
-            })
-        })
-    }
+exports.findWithName = (Spielername)=>{
+    Spieler.findOne({"spielername":Spielername})
+        .then(Spieler =>{
+            //console.log(Spieler);
+            return(Spieler);
+        }).catch(err =>{
+        console.log("nicht gefunden!");
+        return err ;
+    })
 };

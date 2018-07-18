@@ -7,8 +7,8 @@ const MessageSchema = new Schema({
             required: true
         },
         spieler: {
-            type: Schema.Types.ObjectId,
-            ref: 'spieler'
+            type: String,
+            required: true
         }
     },
     {
