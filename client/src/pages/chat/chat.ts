@@ -37,13 +37,13 @@ export class ChatPage {
   }
 
   sendMessage() {
-    this.socket.emit('add-message', { text: this.message });
+    this.socket.emit('new-message', { text: this.message });
     this.message = '';
   }
 
   getMessages() {
     let observable = new Observable(observer => {
-      this.socket.on('message', (data) => {
+      this.socket.on('refresh-messages', (data) => {
         observer.next(data);
       });
     })
@@ -77,7 +77,6 @@ export class ChatPage {
     this.http.post(this.global.serverHost + '/checkprofile', {id: id}).pipe(
       map(res => res.json())
     ).subscribe(response => {
-      console.log("Got username");
       this.socket.connect();
       this.nickname = response.spielername;
       this.socket.emit('set-nickname', this.nickname);

@@ -23,7 +23,7 @@ try {
     client = require('socket.io').listen(portsocket);
     socketEvents(client);
 }catch (e) {
-    console.log("socket io cloudn't connect on port 8080");
+    console.log("socket io couldn't connect on port 8080");
     console.log(e.message);
 }
 
