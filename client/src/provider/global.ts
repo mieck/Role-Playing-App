@@ -18,10 +18,8 @@ export class GlobalProvider {
   //public serverHost:String ="http://192.168.0.25:8080";
 
   //IP Romeo
- //public serverHost:String ="http://192.168.1.5:8080";
+  public serverHost:String ="http://192.168.1.5:8080";
 
-  //Local Host
-  public serverHost:String = "http://127.0.0.1:8080";
 
   //Server
   //public serverHost:String = "https://marvinlwenzel-dev.ddns.net/api/roleplayingapp"
