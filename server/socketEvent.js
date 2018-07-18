@@ -1,7 +1,7 @@
 exports = module.exports = function(client) {
     // Set socket.client listeners.
     const chatcontroller = require('./controllers/chat.controller');
-    client.on('connectclientn', (socket) => {
+    client.on('connection', (socket) => {
         // console.log('a user connected');
 
         // On message entry, join broadcast channel
