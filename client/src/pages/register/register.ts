@@ -38,6 +38,7 @@ export class RegisterPage {
     ).subscribe((response) => {
       console.log('POST Response:', response);
       window.sessionStorage.setItem("id", response._id);
+      this.global.spielername = response.spielername;
 
       this.findRPG();
 
