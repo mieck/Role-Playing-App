@@ -14,7 +14,7 @@
   <!--<ion-textarea rows="3" [placeholder]="imagePath"></ion-textarea>-->
 
 
-  <button ion-button color="mycolor1" (click)="changeAvatars()">Avatare</button>
+  <button ion-button *ngIf="registered" color="mycolor1" (click)="changeAvatars()">Avatare</button>
 
   <ion-list>
       <ion-grid>

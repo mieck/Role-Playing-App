@@ -4,6 +4,7 @@ import {CharacterEditPage} from "../character-edit/character-edit";
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
 import {GlobalProvider} from "../../provider/global";
+import {AddAvatarPage} from "../addAvatar/addAvatar";
 
 @Component({
   selector: 'page-chooseAvatar',
@@ -26,6 +27,10 @@ export class ChooseAvatarPage {
   chosenAvatar(file){
     this.global.avatar = file;
     this.navCtrl.pop();
+  }
+
+  changeAvatars() {
+    this.navCtrl.push(AddAvatarPage);
   }
 
   ionViewDidLoad() {
