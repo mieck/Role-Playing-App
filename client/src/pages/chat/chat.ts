@@ -22,14 +22,14 @@ export class ChatPage {
       this.messages.push(message);
     });
 
-    this.getUsers().subscribe(data => {
-      let user = data['user'];
-      if (data['event'] === 'left') {
-        this.showToast('User left: ' + user);
-      } else {
-        this.showToast('User joined: ' + user);
-      }
-    });
+    // this.getUsers().subscribe(data => {
+    //   let user = data['user'];
+    //   if (data['event'] === 'left') {
+    //     this.showToast('User left: ' + user);
+    //   } else {
+    //     this.showToast('User joined: ' + user);
+    //   }
+    // });
   }
 
   goToProfile() {
@@ -37,13 +37,13 @@ export class ChatPage {
   }
 
   sendMessage() {
-    this.socket.emit('new-message', { text: this.message });
+    this.socket.emit('new-message', { message: this.message });
     this.message = '';
   }
 
   getMessages() {
     let observable = new Observable(observer => {
-      this.socket.on('refresh-messages', (data) => {
+      this.socket.on('new-message', (data) => {
         observer.next(data);
       });
     })
