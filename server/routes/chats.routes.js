@@ -11,7 +11,7 @@ module.exports = function (app) {
 
 
 
-    app.post('/chatmessgae', Chat.getmsg);
+    app.post('/chatmessgae', Chat.getchats);
 
-    app.post('/save_message', Chat.savemessage);
+    app.post('/save_message', Chat.savemessageohne);
 };

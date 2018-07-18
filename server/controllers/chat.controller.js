@@ -114,12 +114,13 @@ exports.sendReply = (req, res)=> {
 };
 
 
-exports.getmsg = (req,res) =>{
+exports.getchats = () =>{
       Chat.find().limit(100).sort({_id:1}).toArray()
           .then( msg =>{
-              res.status(200).send(msg);
+              return msg;
       }).catch(err =>{
-          res.status(500).send(err.message);
+          console.log(err);
+         return 0;
       })
 };
 exports.savemessage =(req,res) =>{
@@ -152,8 +153,8 @@ exports.savemessageohne =(data) =>{
         .then(message => {
             return message;
         }).catch(err =>{
-        console.log("fehler beim Insert Character!");
-         return err.message;
+        console.log(err);
+         return 0;
     })
 
 };

@@ -43,7 +43,8 @@ export class ChatPage {
 
   getMessages() {
     let observable = new Observable(observer => {
-      this.socket.on('new-message', (data) => {
+      this.socket.on('connection', (data) => {
+        console.log("message test");
         observer.next(data);
       });
     })
