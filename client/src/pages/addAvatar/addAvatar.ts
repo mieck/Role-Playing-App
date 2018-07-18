@@ -21,6 +21,7 @@ export class AddAvatarPage {
   public imageFileName:any;
   public Ausgabe: String;
   public numberOfAvatars: number;
+  public selectedAvatar: number;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider,
               public loadingCtrl: LoadingController,
@@ -28,6 +29,7 @@ export class AddAvatarPage {
               private camera: Camera, private sanitizer: DomSanitizer,
               private alertCtrl: AlertController,) {
     this.numberOfAvatars = 0;
+    this.selectedAvatar = -1;
   }
 
   uploadToCharacter() {
@@ -40,8 +42,6 @@ export class AddAvatarPage {
       console.log('POST Response:', response);
       this.images.push(avatarImage);
       this.numberOfAvatars++;
-      //const url =  this.global.serverHost + '/public/resources/' + this.imageFileName;
-      //this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(url);
     });
   }
 
@@ -111,14 +111,41 @@ export class AddAvatarPage {
   presentAlert(message) {
     let alert = this.alertCtrl.create({
       title: message,
-      buttons: ['Verstanden']
+      buttons: ['Verstanden'],
     });
     alert.present();
   }
 
+  presentAlertDelete(message){
+    let alert = this.alertCtrl.create({
+      title: message,
+      buttons: [{text: 'Verstanden',
+        handler: () => {
+          var char_id = window.sessionStorage.getItem("char_id");
+          this.images.splice(this.selectedAvatar, 1);
+
+          this.http.post(this.global.serverHost + '/deleteAvatar', {id: char_id, avatars: this.images}).pipe(
+            map(res => res.json())
+          ).subscribe(response => {
+            console.log('POST Response:', response);
+            this.numberOfAvatars--;
+            this.selectedAvatar = -1;
+          });
+        },},
+        {text: 'Abbrechen'}
+      ]
+    });
+    alert.present();
+  }
+
+  selectAvatarToDelete(index){
+    this.selectedAvatar = index;
+  }
+
   deleteAvatar(){
-    if(this.numberOfAvatars > 0){
-      //Folgt noch
+    if(this.numberOfAvatars > 0 && this.selectedAvatar >= 0){
+      let message = 'Der ausgewählte Avatar wird gelöscht';
+      this.presentAlertDelete(message);
     }else{
       let message = 'Löschen nicht möglich';
       this.presentAlert(message);

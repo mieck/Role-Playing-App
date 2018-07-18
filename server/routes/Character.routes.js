@@ -12,4 +12,6 @@ module.exports = function (app) {
 
     app.post('/uploadAvatar', Character.updateAddAvatar);
 
+    app.post('/deleteAvatar', Character.updateDeleteAvatar);
+
 };

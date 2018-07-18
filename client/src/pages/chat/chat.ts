@@ -1,8 +1,7 @@
-import { Component } from '@angular/core';
-import { NavController, IonicPage, NavParams, ToastController } from 'ionic-angular';
+import {Component, ViewChild} from '@angular/core';
+import {NavController, IonicPage, NavParams, ToastController, Content} from 'ionic-angular';
 import {ProfilePage} from "../profile/profile";
 import { Socket } from 'ng-socket-io';
-import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
 import {GlobalProvider} from "../../provider/global";
 import { Observable } from 'rxjs/Observable';
@@ -33,6 +32,7 @@ export class ChatPage {
     console.log("sendMessage test");
     this.socket.emit('new-message', { message: this.message, spieler: this.spieler, createdAt: this.createdAt});
     this.message = '';
+    this.scrollToBottom();
   }
 
   getMessages() {
@@ -51,7 +51,13 @@ export class ChatPage {
     this.socket.disconnect();
   }
 
+  @ViewChild('content') content: Content;
+  scrollToBottom(){
+    this.content.scrollToBottom();
+  }
+
   ionViewWillEnter(){
+    this.scrollToBottom();
     this.messages = [];
     this.socket.connect();
     this.socket.emit('new-message', { message: ">> Beigetreten", spieler: this.spieler});

@@ -63,14 +63,13 @@ export class CharacterEditPage {
     this.camera.getPicture(options).then((imageURI) => {
       // show Image
       this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(imageURI);
-      // show Image
       this.imagePath= imageURI;
       this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer
-      setTimeout(() => {
-        this.imagePath= imageURI;
-        this.loading.dismiss();
-      }, 1000);
     });
+
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 4000);
   }
 
   updateAddBild(){

@@ -33,7 +33,7 @@ export class ChooseAvatarPage {
     this.navCtrl.push(AddAvatarPage);
   }
 
-  ionViewDidLoad() {
+  ionViewWillEnter() {
     var char_id = window.sessionStorage.getItem("char_id");
 
     if (this.global.registrationComplete) {

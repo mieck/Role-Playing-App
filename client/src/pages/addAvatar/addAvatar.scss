@@ -3,4 +3,14 @@ page-addAvatar {
   #background {
     background-color: #cbe9fb ;
   }
+
+  .selected {
+    border-width: 3px;
+    border-style: ridge;
+    border-color: red;
+  }
+
+  .notSelected {
+
+  }
 }
