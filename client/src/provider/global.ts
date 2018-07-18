@@ -21,7 +21,11 @@ export class GlobalProvider {
   //public serverHost:String ="http://192.168.1.5:8080";
 
   //Local Host
-  //public serverHost:String = "http://127.0.0.1:8080";
+  //public serverHost:String = "http://172.0.0.1:8080";
+
+
+  //Local eduroam
+  //public serverHost:String = "http://172.20.222.213:8080";
 
   //Server
   public serverHost:String = "https://marvinlwenzel-dev.ddns.net/api/roleplayingapp"

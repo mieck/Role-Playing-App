@@ -1,10 +1,10 @@
-const Conversation = require('../models/conversation.model');
 const Message = require('../models/message.model');
 const Spieler =require('../models/Spieler.model');
 
 
 //var client = require('socket.io').listen(port).sockets;
 
+/*
 
 exports.getConversations = (req, res) =>{
     // Only return one message from each conversation to display as snippet
@@ -41,7 +41,7 @@ exports.getConversations = (req, res) =>{
         });
 };
 
-exports.getConversation = (req, res)=> {
+/!*exports.getMessage = (req, res)=> {
     Message.find({ conversationId: req.params.conversationId })
         .select('createdAt body author')
         .sort('-createdAt')
@@ -56,7 +56,7 @@ exports.getConversation = (req, res)=> {
 
             return res.status(200).json({ conversation: messages });
         });
-};
+};*!/
 
 exports.newConversation = (req, res)=> {
     if (!req.params.recipient) {
@@ -94,6 +94,7 @@ exports.newConversation = (req, res)=> {
         });
     });
 };
+*/
 
 exports.sendReply = (req, res)=> {
     const reply = new Message({
@@ -121,10 +122,10 @@ exports.getmsg = (req,res) =>{
           res.status(500).send(err.message);
       })
 };
-exports.savemsg =(req,res) =>{
+exports.savemessage =(req,res) =>{
     const new_msg = {
+        message:req.body.message,
         spieler:req.body.name,
-        Chatmsg:req.body.message,
     };
 
     const chat = new Chat(new_msg);
@@ -139,3 +140,21 @@ exports.savemsg =(req,res) =>{
     })
 
 };
+
+exports.savemessageohne =(data) =>{
+    const new_msg = {
+        message:data.message,
+        spieler:data.name,
+    };
+
+    const chat = new Chat(new_msg);
+    chat.save()
+        .then(message => {
+            return message;
+        }).catch(err =>{
+        console.log("fehler beim Insert Character!");
+         return err.message;
+    })
+
+};
+

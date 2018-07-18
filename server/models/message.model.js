@@ -1,18 +1,12 @@
 const mongoose = require('mongoose'),
     Schema = mongoose.Schema;
-const conversation =require('./conversation.model.js');
 const spieler =require('./Spieler.model.js');
 const MessageSchema = new Schema({
-        conversationId: {
-            type: Schema.Types.ObjectId,
-            required: true,
-            ref:'conversation'
-        },
-        body: {
+        message: {
             type: String,
             required: true
         },
-        author: {
+        spieler: {
             type: Schema.Types.ObjectId,
             ref: 'spieler'
         }

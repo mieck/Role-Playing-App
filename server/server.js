@@ -15,7 +15,7 @@ const dbconfig = require('./config/mongodb.config');
 // that the server is supposed to listen to. tyvm
 // by: marvinlwenzel
 const port = 8080;
-const portsocket = 8085;
+const portsocket = 8086;
 
 // socket client initialisation port
 //var client = require('socket.io').listen(port).sockets;

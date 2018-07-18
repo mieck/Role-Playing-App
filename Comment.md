@@ -35,4 +35,8 @@
     http://javasampleapproach.com/node-js/mongoose-many-to-many-related-models-with-nodejs-express-mongodb
 # File transfert ionic 3 to server js
 https://www.djamware.com/post/599da16580aca768e4d2b130/how-to-upload-file-on-ionic-3-using-native-file-transfer-plugin
+
+# chat mit socket io
+    https://github.com/joshuaslate/mern-starter/blob/master/server/index.js
+    https://www.youtube.com/watch?v=8Y6mWhcdSUM
     
