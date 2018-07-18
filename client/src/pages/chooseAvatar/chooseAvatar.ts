@@ -13,17 +13,31 @@ export class ChooseAvatarPage {
 
   public attributes: Array<any>;
   public description: string;
-  public name: string;
   public images: Array<String>;
+  public standardImages: Array<String>;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
-    this.images = ["assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Laughs.png", "assets/imgs/Charakter_01_Smiles.png",
+
+    this.standardImages = ["assets/imgs/Charakter_01_Angry.png", "assets/imgs/Charakter_01_Laughs.png", "assets/imgs/Charakter_01_Smiles.png",
       "assets/imgs/Charakter_02_Angry.png", "assets/imgs/Charakter_02_Laughs.png", "assets/imgs/Charakter_02_Smiles.png"];
+
   }
 
-  chosenAvatar(file, index){
+  chosenAvatar(file){
     this.global.avatar = file;
     this.navCtrl.pop();
+  }
+
+  ionViewDidLoad() {
+    var char_id = window.sessionStorage.getItem("char_id");
+
+    if (this.global.registrationComplete) {
+      this.http.post(this.global.serverHost + '/find_character', {id: char_id}).pipe(
+        map(res => res.json())
+      ).subscribe(response => {
+        this.images = response.avatar;
+      });
+    }
   }
 
 }

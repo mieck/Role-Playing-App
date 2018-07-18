@@ -10,5 +10,6 @@ module.exports = function (app) {
 
     app.post('/uploadImage', Character.updateAddBild);
 
+    app.post('/uploadAvatar', Character.updateAddAvatar);
 
 };

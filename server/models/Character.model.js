@@ -22,7 +22,12 @@ const characterschema = new Schema({
         unique: false,
         required: false
     },
-    avatar :[{type:Schema.Types.ObjectId,ref:'image'}],
+    avatar :[
+        {
+            type:String,
+            unique: false,
+            required: false
+        }],
 });
 
 module.exports = mongoose.model('Character', characterschema);

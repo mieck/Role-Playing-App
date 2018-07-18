@@ -15,5 +15,14 @@
     </ion-row>
   </ion-grid>
 
+  <div>Standard-Avatare:</div>
+  <ion-grid>
+    <ion-row >
+      <ion-col col-3 *ngFor="let file of standardImages">
+        <img (click)="chosenAvatar(file, images.indexOf(file))" [src]="file" >
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>
 

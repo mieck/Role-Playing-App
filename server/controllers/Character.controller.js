@@ -56,13 +56,30 @@ exports.updateAddBild = (req,res) =>{
        ImageUri:req.body.imagePath
    };
 
-    Character.update({_id:req.body.characterId},  { $set: { CharacterBild : image} })
+    Character.findByIdAndUpdate({_id:req.body.characterId},  { $set: { CharacterBild : image} })
         .then( character =>{
             console.log("character success");
             res.status(200).send(character);
         }).catch(err =>{
             console.log("character bild problem");
             console.log(err.message);
+        res.status(500).send(err.message);
+    })
+
+};
+
+exports.updateAddAvatar = (req,res) =>{
+    // Bild : {data:Buffer,contentType: String} // deal with image https://gist.github.com/aheckmann/2408370
+    var image = req.body.avatar;
+    console.log(image);
+
+    Character.findByIdAndUpdate({_id:req.body.id},  { $push: { avatar : image} })
+        .then( avatar =>{
+            console.log("Daten zum Bild " + avatar);
+            res.status(200).send(avatar);
+        }).catch(err =>{
+        console.log("character bild problem");
+        console.log(err.message);
         res.status(500).send(err.message);
     })
 
