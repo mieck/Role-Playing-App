@@ -115,7 +115,7 @@ export class CharacterEditPage {
 
     if(this.imagePath != undefined){
       this.updateAddBild();
-      dataObj["CharacterBild"] = this.global.serverHost + '/public/resources/' + this.imageFileName;
+      dataObj["CharacterBild"] = this.global.imageServer + this.imageFileName;
     }else{
       dataObj["CharacterBild"] = this.profileImage;
     }
