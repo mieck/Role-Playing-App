@@ -47,16 +47,18 @@ exports = module.exports = function(client) {
         }
           // get all ältere message;
 
-            Message.find().limit(100).sort({_id:1})
+            Message.find().limit(10).sort({_id:-1})
                 .then( msg =>{
-                    console.log("alle vorhandene Nachricten");
+                    console.log("alle vorhandenen Nachrichten");
                     console.log(msg);
-                    socket.emit('refresh-messages', msg );
+                    for (let i = msg.length-1; i >= 0; i--) {
+                        socket.emit('refresh-messages', msg[i]);
+                    }
                 }).catch(err =>{
-                console.log(err.message);
-                sendStatus('es gibt kein message');
+                    console.log(err.message);
+                    sendStatus('es gibt kein message');
 
-            });
+                });
             console.log("even new-message!");
 
             socket.on('new-message', (data) => {
@@ -84,7 +86,7 @@ exports = module.exports = function(client) {
              });
 
              socket.on('disconnect', () => {
-             console.log('user disconnected');
+                console.log('user disconnected');
              });
  });
 

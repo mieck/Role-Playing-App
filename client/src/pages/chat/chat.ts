@@ -13,23 +13,16 @@ import { Observable } from 'rxjs/Observable';
 })
 export class ChatPage {
   messages = [];
-  spieler = '';
   message = '';
+  spieler = this.global.spielername;
+  createdAt:Date = new Date();
 
-  constructor(private http: Http, private navCtrl: NavController, private navParams: NavParams, private socket: Socket, private toastCtrl: ToastController, public global: GlobalProvider) {
+  constructor(private http: Http, private navCtrl: NavController, private navParams: NavParams,
+              private socket: Socket, private toastCtrl: ToastController, public global: GlobalProvider) {
 
     this.getMessages().subscribe(message => {
       this.messages.push(message);
     });
-
-    // this.getUsers().subscribe(data => {
-    //   let user = data['user'];
-    //   if (data['event'] === 'left') {
-    //     this.showToast('User left: ' + user);
-    //   } else {
-    //     this.showToast('User joined: ' + user);
-    //   }
-    // });
   }
 
   goToProfile() {
@@ -38,7 +31,7 @@ export class ChatPage {
 
   sendMessage() {
     console.log("sendMessage test");
-    this.socket.emit('new-message', { message: this.message, spieler: this.spieler});
+    this.socket.emit('new-message', { message: this.message, spieler: this.spieler, createdAt: this.createdAt});
     this.message = '';
   }
 
@@ -46,43 +39,22 @@ export class ChatPage {
     let observable = new Observable(observer => {
       console.log("getmessage");
       this.socket.on('refresh-messages', (data) => {
-        console.log(data);
+        console.log("Daten " + data);
         observer.next(data);
       });
     })
     return observable;
   }
 
-  getUsers() {
-    let observable = new Observable(observer => {
-      this.socket.on('users-changed', (data) => {
-        observer.next(data);
-      });
-    });
-    return observable;
-  }
-
-  ionViewWillLeave() {
+  ionViewWillLeave(){
+    this.socket.emit('new-message', { message: "<< Ausgetreten", spieler: this.spieler});
     this.socket.disconnect();
   }
 
-  showToast(msg) {
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 2000
-    });
-    toast.present();
-  }
-
   ionViewWillEnter(){
-    var id = window.sessionStorage.getItem("id");
-
-    this.http.post(this.global.serverHost + '/checkprofile', {id: id}).pipe(
-      map(res => res.json())
-    ).subscribe(response => {
-      this.socket.connect();
-      this.spieler = response.spielername;
-    });
+    this.messages = [];
+    this.socket.connect();
+    this.socket.emit('new-message', { message: ">> Beigetreten", spieler: this.spieler});
   }
 
 }

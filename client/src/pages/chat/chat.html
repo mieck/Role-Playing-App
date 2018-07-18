@@ -12,13 +12,13 @@
       <ion-col col-9 *ngIf="message.spieler !== spieler" class="message" [ngClass]="{'my_message': message.spieler === spieler, 'other_message': message.spieler !== spieler}">
         <span class="user_name">{{ message.spieler }}:</span><br>
         <span>{{ message.message }}</span>
-        <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div>
+        <div class="time">{{message.createdAt | date:'dd.MM.yy HH:mm'}}</div>
       </ion-col>
 
       <ion-col offset-3 col-9 *ngIf="message.spieler === spieler" class="message" [ngClass]="{'my_message': message.spieler === spieler, 'other_message': message.spieler !== spieler}">
         <span class="user_name">{{ message.spieler }}:</span><br>
         <span>{{ message.message }}</span>
-        <div class="time">{{message.created | date:'dd.MM hh:MM'}}</div>
+        <div class="time">{{message.createdAt | date:'dd.MM.yy HH:mm'}}</div>
       </ion-col>
 
     </ion-row>

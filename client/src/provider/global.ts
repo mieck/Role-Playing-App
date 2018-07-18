@@ -11,6 +11,8 @@ export class GlobalProvider {
 
   public avatar:String = "assets/imgs/ProfileImage.png";
 
+  public spielername:String;
+
   //IP Marie PC cmd -> ipconfig -> IPv4 Adresse
   //public serverHost:String ="http://192.168.0.20:8080";
 
@@ -26,7 +28,7 @@ export class GlobalProvider {
   //public serverHost:String = "http://127.0.0.1:8080";
 
   //Local ImageServer
-   //public imageServer:String = this.serverHost + '/public/resources/'
+  //public imageServer:String = this.serverHost + '/public/resources/'
 
   //Server
   public serverHost:String = "https://marvinlwenzel-dev.ddns.net/api/roleplayingapp"

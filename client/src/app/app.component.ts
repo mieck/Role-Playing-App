@@ -5,6 +5,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/login/login";
 import {TabsPage} from "../pages/tabs/tabs";
 import { GlobalProvider } from "../provider/global";
+import {map} from "rxjs/operators";
+import {Http} from "@angular/http";
 
 @Component({
   templateUrl: 'app.html'
@@ -12,7 +14,9 @@ import { GlobalProvider } from "../provider/global";
 export class MyApp {
   rootPage:any = LoginPage;
 
-  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public events: Events, public appCtrl: App, public global: GlobalProvider) {
+  constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen, public events: Events,
+              public appCtrl: App, public global: GlobalProvider,
+              private http: Http) {
 
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
@@ -24,12 +28,20 @@ export class MyApp {
     this.global.registrationComplete = false;
 
     this.events.subscribe('user:logout', (data)  => {
-      //console.log(data);
+      console.log("bye");
       this.appCtrl.getRootNav().setRoot(LoginPage);
     });
 
     this.events.subscribe('user:login', (data)  => {
-      //console.log(data);
+      console.log("hallo");
+      var id = window.sessionStorage.getItem("id");
+
+      this.http.post(this.global.serverHost + '/checkprofile', {id: id}).pipe(
+        map(res => res.json())
+      ).subscribe(response => {
+        this.global.spielername = response.spielername;
+      });
+
       this.appCtrl.getRootNav().setRoot(TabsPage);
       this.global.registrationComplete = true;
       this.global.avatar = "assets/imgs/ProfileImage.png";
