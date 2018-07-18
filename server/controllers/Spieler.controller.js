@@ -1,4 +1,6 @@
 const Character = require('./Character.controller');
+const Spieler = require('../models/Spieler.model.js');
+
 
 exports.findAll = (req,res)=>{
     console.log("spieler");
