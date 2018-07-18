@@ -30,8 +30,8 @@ import {SettingsEditPage} from "../pages/setting-edit/settings-edit";
 import {ChooseAvatarPage} from "../pages/chooseAvatar/chooseAvatar";
 import {AddAvatarPage} from "../pages/addAvatar/addAvatar";
 import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
-//const config: SocketIoConfig = { url: 'http://localhost:8080', options: {} };
-//const config: SocketIoConfig = { url: 'https://marvinlwenzel-dev.ddns.net/api/roleplayingapp', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:8085', options: {} };
+//const config: SocketIoConfig = { url: 'https://marvinlwenzel-dev.ddns.net/api/roleplayingapp:8085', options: {} };
 
 
 @NgModule({
@@ -60,7 +60,7 @@ import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
     HttpModule,
     HttpClientModule,
     IonicModule.forRoot(MyApp, {tabsPlacement: 'top'}),
-    //SocketIoModule.forRoot(config)
+    SocketIoModule.forRoot(config)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
