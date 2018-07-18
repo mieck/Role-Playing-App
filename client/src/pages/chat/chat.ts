@@ -44,8 +44,9 @@ export class ChatPage {
 
   getMessages() {
     let observable = new Observable(observer => {
-
-      this.socket.emit('connection', (data) => {
+      console.log("getmessage");
+      this.socket.on('refresh-messages', (data) => {
+        console.log(data);
         observer.next(data);
       });
     })
