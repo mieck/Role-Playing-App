@@ -106,8 +106,8 @@ export class CharacterEditPage {
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
-      const url =  this.global.serverHost + '/public/resources/' + this.imageFileName;
-      this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(url);
+      //const url =  this.global.serverHost + '/public/resources/' + this.imageFileName;
+      //this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(url);
     });
   }
  /* getImageUdate(url){

@@ -4,8 +4,9 @@ var app = express(); // new
 var path = require('path');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+socketEvents = require('./socketEvents'),
 // let http = require('http').Server(app);
-// var io = require('socket.io')(http);
+
 
 const dbconfig = require('./config/mongodb.config');
 
@@ -14,6 +15,11 @@ const dbconfig = require('./config/mongodb.config');
 // that the server is supposed to listen to. tyvm
 // by: marvinlwenzel
 const port = 8080;
+
+// socket client initialisation port
+//var client = require('socket.io').listen(port).sockets;
+client = require('socket.io').listen(port);
+socketEvents(client);
 
 //mongoose.connect('mongodb://localhost:27017/WAY');
 mongoose.Promise = global.Promise;
@@ -42,6 +48,7 @@ require('./routes/Post.routes.js')(app);
 require('./routes/RPG.routes.js')(app);
 require('./routes/Spieler.routes.js')(app);
 require('./routes/image.routes')(app);
+require('./routes/chats.routes')(app);
 
 //Chat Funktion
 // io.on('connection', (socket) => {
