@@ -34,14 +34,6 @@ export class MyApp {
 
     this.events.subscribe('user:login', (data)  => {
       console.log("hallo");
-      var id = window.sessionStorage.getItem("id");
-
-      this.http.post(this.global.serverHost + '/checkprofile', {id: id}).pipe(
-        map(res => res.json())
-      ).subscribe(response => {
-        this.global.spielername = response.spielername;
-      });
-
       this.appCtrl.getRootNav().setRoot(TabsPage);
       this.global.registrationComplete = true;
       this.global.avatar = "assets/imgs/ProfileImage.png";

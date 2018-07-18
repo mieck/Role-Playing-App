@@ -101,6 +101,7 @@ export class LoginPage {
       }
       else {
         window.sessionStorage.setItem("id", response._id);
+        this.global.spielername = response.spielername;
         this.findRPG(response);
       }
 
