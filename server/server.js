@@ -4,7 +4,7 @@ var app = express(); // new
 var path = require('path');
 var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-socketEvents = require('./socketEvents'),
+socketEvents = require('./socketEvent');
 // let http = require('http').Server(app);
 
 
@@ -15,11 +15,18 @@ const dbconfig = require('./config/mongodb.config');
 // that the server is supposed to listen to. tyvm
 // by: marvinlwenzel
 const port = 8080;
+const portsocket = 8085;
 
 // socket client initialisation port
 //var client = require('socket.io').listen(port).sockets;
-client = require('socket.io').listen(port);
-socketEvents(client);
+try {
+    client = require('socket.io').listen(portsocket);
+    socketEvents(client);
+}catch (e) {
+    console.log("socket io cloudn't connect on port 8080");
+    console.log(e.message);
+}
+
 
 //mongoose.connect('mongodb://localhost:27017/WAY');
 mongoose.Promise = global.Promise;

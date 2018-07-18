@@ -1,13 +1,13 @@
 module.exports = function (app) {
     var Chat = require('../controllers/chat.controller');
 
-    chatRoutes.get('/conversationId', ChatController.getConversation);
+    app.get('/conversationId', Chat.getConversation);
 
     // Send reply in conversation
-    chatRoutes.post('/conversationId', ChatController.sendReply);
+    app.post('/conversationId', Chat.sendReply);
 
     // Start new conversation
-    chatRoutes.post('/new/recipient', ChatController.newConversation);
+    app.post('/new/recipient', Chat.newConversation);
 
 
 
