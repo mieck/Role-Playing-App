@@ -56,7 +56,7 @@
 
     <ion-item class="table">
       <ion-label class="my-label" stacked>Beschreibung</ion-label>
-      <ion-textarea id="descr" rows="6"type="text" [(ngModel)]="description"></ion-textarea>
+      <ion-textarea id="descr" maxlength="2000" rows="6" type="text" [(ngModel)]="description"></ion-textarea>
     </ion-item>
   </ion-list>
   <button ion-button color="mycolor1" id="save" (click)="saveAttributes()">Speichern</button>

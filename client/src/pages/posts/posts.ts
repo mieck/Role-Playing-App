@@ -24,6 +24,7 @@ export class PostsPage {
   public numberOfPages: number;
   public currentPage: number;
   public lastPage: boolean;
+  public noPost: boolean;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
     this.posts = [];
@@ -33,6 +34,7 @@ export class PostsPage {
     this.numberOfPages = 1;
     this.currentPage = 1;
     this.lastPage = true;
+    this.noPost = true;
   }
 
   goToCharacter(charID) {
@@ -164,6 +166,7 @@ export class PostsPage {
           }
           this.posts.push(post);
         }
+        this.noPost = false;
         this.numberOfPages = Math.ceil(this.posts.length/postsPerPage);
         this.postsToShow = this.posts.slice(postsPerPage*(this.numberOfPages-1), this.posts.length);
         this.currentPage = this.numberOfPages;
