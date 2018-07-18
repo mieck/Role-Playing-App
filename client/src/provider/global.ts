@@ -19,20 +19,21 @@ export class GlobalProvider {
   //public serverHost:String ="http://172.20.246.158:8080";
 
   //IP Romeo
-  //public serverHost:String ="http://192.168.1.5:8080";
+  public serverHost:String ="http://192.168.1.5:8080";
   //public serverHost:String = "http://172.20.222.213:8080"
 
   //Local Host
   //public serverHost:String = "http://127.0.0.1:8080";
 
   //Local ImageServer
-  //public imageServer:String = this.serverHost + '/public/resources/'
+   public imageServer:String = this.serverHost + '/public/resources/'
 
   //Server
-  public serverHost:String = "https://marvinlwenzel-dev.ddns.net/api/roleplayingapp"
+  //public serverHost:String = "https://marvinlwenzel-dev.ddns.net/api/roleplayingapp"
 
   //ImageServer
-  public imageServer:String = "https://marvinlwenzel-dev.ddns.net/resources/roleplayingapp/"
+  //public imageServer:String = "https://marvinlwenzel-dev.ddns.net/resources/roleplayingapp/"
+
 
 
   public isAdmin:boolean;
