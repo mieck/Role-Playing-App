@@ -17,7 +17,11 @@ const characterschema = new Schema({
         unique:false,
         required:false
     },
-    CharacterBild : {type:Schema.Types.ObjectId,ref:'image'},
+    CharacterBild : {
+        type:String,
+        unique: false,
+        required: false
+    },
     avatar :[{type:Schema.Types.ObjectId,ref:'image'}],
 });
 

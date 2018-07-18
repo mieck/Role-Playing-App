@@ -41,7 +41,7 @@ export class CharacterPage {
       this.name = response.CharacterName;
       this.description = response.CharacterBeschreibung;
       this.attributes = response.CharacterAttributes;
-      this.profileImage = "assets/imgs/ProfileImage.png";
+      this.profileImage = response.CharacterBild;
     });
   }
 

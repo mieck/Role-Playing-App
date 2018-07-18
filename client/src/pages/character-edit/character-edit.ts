@@ -43,6 +43,60 @@ export class CharacterEditPage {
     this.attributes = [];
   }
 
+  // get image from librabry
+  // https://stackoverflow.com/questions/47118760/how-to-take-or-choose-image-from-gallery-in-ionic-3
+  getImage() {
+    const options: CameraOptions =  {
+      quality: 100,
+      allowEdit: true,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.PNG,
+      mediaType: this.camera.MediaType.PICTURE,
+      sourceType : this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+    }
+    this.loading = this.loadingCtrl.create({
+      spinner: 'ios',
+    });
+
+    this.loading.present();
+
+    this.camera.getPicture(options).then((imageURI) => {
+      // show Image
+      this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(imageURI);
+      // show Image
+      this.imagePath= imageURI;
+      this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer
+      setTimeout(() => {
+        this.imagePath= imageURI;
+        this.loading.dismiss();
+      }, 1000);
+    });
+  }
+
+  updateAddBild(){
+
+    let options: FileUploadOptions = {
+      fileKey: 'file',
+      fileName: this.imageFileName,
+      chunkedMode: false,
+      mimeType: "image/png",
+      httpMethod:'POST',
+      headers: {}
+    };
+
+    const fileTransfer: FileTransferObject = this.transfer.create();
+
+    console.log("file transfert");
+    fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_character', options)
+      .then((data) => {
+        this.Ausgabe = data+" Uploaded Successfully";
+        this.presentToast("Image uploaded successfully");
+      },(err) => {
+        console.log(err);
+        this.presentToast(err);
+      });
+  }
+
   saveAttributes(){
     if(this.name == undefined || this.name == '')
       this.presentAlert();
@@ -52,16 +106,19 @@ export class CharacterEditPage {
     let arrayLength = this.attributes.length;
     let dataObj = {CharacterAttributes:[]};
 
-    //if(this.imagePath != undefined)
-    //this.updateAddBild();
+      //dynamische Liste füllen
+      for (let i = 0; i < arrayLength; i++) {
+        dataObj.CharacterAttributes.push(this.attributes[i]);
+      }
+      dataObj["CharacterName"] = this.name;
+      dataObj["CharacterBeschreibung"] = this.description;
 
-    //dynamische Liste füllen
-    for (let i = 0; i < arrayLength; i++) {
-      dataObj.CharacterAttributes.push(this.attributes[i]);
+    if(this.imagePath != undefined){
+      this.updateAddBild();
+      dataObj["CharacterBild"] = this.global.serverHost + '/public/resources/' + this.imageFileName;
+    }else{
+      dataObj["CharacterBild"] = this.profileImage;
     }
-    dataObj["CharacterName"] = this.name;
-    dataObj["CharacterBeschreibung"] = this.description;
-    dataObj["CharacterBild"] = this.imageFileName;
 
     console.log(dataObj);
 
@@ -109,37 +166,16 @@ export class CharacterEditPage {
       //const url =  this.global.serverHost + '/public/resources/' + this.imageFileName;
       //this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(url);
     });
-  }
+  };
  /* getImageUdate(url){
     this.http.get(url).map(res => res.json()).subscribe(data => {
       this.presentToast(data);
+
+      // const url =  this.global.serverHost + '/public/resources/' + this.imageFileName;
+      // this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(url);
+
     });
-
   }*/
-
-  updateAddBild(){
-
-    let options: FileUploadOptions = {
-      fileKey: 'file',
-      fileName: this.imageFileName,
-      chunkedMode: false,
-      mimeType: "image/png",
-      httpMethod:'POST',
-      headers: {}
-    };
-
-    const fileTransfer: FileTransferObject = this.transfer.create();
-
-      console.log("file transfert");
-    fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_charcater', options)
-      .then((data) => {
-        this.Ausgabe = data+" Uploaded Successfully";
-        this.presentToast("Image uploaded successfully");
-      },(err) => {
-        console.log(err);
-        this.presentToast(err);
-      });
-  }
 
   presentToast(msg) {
     let toast = this.toastCtrl.create({
@@ -153,38 +189,6 @@ export class CharacterEditPage {
     });
 
     toast.present();
-  }
-
-  // get image from librabry
-  // https://stackoverflow.com/questions/47118760/how-to-take-or-choose-image-from-gallery-in-ionic-3
-  getImage() {
-    const options: CameraOptions =  {
-      quality: 100,
-      allowEdit: true,
-      destinationType: this.camera.DestinationType.FILE_URI,
-      encodingType: this.camera.EncodingType.PNG,
-      mediaType: this.camera.MediaType.PICTURE,
-      sourceType : this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-    }
-    this.loading = this.loadingCtrl.create({
-      spinner: 'ios',
-    });
-
-    this.loading.present();
-
-    this.camera.getPicture(options).then((imageURI) => {
-      // show Image
-      this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(imageURI);
-      // show Image
-      this.imagePath= imageURI;
-      this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer
-      setTimeout(() => {
-        this.imagePath= imageURI;
-        this.updateAddBild();
-        this.loading.dismiss();
-      }, 1000);
-    });
-
   }
 
   deleteRows(){
@@ -236,8 +240,6 @@ export class CharacterEditPage {
       this.registered = false;
     }
 
-
-
     var char_id = window.sessionStorage.getItem("char_id");
 
     if(this.global.registrationComplete){
@@ -247,6 +249,7 @@ export class CharacterEditPage {
         this.name = response.CharacterName;
         this.description = response.CharacterBeschreibung;
         this.attributes = response.CharacterAttributes;
+        this.profileImage = response.CharacterBild;
       });
     }
   }
