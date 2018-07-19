@@ -57,10 +57,13 @@ export class ChatPage {
   }
 
   ionViewWillEnter(){
-    this.scrollToBottom();
     this.messages = [];
     this.socket.connect();
     this.socket.emit('new-message', { message: ">> Beigetreten", spieler: this.spieler});
+  }
+
+  ionViewDidEnter(){
+    this.scrollToBottom();
   }
 
 }

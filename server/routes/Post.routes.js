@@ -4,5 +4,7 @@ module.exports = function (app) {
 
     app.post('/send_post', Post.SavePost);
     app.get('/list_posts', Post.ListPost);
+    app.post('/edit_post', Post.EditPost);
+    app.post('/find_one_post', Post.findOnePost);
 
 };

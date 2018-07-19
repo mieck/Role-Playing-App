@@ -1,12 +1,12 @@
 import {Component, ElementRef, ViewChild} from '@angular/core';
 import {Content, NavController} from 'ionic-angular';
 import {ProfilePage} from "../profile/profile";
-import {SettingsPage} from "../settings/settings";
 import {CharacterPage} from "../character/character";
 import {GlobalProvider} from "../../provider/global";
 import {map} from "rxjs/operators";
 import {Http} from "@angular/http";
 import {ChooseAvatarPage} from "../chooseAvatar/chooseAvatar";
+import {PostEditPage} from "../post-edit/post-edit";
 
 const postsPerPage = 15;
 @Component({
@@ -61,7 +61,8 @@ export class PostsPage {
       "text": this.text,
       "avatar": this.avatar,
       "character": char_id,
-      "name": this.charactername
+      "name": this.charactername,
+      "edited": false,
     };
 
     if(this.text != undefined && this.text != ""){
@@ -69,6 +70,8 @@ export class PostsPage {
       this.http.post(this.global.serverHost + '/send_post', post).pipe(
         map(res => res.json())
       ).subscribe(response => {
+        post["postID"] = response._id;
+        post["ownPost"] = true;
         this.posts.push(post);
         this.postsToShow = this.posts.slice(postsPerPage*(this.numberOfPages-1), this.posts.length);
         this.text = "";
@@ -77,6 +80,10 @@ export class PostsPage {
         console.log(err);
       });
     }
+  }
+
+  editPost(postID){
+    this.navCtrl.push(PostEditPage, { postID: postID });
   }
 
   chooseAvatar(){
@@ -159,10 +166,18 @@ export class PostsPage {
       if (response.length > 0){
         for (let i = 0; i < response.length; i++) {
           let post = {
+            "postID": response[i]._id,
             "text": response[i].text,
             "avatar": response[i].avatar,
             "character": response[i].character,
-            "name": response[i].name
+            "name": response[i].name,
+            "edited": response[i].edited,
+          }
+          if(char_id == response[i].character){
+            post["ownPost"] = true;
+          }
+          else{
+            post["ownPost"] = false;
           }
           this.posts.push(post);
         }

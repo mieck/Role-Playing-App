@@ -21,6 +21,11 @@ const PostSchema = new Schema({
     },
     character :{type:Schema.Types.ObjectId,ref:'Character'},
 
+    edited: {
+        type:Boolean,
+        unique:false,
+        required: false
+    }
 });
 
 module.exports = mongoose.model('Post', PostSchema);
