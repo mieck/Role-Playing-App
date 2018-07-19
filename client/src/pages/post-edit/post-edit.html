@@ -1,0 +1,34 @@
+<ion-header id="navibar">
+  <ion-navbar>
+    <div id="header">Posts</div>
+    <div id="logo"><img src="assets/imgs/Dummy_Profile_02.png" (click)="goToProfile()"/></div>
+  </ion-navbar>
+</ion-header>
+
+<ion-content #content class="background" padding>
+
+  <ion-grid id="writeBox">
+    <ion-row id="headPost">
+      <ion-col col-4>
+        <img id="image" (click)="chooseAvatar()" [src]=avatar >
+      </ion-col>
+      <ion-col col-6>
+        <div tappable (click)="playerCharacter()" id="charaName">{{charactername}}</div>
+      </ion-col>
+      <ion-col col-2>
+        <img src="assets/imgs/Senden.png" (click)="sendPost()">
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col >
+        <textarea #myInput maxlength="1000" scrollHeight="300px" id="myInput" rows="1" (keyup)="resize()" [(ngModel)]="text"></textarea></ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-icon class="arrow" name="arrow-round-down" (click)="resize()"></ion-icon>
+        <ion-icon class="arrow" name="arrow-round-up" (click)="decrease()"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

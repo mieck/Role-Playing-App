@@ -1,0 +1,92 @@
+page-post-edit {
+  .background {
+    background-color: #cbe9fb ;
+  }
+
+  #writeBox{
+    border-style: groove;
+    border-radius: 20px !important;
+    background-color: white;
+  }
+  #charName{
+    font-family: Carlito;
+    font-weight: bold;
+    font-size: 20px;
+    color: midnightblue !important;
+  }
+  #avatar{
+    float: left;
+    max-width: 80px;
+    max-height: 80px;
+    min-height: 40px;
+    min-width: 40px;
+  }
+  #image{
+    float: left;
+    max-width: 80px;
+    max-height: 80px;
+    min-height: 40px;
+    min-width: 40px;
+  }
+  #logo {
+    float: right;
+    display: inline-block;
+    max-height: 45px;
+    max-width: 45px;
+    margin-right: 2%;
+  }
+  #charaName{
+    font-family: Carlito;
+    font-weight: bold;
+    font-size: 20px;
+    color: midnightblue !important;
+
+  }
+
+  #header{
+    font-family: Carlito;
+    float: left;
+    display: inline-block;
+    font-size: 35px;
+    margin-left: 2%;
+  }
+  .col{
+    border:  black;
+  }
+  .arrow{
+    float: right;
+    font-size: 20pt;
+    margin-left: 15px;
+  }
+  #headPost{
+    border-bottom: groove;
+
+  }
+  #send{
+    float: right;
+    padding: 0.5em;
+    font-size: 20pt;
+
+  }
+  #myInput{
+    width: calc(100% - 10px);
+    height: 300px;
+    border: 0;
+    border-radius: 0;
+    background: #eef9ff;
+    resize: none;
+    white-space: pre-line;
+  }
+  #line{
+    width: 97%;
+    border-bottom: groove;
+    height:1px;
+  }
+  #text{
+    white-space: pre-line;
+    margin-bottom: 2%;
+    margin-top: 1%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
