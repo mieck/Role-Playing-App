@@ -33,7 +33,7 @@ import { SocketIoModule, SocketIoConfig } from 'ng-socket-io';
 import {PostEditPage} from "../pages/post-edit/post-edit";
 //const config: SocketIoConfig = { url: 'http://192.168.0.25:8085', options: {} };
 //const config: SocketIoConfig = { url: 'http://192.168.1.5:8085', options: {} };
-const config: SocketIoConfig = { url: 'https://marvinlwenzel-dev.ddns.net:8085', options: {} };
+const config: SocketIoConfig = { url: 'http://marvinlwenzel-dev.ddns.net:8085', options: {} };
 
 @NgModule({
   declarations: [
