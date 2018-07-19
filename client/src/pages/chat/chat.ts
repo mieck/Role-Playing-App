@@ -14,13 +14,26 @@ export class ChatPage {
   messages = [];
   message = '';
   spieler = this.global.spielername;
-  createdAt:Date = new Date();
+  likedBy = [];
 
   constructor(private http: Http, private navCtrl: NavController, private navParams: NavParams,
               private socket: Socket, private toastCtrl: ToastController, public global: GlobalProvider) {
 
     this.getMessages().subscribe(message => {
+      if(message["likedBy"].find(x => x === this.spieler)) {
+        message["alreadyLiked"] = true;
+      }else{
+        message["alreadyLiked"] = false;
+      }
       this.messages.push(message);
+    });
+
+    this.getLikes().subscribe(message => {
+      for (let i = 0; i < this.messages.length; i++){
+        if (this.messages[i]._id == message["_id"]){
+          this.messages[i].likes = message["likes"]+1;
+        }
+      }
     });
   }
 
@@ -30,9 +43,18 @@ export class ChatPage {
 
   sendMessage() {
     console.log("sendMessage test");
-    this.socket.emit('new-message', { message: this.message, spieler: this.spieler, createdAt: this.createdAt});
+    this.socket.emit('new-message', { message: this.message, spieler: this.spieler});
     this.message = '';
     this.scrollToBottom();
+  }
+
+  getLikes() {
+    let observable = new Observable(observer => {
+      this.socket.on('refresh-like', (data) => {
+        observer.next(data);
+      });
+    })
+    return observable;
   }
 
   getMessages() {
@@ -44,6 +66,15 @@ export class ChatPage {
       });
     })
     return observable;
+  }
+
+  likeMessage(id, likedBy, index){
+    this.likedBy = likedBy;
+    if(!(this.likedBy.find(x => x === this.spieler))){
+      this.likedBy.push(this.spieler);
+      this.messages[index]["alreadyLiked"] = true;
+      this.socket.emit('new-like', {id: id, spieler: this.spieler});
+    }
   }
 
   ionViewWillLeave(){

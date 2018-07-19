@@ -14,7 +14,8 @@ page-chat {
   }
 
   .user_name {
-    color: #afafaf;
+    color: #00058F;
+    font-weight: bold;
   }
   .message {
     padding: 10px !important;
@@ -23,20 +24,28 @@ page-chat {
     margin-bottom: 4px !important;
   }
   .my_message {
-    background: color($colors, primary) !important;
+    background: #86cee9 !important;
     color: #000 !important;
   }
   .other_message {
-    background: #dcdcdc !important;
+    background: #FDD196 !important;
     color: #000 !important;
   }
   .time {
-    color: #afafaf;
+    color: #00342F;
     float: right;
     font-size: small;
   }
   .message_row {
     background-color: #fff;
+  }
+
+  .like_number {
+    color: crimson;
+  }
+
+  .heart {
+    font-size: 11pt;
   }
 
 }

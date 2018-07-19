@@ -13,12 +13,15 @@
         <span class="user_name">{{ message.spieler }}:</span><br>
         <span>{{ message.message }}</span>
         <div class="time">{{message.createdAt | date:'dd.MM.yy HH:mm'}}</div>
+        <div class="like_number" tappable (click)="likeMessage(message._id, message.likedBy, messages.indexOf(message))">{{message.likes}}
+          <ion-icon class="heart" *ngIf="message.alreadyLiked" name="md-heart"></ion-icon> <ion-icon class="heart" *ngIf="!message.alreadyLiked" name="md-heart-outline"></ion-icon></div>
       </ion-col>
 
       <ion-col offset-3 col-9 *ngIf="message.spieler === spieler" class="message" [ngClass]="{'my_message': message.spieler === spieler, 'other_message': message.spieler !== spieler}">
         <span class="user_name">{{ message.spieler }}:</span><br>
         <span>{{ message.message }}</span>
         <div class="time">{{message.createdAt | date:'dd.MM.yy HH:mm'}}</div>
+        <div class="like_number">{{message.likes}} <ion-icon class="heart" name="md-heart"></ion-icon></div>
       </ion-col>
 
     </ion-row>

@@ -47,7 +47,7 @@ exports = module.exports = function(client) {
         }
           // get all ältere message;
 
-            Message.find().limit(10).sort({_id:-1})
+            Message.find().limit(30).sort({_id:-1})
                 .then( msg =>{
                     console.log("alle vorhandenen Nachrichten");
                     console.log(msg);
@@ -67,6 +67,7 @@ exports = module.exports = function(client) {
                 const new_msg = {
                     message:data.message,
                     spieler:data.spieler,
+                    likes: 0,
                 };
 
                 const new_message = new Message(new_msg);
@@ -75,7 +76,7 @@ exports = module.exports = function(client) {
                     .then(message => {
                         console.log("neue nachricht was gespeichert");
                         console.log(message);
-                        client.emit('refresh-messages',data);
+                        client.emit('refresh-messages',message);
                     }).catch(err =>{
                     console.log(err.message);
                     sendStatus('es gibt kein message');
@@ -84,6 +85,17 @@ exports = module.exports = function(client) {
 
 
              });
+
+            socket.on('new-like', (data) => {
+
+                Message.findByIdAndUpdate({_id:data.id},  { $inc: { likes: 1}, $push: {likedBy: data.spieler} })
+                    .then(message => {
+                        client.emit('refresh-like',message);
+                    }).catch(err =>{
+                    sendStatus('Fehler bei Like');
+                })
+
+            });
 
              socket.on('disconnect', () => {
                 console.log('user disconnected');
