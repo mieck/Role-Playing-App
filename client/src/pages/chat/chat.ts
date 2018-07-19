@@ -78,7 +78,6 @@ export class ChatPage {
   }
 
   ionViewWillLeave(){
-    this.socket.emit('new-message', { message: "<< Ausgetreten", spieler: this.spieler});
     this.socket.disconnect();
   }
 
@@ -90,7 +89,6 @@ export class ChatPage {
   ionViewWillEnter(){
     this.messages = [];
     this.socket.connect();
-    this.socket.emit('new-message', { message: ">> Beigetreten", spieler: this.spieler});
   }
 
   ionViewDidEnter(){
