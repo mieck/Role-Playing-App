@@ -56,13 +56,13 @@ export class ProfilePage {
     }
 
     setTimeout(() => {
-      this.loading.dismiss();
       this.http.post(this.global.serverHost + '/update_profile', data).pipe(
         map(res => res.json())
       ).subscribe(response => {
         console.log(response);
         this.saved = true;
       });
+      this.loading.dismiss();
     }, 1000)
 
   }

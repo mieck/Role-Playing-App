@@ -32,17 +32,37 @@ export class AddAvatarPage {
     this.selectedAvatar = -1;
   }
 
-  uploadToCharacter() {
-    var char_id = window.sessionStorage.getItem("char_id");
-    let avatarImage = this.global.imageServer + this.imageFileName;
+  addAvatar(){
+    if(this.numberOfAvatars < 8){
 
-    this.http.post(this.global.serverHost + '/uploadAvatar', {id: char_id, avatar: avatarImage}).pipe(
-      map(res => res.json())
-    ).subscribe(response => {
-      console.log('POST Response:', response);
-      this.images.push(avatarImage);
-      this.numberOfAvatars++;
-    });
+      const options: CameraOptions =  {
+        quality: 50,
+        allowEdit: true,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        encodingType: this.camera.EncodingType.PNG,
+        mediaType: this.camera.MediaType.PICTURE,
+        sourceType : this.camera.PictureSourceType.SAVEDPHOTOALBUM,
+      }
+
+      this.camera.getPicture(options).then((imageURI) => {
+        this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer
+        this.imagePath= imageURI;
+        this.loading = this.loadingCtrl.create({
+          spinner: 'ios',
+          content: 'Speichern',
+        });
+        this.loading.present();
+
+        setTimeout(() => {
+          this.updateAddBild();
+          this.loading.dismiss();
+        }, 10000);
+      });
+
+    }else{
+      let message = 'Maximal 8 Avatare';
+      this.presentAlert(message);
+    }
   }
 
   updateAddBild(){
@@ -61,12 +81,26 @@ export class AddAvatarPage {
     console.log("file transfert");
     fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_character', options)
       .then((data) => {
-        this.Ausgabe = data+" Uploaded Successfully";
-        //this.presentToast("Image uploaded successfully");
+        this.Ausgabe = data +" Uploaded Successfully";
+        this.uploadToCharacter()
+        this.presentToast("Bild wurde hochgeladen");
       },(err) => {
         console.log(err);
-        //this.presentToast(this.imagePath + ' ' + err);
+        this.presentToast("Es gab ein Problem");
       });
+  }
+
+  uploadToCharacter() {
+    var char_id = window.sessionStorage.getItem("char_id");
+    let avatarImage = this.global.imageServer + this.imageFileName;
+
+    this.http.post(this.global.serverHost + '/uploadAvatar', {id: char_id, avatar: avatarImage}).pipe(
+      map(res => res.json())
+    ).subscribe(response => {
+      console.log('POST Response:', response);
+      this.images.push(avatarImage);
+      this.numberOfAvatars++;
+    });
   }
 
   presentToast(msg) {
@@ -81,31 +115,6 @@ export class AddAvatarPage {
     });
 
     toast.present();
-  }
-
-  addAvatar(){
-    if(this.numberOfAvatars < 8){
-
-      const options: CameraOptions =  {
-        quality: 100,
-        allowEdit: true,
-        destinationType: this.camera.DestinationType.FILE_URI,
-        encodingType: this.camera.EncodingType.PNG,
-        mediaType: this.camera.MediaType.PICTURE,
-        sourceType : this.camera.PictureSourceType.SAVEDPHOTOALBUM,
-      }
-
-      this.camera.getPicture(options).then((imageURI) => {
-        this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer
-        this.imagePath= imageURI;
-        this.updateAddBild();
-        this.uploadToCharacter();
-      });
-
-    }else{
-      let message = 'Maximal 8 Avatare';
-      this.presentAlert(message);
-    }
   }
 
   presentAlert(message) {

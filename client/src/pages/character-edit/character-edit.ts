@@ -47,7 +47,7 @@ export class CharacterEditPage {
   // https://stackoverflow.com/questions/47118760/how-to-take-or-choose-image-from-gallery-in-ionic-3
   getImage() {
     const options: CameraOptions =  {
-      quality: 100,
+      quality: 50,
       allowEdit: true,
       destinationType: this.camera.DestinationType.FILE_URI,
       encodingType: this.camera.EncodingType.PNG,
@@ -88,13 +88,13 @@ export class CharacterEditPage {
     console.log("file transfert");
     fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_character', options)
       .then((data) => {
-        this.Ausgabe = data+" Uploaded Successfully";
-		dataObj["CharacterBild"] = this.global.imageServer + this.imageFileName;
-		this.sendData(dataObj);
-        //this.presentToast("Image uploaded successfully");
+        this.Ausgabe = data +" Uploaded Successfully";
+        dataObj["CharacterBild"] = this.global.imageServer + this.imageFileName;
+        this.sendData(dataObj);
+        this.presentToast("Bild wurde hochgeladen");
       },(err) => {
         console.log(err);
-        //this.presentToast(err);
+        this.presentToast("Es gab ein Problem");
       });
   }
 
@@ -102,56 +102,55 @@ export class CharacterEditPage {
     if(this.name == undefined || this.name == '')
       this.presentAlert();
     else{
+      this.loading = this.loadingCtrl.create({
+        spinner: 'ios',
+        content: 'Speichern',
+      });
+      this.loading.present();
 
-		this.deleteRows();
-		let arrayLength = this.attributes.length;
-		let dataObj = {CharacterAttributes:[]};
+      setTimeout(() => {
+        this.deleteRows();
+        let arrayLength = this.attributes.length;
+        let dataObj = {CharacterAttributes:[]};
 
-		  //dynamische Liste füllen
-		  for (let i = 0; i < arrayLength; i++) {
-			dataObj.CharacterAttributes.push(this.attributes[i]);
-		  }
-		  dataObj["CharacterName"] = this.name;
-		  dataObj["CharacterBeschreibung"] = this.description;
+        //dynamische Liste füllen
+        for (let i = 0; i < arrayLength; i++) {
+          dataObj.CharacterAttributes.push(this.attributes[i]);
+        }
+        dataObj["CharacterName"] = this.name;
+        dataObj["CharacterBeschreibung"] = this.description;
 
-		if(this.imagePath != undefined){
-		  this.updateAddBild(dataObj);
-		}else{
-		  dataObj["CharacterBild"] = this.profileImage;
-		  this.sendData(dataObj);
-		}
+        if(this.imagePath != undefined){
+          this.updateAddBild(dataObj);
+        }else{
+          dataObj["CharacterBild"] = this.profileImage;
+          this.sendData(dataObj);
+        }
+        this.loading.dismiss();
+      }, 10000);
+
+	  }
 	}
 
-  }
-  
   sendData(dataObj){
 	  console.log(dataObj);
 
 	  if(!this.global.registrationComplete) {
-		var spielerId = window.sessionStorage.getItem("id");
-		dataObj["spielerId"] = spielerId;
-		this.createData(dataObj);
-		this.loading = this.loadingCtrl.create({
-		  spinner: 'ios',
-		  content: 'Charakter wird erstellt',
-		});
-		this.loading.present();
+      var spielerId = window.sessionStorage.getItem("id");
+      dataObj["spielerId"] = spielerId;
+      this.createData(dataObj);
 
-		setTimeout(() => {
-		  this.navCtrl.setRoot(CharRegistrPage);
-		  this.navCtrl.popToRoot();
+      this.navCtrl.setRoot(CharRegistrPage);
+      this.navCtrl.popToRoot();
 
-		  this.loading.dismiss();
-		}, 1000);
+	  }else{
+      var characterId = window.sessionStorage.getItem("char_id");
+      dataObj["characterId"] = characterId;
+      this.updateData(dataObj);
 
+      this.navCtrl.pop();
 	  }
-	  else{
-		var characterId = window.sessionStorage.getItem("char_id");
-		dataObj["characterId"] = characterId;
-		this.updateData(dataObj);
-		this.navCtrl.pop();
-	  }
- 
+
   }
 
   createData(data){
