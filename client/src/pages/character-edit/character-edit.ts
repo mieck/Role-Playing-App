@@ -89,10 +89,10 @@ export class CharacterEditPage {
     fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_character', options)
       .then((data) => {
         this.Ausgabe = data+" Uploaded Successfully";
-        this.presentToast("Image uploaded successfully");
+        //this.presentToast("Image uploaded successfully");
       },(err) => {
         console.log(err);
-        this.presentToast(err);
+        //this.presentToast(err);
       });
   }
 
