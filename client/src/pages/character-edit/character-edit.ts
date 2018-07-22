@@ -108,26 +108,23 @@ export class CharacterEditPage {
       });
       this.loading.present();
 
-      setTimeout(() => {
-        this.deleteRows();
-        let arrayLength = this.attributes.length;
-        let dataObj = {CharacterAttributes:[]};
+      this.deleteRows();
+      let arrayLength = this.attributes.length;
+      let dataObj = {CharacterAttributes:[]};
 
-        //dynamische Liste füllen
-        for (let i = 0; i < arrayLength; i++) {
-          dataObj.CharacterAttributes.push(this.attributes[i]);
-        }
-        dataObj["CharacterName"] = this.name;
-        dataObj["CharacterBeschreibung"] = this.description;
+      //dynamische Liste füllen
+      for (let i = 0; i < arrayLength; i++) {
+        dataObj.CharacterAttributes.push(this.attributes[i]);
+      }
+      dataObj["CharacterName"] = this.name;
+      dataObj["CharacterBeschreibung"] = this.description;
 
-        if(this.imagePath != undefined){
-          this.updateAddBild(dataObj);
-        }else{
-          dataObj["CharacterBild"] = this.profileImage;
-          this.sendData(dataObj);
-        }
-        this.loading.dismiss();
-      }, 10000);
+      if(this.imagePath != undefined){
+        this.updateAddBild(dataObj);
+      }else{
+        dataObj["CharacterBild"] = this.profileImage;
+        this.sendData(dataObj);
+      }
 
 	  }
 	}
@@ -139,16 +136,20 @@ export class CharacterEditPage {
       var spielerId = window.sessionStorage.getItem("id");
       dataObj["spielerId"] = spielerId;
       this.createData(dataObj);
-
-      this.navCtrl.setRoot(CharRegistrPage);
-      this.navCtrl.popToRoot();
+      
+      setTimeout(() => {
+        this.navCtrl.setRoot(CharRegistrPage);
+        this.navCtrl.popToRoot();
+        this.loading.dismiss();
+      }, 10000);
 
 	  }else{
       var characterId = window.sessionStorage.getItem("char_id");
       dataObj["characterId"] = characterId;
       this.updateData(dataObj);
-
-      this.navCtrl.pop();
+      setTimeout(() => {
+        this.navCtrl.pop();
+      }, 10000);
 	  }
 
   }
