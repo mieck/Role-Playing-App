@@ -72,7 +72,7 @@ export class CharacterEditPage {
     }, 4000);
   }
 
-  updateAddBild(){
+  updateAddBild(dataObj){
 
     let options: FileUploadOptions = {
       fileKey: 'file',
@@ -89,6 +89,8 @@ export class CharacterEditPage {
     fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_character', options)
       .then((data) => {
         this.Ausgabe = data+" Uploaded Successfully";
+		dataObj["CharacterBild"] = this.global.imageServer + this.imageFileName;
+		this.sendData(dataObj);
         //this.presentToast("Image uploaded successfully");
       },(err) => {
         console.log(err);
@@ -101,51 +103,55 @@ export class CharacterEditPage {
       this.presentAlert();
     else{
 
-    this.deleteRows();
-    let arrayLength = this.attributes.length;
-    let dataObj = {CharacterAttributes:[]};
+		this.deleteRows();
+		let arrayLength = this.attributes.length;
+		let dataObj = {CharacterAttributes:[]};
 
-      //dynamische Liste füllen
-      for (let i = 0; i < arrayLength; i++) {
-        dataObj.CharacterAttributes.push(this.attributes[i]);
-      }
-      dataObj["CharacterName"] = this.name;
-      dataObj["CharacterBeschreibung"] = this.description;
+		  //dynamische Liste füllen
+		  for (let i = 0; i < arrayLength; i++) {
+			dataObj.CharacterAttributes.push(this.attributes[i]);
+		  }
+		  dataObj["CharacterName"] = this.name;
+		  dataObj["CharacterBeschreibung"] = this.description;
 
-    if(this.imagePath != undefined){
-      this.updateAddBild();
-      dataObj["CharacterBild"] = this.global.imageServer + this.imageFileName;
-    }else{
-      dataObj["CharacterBild"] = this.profileImage;
-    }
+		if(this.imagePath != undefined){
+		  this.updateAddBild(dataObj);
+		}else{
+		  dataObj["CharacterBild"] = this.profileImage;
+		  this.sendData(dataObj);
+		}
+	}
 
-    console.log(dataObj);
+  }
+  
+  sendData(dataObj){
+	  console.log(dataObj);
 
-      if(!this.global.registrationComplete) {
-        var spielerId = window.sessionStorage.getItem("id");
-        dataObj["spielerId"] = spielerId;
-        this.createData(dataObj);
-        this.loading = this.loadingCtrl.create({
-          spinner: 'ios',
-          content: 'Charakter wird erstellt',
-        });
-        this.loading.present();
+	  if(!this.global.registrationComplete) {
+		var spielerId = window.sessionStorage.getItem("id");
+		dataObj["spielerId"] = spielerId;
+		this.createData(dataObj);
+		this.loading = this.loadingCtrl.create({
+		  spinner: 'ios',
+		  content: 'Charakter wird erstellt',
+		});
+		this.loading.present();
 
-        setTimeout(() => {
-          this.navCtrl.setRoot(CharRegistrPage);
-          this.navCtrl.popToRoot();
+		setTimeout(() => {
+		  this.navCtrl.setRoot(CharRegistrPage);
+		  this.navCtrl.popToRoot();
 
-          this.loading.dismiss();
-        }, 1000);
+		  this.loading.dismiss();
+		}, 1000);
 
-      }
-      else{
-        var characterId = window.sessionStorage.getItem("char_id");
-        dataObj["characterId"] = characterId;
-        this.updateData(dataObj);
-        this.navCtrl.pop();
-      }
-    }
+	  }
+	  else{
+		var characterId = window.sessionStorage.getItem("char_id");
+		dataObj["characterId"] = characterId;
+		this.updateData(dataObj);
+		this.navCtrl.pop();
+	  }
+ 
   }
 
   createData(data){
@@ -169,10 +175,8 @@ export class CharacterEditPage {
  /* getImageUdate(url){
     this.http.get(url).map(res => res.json()).subscribe(data => {
       this.presentToast(data);
-
       // const url =  this.global.serverHost + '/public/resources/' + this.imageFileName;
       // this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(url);
-
     });
   }*/
 
