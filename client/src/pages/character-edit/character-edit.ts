@@ -149,6 +149,7 @@ export class CharacterEditPage {
       this.updateData(dataObj);
       setTimeout(() => {
         this.navCtrl.pop();
+        this.loading.dismiss();
       }, 10000);
 	  }
 
