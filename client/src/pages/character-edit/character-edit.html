@@ -11,9 +11,8 @@
   <div *ngIf="!registered" id="notification">Erstelle einen neuen Charakter! Du kannst ihn auch später ändern.</div>
   <br>
   <img id="avatar"  [src]='(profileImage) || ("assets/imgs/loading.gif")' (click)="getImage()" >
-  <!--<ion-textarea rows="3" [placeholder]="imagePath"></ion-textarea>-->
 
-
+  <img id="camera"  src = "assets/imgs/Kamera.png"  (click)="getImage()">
   <button ion-button *ngIf="registered" color="mycolor1" (click)="changeAvatars()" id="avaButton" >Avatare</button>
 
   <ion-list>

@@ -214,7 +214,7 @@ export class CharacterEditPage {
 
   deleteAttribute(){
     let arrayLength = this.attributes.length;
-    if(arrayLength > 1)
+    if(arrayLength > 0)
       this.attributes.pop();
   }
 
@@ -234,14 +234,9 @@ export class CharacterEditPage {
 
     if(this.global.registrationComplete) {
       this.registered = true;
-    } else {
-      this.registered = false;
-      this.profileImage = "assets/imgs/ProfileImage.png";
-    }
 
-    var char_id = window.sessionStorage.getItem("char_id");
+      var char_id = window.sessionStorage.getItem("char_id");
 
-    if(this.global.registrationComplete){
       this.http.post(this.global.serverHost + '/find_character', {id: char_id}).pipe(
         map(res => res.json())
       ).subscribe(response => {
@@ -251,6 +246,10 @@ export class CharacterEditPage {
         this.profileImage = response.CharacterBild;
 
       });
+
+    } else {
+      this.registered = false;
+      this.profileImage = "assets/imgs/ProfileImage.png";
     }
   }
 }
