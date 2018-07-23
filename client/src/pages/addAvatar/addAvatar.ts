@@ -44,7 +44,7 @@ export class AddAvatarPage {
       }
 
       this.camera.getPicture(options).then((imageURI) => {
-        this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer
+        this.imageFileName = this.name + Math.floor(Math.random()* (1 - 9999)); //  Name des Bilds ist CharacterName + integer
         this.imagePath= imageURI;
         this.updateAddBild();
       });
@@ -86,7 +86,7 @@ export class AddAvatarPage {
 
     setTimeout(() => {
       this.loading.dismiss();
-    }, 10000);
+    }, 15000);
   }
 
   uploadToCharacter() {

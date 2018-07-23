@@ -62,7 +62,7 @@ export class CharacterEditPage {
       // show Image
       this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(imageURI);
       this.imagePath= imageURI;
-      this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer
+      this.imageFileName = this.name + Math.floor(Math.random()* (1 - 9999)); //  Name des Bilds ist CharacterName + integer
     });
 
     setTimeout(() => {
@@ -125,7 +125,7 @@ export class CharacterEditPage {
 
       setTimeout(() => {
         this.loading.dismiss();
-      }, 10000);
+      }, 15000);
 	  }
 	}
 
