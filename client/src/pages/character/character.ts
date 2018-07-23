@@ -18,7 +18,6 @@ export class CharacterPage {
   public profileImage:String;
 
   constructor(private http: Http, public navCtrl: NavController, public global: GlobalProvider) {
-    this.profileImage = "assets/imgs/ProfileImage.png";
   }
 
   editCharacter() {

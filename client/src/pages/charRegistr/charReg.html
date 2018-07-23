@@ -7,8 +7,7 @@
 </ion-header>
 
 <ion-content class="background" padding>
-  <img id="avatar" [src]="profileImage">
-
+  <img id="avatar" [src]='(profileImage) || ("assets/imgs/loading.gif")'>
 
   <ion-list>
     <ion-item class="background">

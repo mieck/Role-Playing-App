@@ -19,7 +19,6 @@ export class AddAvatarPage {
   public loading: Loading;
   public imagePath: any;
   public imageFileName:any;
-  public Ausgabe: String;
   public numberOfAvatars: number;
   public selectedAvatar: number;
 
@@ -47,7 +46,7 @@ export class AddAvatarPage {
       this.camera.getPicture(options).then((imageURI) => {
         this.imageFileName = this.name + Math.floor(Math.random()* (1 - 50)) + 1; //  Name des Bilds ist CharacterName + integer
         this.imagePath= imageURI;
-        this.updateAddBild();   
+        this.updateAddBild();
       });
 
     }else{
@@ -57,7 +56,7 @@ export class AddAvatarPage {
   }
 
   updateAddBild(){
-    
+
     this.loading = this.loadingCtrl.create({
       spinner: 'ios',
       content: 'Speichern',
@@ -78,13 +77,16 @@ export class AddAvatarPage {
     console.log("file transfert");
     fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_character', options)
       .then((data) => {
-        this.Ausgabe = data +" Uploaded Successfully";
         this.uploadToCharacter();
-        this.presentToast("Bild wurde hochgeladen");
+        this.presentToast("Der Avatar wurde hochgeladen.");
       },(err) => {
         console.log(err);
-        this.presentToast("Es gab ein Problem");
+        this.presentToast("Es gab ein Problem beim Bildupload.");
       });
+
+    setTimeout(() => {
+      this.loading.dismiss();
+    }, 10000);
   }
 
   uploadToCharacter() {
@@ -97,11 +99,8 @@ export class AddAvatarPage {
       console.log('POST Response:', response);
       this.images.push(avatarImage);
       this.numberOfAvatars++;
-    });
-    
-    setTimeout(() => {
       this.loading.dismiss();
-    }, 10000);
+    });
   }
 
   presentToast(msg) {

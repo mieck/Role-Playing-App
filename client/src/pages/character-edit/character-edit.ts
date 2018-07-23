@@ -31,13 +31,11 @@ export class CharacterEditPage {
   public registered:boolean;
   public images: Array<String>;
   public imageFileName:any;
-  public Ausgabe: String;
 
   constructor(private http: Http, public navCtrl: NavController, private alertCtrl: AlertController,
               public global: GlobalProvider, private camera: Camera, private sanitizer: DomSanitizer,
               public loadingCtrl: LoadingController,
               private transfer: FileTransfer, public toastCtrl: ToastController, private file: File) {
-    this.profileImage = "assets/imgs/ProfileImage.png"
     this.name = "";
     this.description = "";
     this.attributes = [];
@@ -88,13 +86,12 @@ export class CharacterEditPage {
     console.log("file transfert");
     fileTransfer.upload(this.imagePath, this.global.serverHost + '/new_image_character', options)
       .then((data) => {
-        this.Ausgabe = data +" Uploaded Successfully";
         dataObj["CharacterBild"] = this.global.imageServer + this.imageFileName;
         this.sendData(dataObj);
-        this.presentToast("Bild wurde hochgeladen");
+        this.presentToast("Das Bild wurde hochgeladen.");
       },(err) => {
         console.log(err);
-        this.presentToast("Es gab ein Problem");
+        this.presentToast("Es gab ein Problem beim Bildupload.");
       });
   }
 
@@ -126,6 +123,9 @@ export class CharacterEditPage {
         this.sendData(dataObj);
       }
 
+      setTimeout(() => {
+        this.loading.dismiss();
+      }, 10000);
 	  }
 	}
 
@@ -136,23 +136,12 @@ export class CharacterEditPage {
       var spielerId = window.sessionStorage.getItem("id");
       dataObj["spielerId"] = spielerId;
       this.createData(dataObj);
-      
-      setTimeout(() => {
-        this.navCtrl.setRoot(CharRegistrPage);
-        this.navCtrl.popToRoot();
-        this.loading.dismiss();
-      }, 10000);
 
 	  }else{
       var characterId = window.sessionStorage.getItem("char_id");
       dataObj["characterId"] = characterId;
       this.updateData(dataObj);
-      setTimeout(() => {
-        this.navCtrl.pop();
-        this.loading.dismiss();
-      }, 10000);
 	  }
-
   }
 
   createData(data){
@@ -161,6 +150,9 @@ export class CharacterEditPage {
     ).subscribe(response => {
       console.log('POST Response:', response);
       window.sessionStorage.setItem("char_id", response._id);
+      this.loading.dismiss();
+      this.navCtrl.setRoot(CharRegistrPage);
+      this.navCtrl.popToRoot();
     });
   }
 
@@ -169,6 +161,8 @@ export class CharacterEditPage {
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
+      this.loading.dismiss();
+      this.navCtrl.pop();
       //const url =  this.global.serverHost + '/public/resources/' + this.imageFileName;
       //this.profileImage  = this.sanitizer.bypassSecurityTrustUrl(url);
     });
@@ -253,7 +247,10 @@ export class CharacterEditPage {
         this.name = response.CharacterName;
         this.description = response.CharacterBeschreibung;
         this.attributes = response.CharacterAttributes;
-        this.profileImage = response.CharacterBild;
+        if(response.CharacterBild != undefined)
+          this.profileImage = response.CharacterBild;
+        else
+          this.profileImage = "assets/imgs/ProfileImage.png";
       });
     }
   }

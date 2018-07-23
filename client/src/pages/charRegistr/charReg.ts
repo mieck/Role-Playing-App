@@ -16,7 +16,6 @@ export class CharRegistrPage {
   public profileImage:String;
 
   constructor(private http: Http, public navCtrl: NavController, public events: Events, public global: GlobalProvider,) {
-    this.profileImage = "assets/imgs/ProfileImage.png";
   }
 
   goToPosts(){
