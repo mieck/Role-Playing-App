@@ -54,14 +54,15 @@ export class ProfilePage {
         "spielerId": id,
       };
     }
-
-    setTimeout(() => {
-      this.http.post(this.global.serverHost + '/update_profile', data).pipe(
+    
+    this.http.post(this.global.serverHost + '/update_profile', data).pipe(
         map(res => res.json())
       ).subscribe(response => {
         console.log(response);
         this.saved = true;
       });
+
+    setTimeout(() => {
       this.loading.dismiss();
     }, 1000)
 
