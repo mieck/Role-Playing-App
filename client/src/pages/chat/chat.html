@@ -5,7 +5,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content #content>
+<ion-content class="background" #content>
   <ion-grid>
     <ion-row *ngFor="let message of messages">
 
@@ -29,16 +29,16 @@
 
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar>
+<ion-footer class="hBox">
+  <ion-toolbar class="hBox">
     <ion-row class="message_row">
       <ion-col col-9>
-        <ion-item no-lines>
+        <ion-item no-lines class= "input">
           <ion-input type="text" placeholder="Nachricht" [(ngModel)]="message"></ion-input>
         </ion-item>
       </ion-col>
-      <ion-col col-3>
-        <button ion-button clear color="primary" (click)="sendMessage()" [disabled]="message === ''">
+      <ion-col col-3 class="sendeButton">
+        <button ion-button clear class ="Senden" (click)="sendMessage()" [disabled]="message === ''">
           Senden
         </button>
       </ion-col>

@@ -14,7 +14,7 @@
   <!--<ion-textarea rows="3" [placeholder]="imagePath"></ion-textarea>-->
 
 
-  <button ion-button *ngIf="registered" color="mycolor1" (click)="changeAvatars()">Avatare</button>
+  <button ion-button *ngIf="registered" color="mycolor1" (click)="changeAvatars()" id="avaButton" >Avatare</button>
 
   <ion-list>
       <ion-grid>
@@ -51,8 +51,8 @@
       </ion-grid>
 
 
-  <button class="attrButton" color="danger" ion-button (click)="deleteAttribute()">-</button>
-    <button class="attrButton" ion-button (click)="addAttribute()">+</button>
+  <button class="attrButton" color="danger" ion-button (click)="deleteAttribute()" class="mButton">-</button>
+    <button class="attrButton" ion-button (click)="addAttribute()" class="pButton">+</button>
 
     <ion-item class="table">
       <ion-label class="my-label" stacked>Beschreibung</ion-label>

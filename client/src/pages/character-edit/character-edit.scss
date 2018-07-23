@@ -1,5 +1,8 @@
 page-character {
-
+#notification{
+  font-weight: bold;
+  text-align: center;
+}
   #avatar{
     display: block;
     margin: 0 auto;
@@ -8,11 +11,35 @@ page-character {
     min-height: 100px;
     min-width: 100px;
   }
+  .pButton{
+    float: left;
 
+    position: relative;
+    right: -3%; /* or right 50% */
+    text-align: left;
+    margin-bottom: 15px;
+  }
+  .mButton{
+    float: right;
+
+    position: relative;
+    left: -3%; /* or right 50% */
+    text-align: left;
+    margin-bottom: 15px;
+  }
+#avaButton{
+  float: right;
+
+  position: relative;
+  left: -2%; /* or right 50% */
+  text-align: left;
+  margin-top: 15px;
+  margin-bottom: 10px;
+}
   .my-label {
     color: #000000 !important;
     font-size: 16px !important;
-    background-color: ghostwhite
+    background-color: ghostwhite;
   }
 
   .attrButton{
