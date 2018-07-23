@@ -30,12 +30,6 @@ export class PostEditPage {
     this.navCtrl.push(ProfilePage);
   }
 
-  playerCharacter(){
-    var char_id = window.sessionStorage.getItem("char_id");
-    this.global.otherCharID = char_id;
-    this.navCtrl.push(CharacterPage);
-  }
-
   chooseAvatar(){
     this.navCtrl.push(ChooseAvatarPage);
   }

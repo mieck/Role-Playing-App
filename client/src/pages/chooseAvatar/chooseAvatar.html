@@ -7,6 +7,7 @@
 </ion-header>
 <ion-content id="background" padding>
 
+  <div class="headline">Eigene Avatare:</div>
   <ion-grid>
     <ion-row >
       <ion-col col-3 *ngFor="let file of images">
@@ -15,9 +16,9 @@
     </ion-row>
   </ion-grid>
 
-  <button ion-button color="mycolor1" (click)="changeAvatars()">Avatare hinzufügen</button>
+  <div id="addButton"><ion-icon name="md-add-circle" (click)="changeAvatars()"></ion-icon></div>
 
-  <div>Standard-Avatare:</div>
+  <div class="headline">Standard-Avatare:</div>
   <ion-grid>
     <ion-row >
       <ion-col col-3 *ngFor="let file of standardImages">

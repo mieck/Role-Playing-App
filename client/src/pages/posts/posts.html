@@ -13,8 +13,8 @@
 
   <ion-grid id="firstBox" *ngFor="let item of postsToShow" >
     <ion-row >
-      <ion-col col-5><img id="avatar" (click)="goToCharacter(item.character)" [src]=item.avatar></ion-col>
-      <ion-col col-5 id="charName">
+      <ion-col col-4><img id="avatar" (click)="goToCharacter(item.character)" [src]=item.avatar></ion-col>
+      <ion-col col-6 id="charName">
         <div tappable (click)="goToCharacter(item.character)">{{item.name}}</div>
       </ion-col>
       <ion-col col-2 *ngIf="item.ownPost">
