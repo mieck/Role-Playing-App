@@ -236,6 +236,7 @@ export class CharacterEditPage {
       this.registered = true;
     } else {
       this.registered = false;
+      this.profileImage = "assets/imgs/ProfileImage.png";
     }
 
     var char_id = window.sessionStorage.getItem("char_id");
@@ -247,10 +248,8 @@ export class CharacterEditPage {
         this.name = response.CharacterName;
         this.description = response.CharacterBeschreibung;
         this.attributes = response.CharacterAttributes;
-        if(response.CharacterBild != undefined)
-          this.profileImage = response.CharacterBild;
-        else
-          this.profileImage = "assets/imgs/ProfileImage.png";
+        this.profileImage = response.CharacterBild;
+
       });
     }
   }
