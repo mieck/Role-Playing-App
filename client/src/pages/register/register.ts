@@ -86,7 +86,7 @@ export class RegisterPage {
 
     const confirm = this.alerCtrl.create({
       title: "Nutzername endgültig",
-      message: "Nach der Registrierung kann dieser nicht mehr geändert werden. \n Trotzdem fortfahren?",
+      message: "Nach der Registrierung kann dieser nicht mehr geändert werden. Trotzdem fortfahren?",
       buttons: [
         {
           text: "Noch nicht",
