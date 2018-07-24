@@ -18,14 +18,8 @@ import {CreateRPGPage} from "../createRPG/createRPG";
 })
 export class LoginPage {
   user:any;
-  imageURI:any;
-  imageFileName:any;
-  base64Image: string;
 
   constructor(private http: Http, public navCtrl:NavController,
-              private transfer: FileTransfer,
-              private camera: Camera,
-              public loadingCtrl: LoadingController,
               public events: Events,
               public alerCtrl: AlertController,
               public global: GlobalProvider) {
@@ -69,21 +63,17 @@ export class LoginPage {
           text: action,
           handler: () => {
             this.global.registrationComplete = false;
-            this.navCtrl.setRoot(CharacterEditPage);
-            this.navCtrl.popToRoot();
           }
         }]
     });
     alert.present();
+    this.navCtrl.setRoot(CharacterEditPage);
+    this.navCtrl.popToRoot();
   }
 
   GoToRegister(){
     //Mit "Zurück"-Funktion
     this.navCtrl.push(RegisterPage);
-
-    //Ohne "Zurück"-Funktion
-    // this.navCtrl.setRoot(RegisterPage);
-    // this.navCtrl.popToRoot();
   }
 
   checkLogin() {
@@ -106,12 +96,6 @@ export class LoginPage {
       }
 
     });
-
-    /*this.http.get('http://localhost:8080/singup' + this.name).pipe(
-      map(res => res.json())
-    ).subscribe(response => {
-      console.log('GET Response:', response);
-    });*/
 
   }
 
