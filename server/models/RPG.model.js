@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const Post =require('./Post.model.js');
+const Spieler =require('./Spieler.model.js');
 
 const spielSchema = new Schema ({
     spieltitle: {
@@ -24,7 +25,16 @@ const spielSchema = new Schema ({
         unique:false,
         required:true
     },
-    PostID : [{type: Schema.Types.ObjectId,ref:'Post'}]
+    PostID : [
+        {
+            type: Schema.Types.ObjectId,
+            ref:'Post'
+        }],
+    Spieler : [
+        {
+            type:Schema.Types.ObjectId,
+            ref:'Spieler'
+        }]
 });
 
 module.exports = mongoose.model('Spiel', spielSchema);
