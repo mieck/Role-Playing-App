@@ -22,17 +22,20 @@ export class RegisterPage {
       password: new FormControl('', Validators.required),
       mail: new FormControl('')
     });
+
   }
 
+  remindUser(){
+    this.showConfirmName('Nutzername kann nicht mehr geändert werden','Registrierung abschließen?','Doch nicht!', 'Einverstanden!');
+  }
+  
   checkRegister() {
-
     console.log(this.user);
     let data = {
       "spielername": this.user.controls.name.value,
       "spielerpasswort": this.user.controls.password.value,
       "spieleremail": this.user.controls.mail.value,
     };
-
     this.http.post(this.global.serverHost + '/register', data).pipe(
       map(res => res.json())
     ).subscribe((response) => {
@@ -44,10 +47,9 @@ export class RegisterPage {
 
     },(err) => {
       console.log(err._body);
-        if(err._body=="Name doppelt")
-          this.showConfirm(err._body,'Der Name ist schon vergeben!','Neuer Versuch');
+      if(err._body=="Name doppelt")
+        this.showConfirm(err._body,'Der Name ist schon vergeben!','Neuer Versuch');
     });
-
   }
 
   findRPG() {
@@ -82,6 +84,30 @@ export class RegisterPage {
     });
     confirm.present();
   }
+
+  showConfirmName(title,message,firstAction,secondAction) {
+
+    const confirm = this.alerCtrl.create({
+      title: title,
+      message: message,
+      buttons: [
+        {
+          text: firstAction,
+          handler: () => {
+
+          }
+        },
+        {
+          text: secondAction,
+          handler: () => {
+            this.checkRegister()
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
 
   ionViewWillEnter(){
     this.global.registrationComplete = false;
