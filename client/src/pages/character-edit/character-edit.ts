@@ -119,6 +119,9 @@ export class CharacterEditPage {
       if(this.imagePath != undefined){
         this.updateAddBild(dataObj);
       }else{
+        if(this.profileImage == "assets/imgs/EditProfileImage.png")
+          this.profileImage = "assets/imgs/ProfileImage.png"
+
         dataObj["CharacterBild"] = this.profileImage;
         this.sendData(dataObj);
       }
