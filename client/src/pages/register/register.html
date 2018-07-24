@@ -8,7 +8,7 @@
 <ion-content class="background" padding>
 
 
-    <form [formGroup]="user" (ngSubmit)="remindUser()">
+    <form [formGroup]="user" (ngSubmit)="showConfirmName()">
       <ion-item class="background">
         <ion-label floating>Nutzername</ion-label>
         <ion-input formControlName="name" type="text"></ion-input>

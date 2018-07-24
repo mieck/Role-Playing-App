@@ -25,10 +25,7 @@ export class RegisterPage {
 
   }
 
-  remindUser(){
-    this.showConfirmName('Nutzername kann nicht mehr geändert werden','Registrierung abschließen?','Doch nicht!', 'Einverstanden!');
-  }
-  
+
   checkRegister() {
     console.log(this.user);
     let data = {
@@ -85,20 +82,20 @@ export class RegisterPage {
     confirm.present();
   }
 
-  showConfirmName(title,message,firstAction,secondAction) {
+  showConfirmName() {
 
     const confirm = this.alerCtrl.create({
-      title: title,
-      message: message,
+      title: "Nutzername kann dann nicht mehr geändert werden",
+      message: "Registrierung abschließen?",
       buttons: [
         {
-          text: firstAction,
+          text: "Noch nicht",
           handler: () => {
 
           }
         },
         {
-          text: secondAction,
+          text: "Ja",
           handler: () => {
             this.checkRegister()
           }
