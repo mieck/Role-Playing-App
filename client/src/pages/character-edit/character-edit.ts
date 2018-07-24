@@ -249,7 +249,7 @@ export class CharacterEditPage {
 
     } else {
       this.registered = false;
-      this.profileImage = "assets/imgs/ProfileImage.png";
+      this.profileImage = "assets/imgs/EditProfileImage.png";
     }
   }
 }
