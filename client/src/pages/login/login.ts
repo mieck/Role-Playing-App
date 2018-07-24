@@ -122,6 +122,7 @@ export class LoginPage {
       console.log(response.length);
       if (response.length > 0) {
         this.global.isAdmin = spieler.admin;
+        window.sessionStorage.setItem("rpgid", response[0]._id);
 
         if(spieler.Characters.length > 0){
           this.events.publish('user:login', 'hurray');

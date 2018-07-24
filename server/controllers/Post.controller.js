@@ -1,5 +1,5 @@
 const PostMessage = require('../models/Post.model');
-const Character = require('./Character.controller');
+const Spiel = require('./RPG.controller');
 
 exports.SavePost = (req,res)=>{
     var newspost = {
@@ -14,6 +14,7 @@ exports.SavePost = (req,res)=>{
 
     post.save()
         .then(post => {
+            Spiel.AddPostID(req.body.rpgid, post._id);
             res.status(200).send(post);
         }).catch(err => {
         res.status(500).send({
@@ -62,9 +63,5 @@ exports.EditPost = (req,res)=>{
             message:err.message
         })
     })
-
-};
-
-exports.GetALLPostsCharacterId = (req,res)=>{
 
 };

@@ -57,7 +57,10 @@ export class PostsPage {
 
     this.removeWhiteSpace();
 
+    var rpg_id = window.sessionStorage.getItem("rpgid");
+
     let post = {
+      "rpgid": rpg_id,
       "text": this.text,
       "avatar": this.avatar,
       "character": char_id,

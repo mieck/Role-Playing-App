@@ -56,6 +56,7 @@ export class RegisterPage {
     ).subscribe(response => {
       console.log(response.length);
       if (response.length > 0) {
+        window.sessionStorage.setItem("rpgid", response[0]._id);
         this.global.isAdmin = false;
         this.navCtrl.setRoot(CharacterEditPage);
         this.navCtrl.popToRoot();

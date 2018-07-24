@@ -45,6 +45,7 @@ export class CreateRPGPage {
       map(res => res.json())
     ).subscribe(response => {
       console.log('POST Response:', response);
+      window.sessionStorage.setItem("rpgid", response._id);
       this.global.isAdmin = true;
       this.navCtrl.setRoot(CharacterEditPage);
       this.navCtrl.popToRoot();

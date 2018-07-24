@@ -78,3 +78,14 @@ exports.findAll = (req,res)=>{
         })
     })
 };
+
+exports.AddPostID = (RPGID, PostID)=>{
+    Spiel.findByIdAndUpdate(RPGID,  { $push: { PostID: PostID }})
+        .then( Spiel =>{
+            console.log(Spiel);
+            //return Spieler;
+        }).catch(err =>{
+        console.log("Fehler Beim AddPostID");
+        return err.message;
+    })
+};
