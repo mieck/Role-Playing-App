@@ -6,10 +6,10 @@
 </ion-header>
 
 <ion-content #content class="background" padding>
-  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toFirstPage()"style="float:left"><<</button>
-  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toPageBefore()"style="float:left"><</button>
-  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toLastPage()"style="float:right">>></button>
-  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toPageAfter()"style="float:right">></button>
+  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toFirstPage()" style="float:left"><ion-icon name="arrow-dropleft"></ion-icon><ion-icon name="arrow-dropleft"></ion-icon></button>
+  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toPageBefore()" style="float:left"><ion-icon name="arrow-dropleft"></ion-icon></button>
+  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toLastPage()" style="float:right"><ion-icon name="arrow-dropright"></ion-icon><ion-icon name="arrow-dropright"></ion-icon></button>
+  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toPageAfter()" style="float:right"><ion-icon name="arrow-dropright"></ion-icon></button>
 
   <ion-grid id="firstBox" *ngFor="let item of postsToShow" >
     <ion-row >
@@ -30,11 +30,11 @@
     </ion-row>
   </ion-grid>
 
-  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toFirstPage()"style="float:left"><<</button>
-  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toPageBefore()"style="float:left"><</button>
-  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toLastPage()"style="float:right">>></button>
-  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toPageAfter()"style="float:right">></button>
 
+  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toFirstPage()" style="float:left"><ion-icon name="arrow-dropleft"></ion-icon><ion-icon name="arrow-dropleft"></ion-icon></button>
+  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toPageBefore()" style="float:left"><ion-icon name="arrow-dropleft"></ion-icon></button>
+  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toLastPage()" style="float:right"><ion-icon name="arrow-dropright"></ion-icon><ion-icon name="arrow-dropright"></ion-icon></button>
+  <button *ngIf="!noPost" ion-button color="mycolor1" class="pageButton" (click)="toPageAfter()" style="float:right"><ion-icon name="arrow-dropright"></ion-icon></button>
 
   <ion-grid *ngIf="lastPage" id="writeBox">
     <ion-row id="headPost">
