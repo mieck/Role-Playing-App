@@ -50,8 +50,8 @@
       </ion-grid>
 
 
-  <button class="attrButton" color="danger" ion-button (click)="deleteAttribute()" class="mButton">-</button>
-    <button class="attrButton" ion-button (click)="addAttribute()" class="pButton">+</button>
+    <div id="pButton"><ion-icon name="add-circle" (click)="addAttribute()"></ion-icon></div>
+    <div id="mButton"><ion-icon name="remove-circle" (click)="deleteAttribute()"></ion-icon></div>
 
     <ion-item class="table">
       <ion-label class="my-label" stacked>Beschreibung</ion-label>

@@ -13,4 +13,28 @@ page-addAvatar {
   .notSelected {
 
   }
+
+  #pButton{
+    float: left;
+
+    position: relative;
+    right: -35%; /* or right 50% */
+    text-align: left;
+    margin-bottom: 15px;
+
+    font-size: 30px;
+    color:  #f7931e;
+  }
+
+  #mButton{
+    float: right;
+
+    position: relative;
+    left: -35%; /* or right 50% */
+    text-align: left;
+    margin-bottom: 15px;
+
+    font-size: 30px;
+    color:  red;
+  }
 }

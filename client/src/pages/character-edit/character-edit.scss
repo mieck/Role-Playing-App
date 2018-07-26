@@ -21,21 +21,27 @@ page-character {
     margin-top: 12px;
   }
 
-  .pButton{
+  #pButton{
     float: left;
 
     position: relative;
     right: -3%; /* or right 50% */
     text-align: left;
     margin-bottom: 15px;
+
+    font-size: 30px;
+    color:  #f7931e;
   }
-  .mButton{
+  #mButton{
     float: right;
 
     position: relative;
     left: -3%; /* or right 50% */
     text-align: left;
     margin-bottom: 15px;
+
+    font-size: 30px;
+    color:  red;
   }
   #avaButton{
     float: right;
