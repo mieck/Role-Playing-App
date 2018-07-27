@@ -42,11 +42,11 @@ export class PostEditPage {
 
   resize() {
     var text = this.myInput.nativeElement.value;
-    var lines = text.split("\n");
-    if(lines.length >=6){
-      this.myInput.nativeElement.style.height = lines.length * 17 + 'px';
-    }
-    //this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
+    //var lines = text.split("\n");
+    //if(lines.length >=6){
+    //this.myInput.nativeElement.style.height = lines.length * 17 + 'px';
+    //}
+    this.myInput.nativeElement.style.height = this.myInput.nativeElement.scrollHeight + 'px';
 
   }
   decrease(){
