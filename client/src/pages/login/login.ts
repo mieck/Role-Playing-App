@@ -62,7 +62,6 @@ export class LoginPage {
         {
           text: action,
           handler: () => {
-            this.global.registrationComplete = false;
           }
         }]
     });
@@ -112,7 +111,8 @@ export class LoginPage {
           this.events.publish('user:login', 'hurray');
           window.sessionStorage.setItem("char_id", spieler.Characters[0]);
         }else{
-          this.showAlert('Bestätigen','Sie müssen noch einen Charakter erstellen','Okay!');
+          this.global.registrationComplete = false;
+          this.showAlert('Fehlender Charakter','Du musst noch einen Charakter erstellen, bevor es losgehen kann!','Okay!');
         }
       } else {
         this.navCtrl.setRoot(CreateRPGPage);
