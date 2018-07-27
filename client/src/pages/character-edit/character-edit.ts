@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController  } from 'ionic-angular';
-import {CharacterPage} from "../character/character";
 import { AlertController } from 'ionic-angular';
 import {GlobalProvider} from "../../provider/global";
 import {CharRegistrPage} from "../charRegistr/charReg";
@@ -97,7 +96,7 @@ export class CharacterEditPage {
 
   saveAttributes(){
     if(this.name == undefined || this.name == '')
-      this.presentAlert();
+      this.showNameAlert();
     else{
       this.loading = this.loadingCtrl.create({
         spinner: 'ios',
@@ -221,7 +220,7 @@ export class CharacterEditPage {
       this.attributes.pop();
   }
 
-  presentAlert() {
+  showNameAlert() {
     let alert = this.alertCtrl.create({
       title: 'Name fehlt!',
       buttons: ['Verstanden']
@@ -229,8 +228,25 @@ export class CharacterEditPage {
     alert.present();
   }
 
-  changeAvatars() {
-    this.navCtrl.push(AddAvatarPage);
+  showImageAlert() {
+    let alert = this.alertCtrl.create({
+      title: 'Bild gespeichert?',
+      message: 'Dein Bild könnte verloren gehen, falls nicht gespeichert.',
+      buttons: [
+        {
+          text: 'Hier bleiben',
+          handler: () => {
+          }
+        },
+        {
+          text: 'Zu Avataren',
+          handler: () => {
+            this.navCtrl.push(AddAvatarPage);
+          }
+        }
+      ]
+    });
+    alert.present();
   }
 
   ionViewDidLoad(){

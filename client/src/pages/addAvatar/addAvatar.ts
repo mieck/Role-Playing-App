@@ -106,7 +106,7 @@ export class AddAvatarPage {
   presentToast(msg) {
     let toast = this.toastCtrl.create({
       message: msg,
-      duration: 7000,
+      duration: 3000,
       position: 'bottom'
     });
 
